@@ -16,7 +16,11 @@ export default async function About() {
     collection: 'posts',
   });
 
-  const heroImage = resultMedia.docs.find((media) => media.filename === 'About-Hero2.jpg') || { url: '/About-Hero2.jpg' };
+  const heroImage = resultMedia.docs.find((media) => {
+    if (media.filename === 'About-Hero2.jpg') {
+      return media;
+    }
+  })
 
   const posts: PostType[] = resultPosts.docs as PostType[];
 
@@ -29,7 +33,7 @@ export default async function About() {
             <div className="order-2 lg:order-1">
               <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src={heroImage.url || ''}
+                  src={heroImage?.url ?? ''}
                   alt="Exquisite Japanese cuisine"
                   fill
                   className="object-cover"
