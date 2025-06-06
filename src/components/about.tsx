@@ -2,13 +2,15 @@ import Image from "next/image";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { PostType } from "@/type/postType";
+import { Media } from "@/type/mediaType";
+import { Hero } from "@/type/heroType";
 
 export default async function About() {
   const payload = await getPayload({ config });
 
   // Get the media
-  const resultMedia = await payload.find({
-    collection: 'media',
+  const resultHero = await payload.find({
+    collection: 'hero',
   });
 
   // Get the posts
@@ -16,11 +18,7 @@ export default async function About() {
     collection: 'posts',
   });
 
-  const heroImage = resultMedia.docs.find((media) => {
-    if (media.filename === 'About-Hero2.jpg') {
-      return media;
-    }
-  })
+  const heroes: Hero[] = resultHero.docs as Hero[];
 
   const posts: PostType[] = resultPosts.docs as PostType[];
 
@@ -33,7 +31,7 @@ export default async function About() {
             <div className="order-2 lg:order-1">
               <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src={heroImage?.url ?? ''}
+                  src={heroes.find((hero) => hero.title === 'aboutHero')?.image.url || '/notFound.jpg'}
                   alt="Exquisite Japanese cuisine"
                   fill
                   className="object-cover"
