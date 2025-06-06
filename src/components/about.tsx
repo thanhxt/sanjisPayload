@@ -2,7 +2,6 @@ import Image from "next/image";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { PostType } from "@/type/postType";
-import { Media } from "@/type/mediaType";
 import { Hero } from "@/type/heroType";
 
 export default async function About() {
