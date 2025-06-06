@@ -3,8 +3,6 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import { PostType } from "@/type/postType";
 
-const payload = getPayload({ config });
-
 export default async function About() {
   const payload = await getPayload({ config });
 
