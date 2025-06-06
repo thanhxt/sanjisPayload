@@ -10,6 +10,7 @@ import { en } from '@payloadcms/translations/languages/en'
 import { Media } from './collections/media'
 import { Customers } from './collections/auth/customer'
 import { Admins } from './collections/auth/admin'
+import { Hero } from './collections/hero'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -22,6 +23,7 @@ export default buildConfig({
     Media,
     Customers,
     Admins,
+    Hero,
   ],
   // Define and configure your globals in this array
   globals: [
