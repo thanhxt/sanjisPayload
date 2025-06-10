@@ -1,8 +1,8 @@
 import type { CollectionConfig } from 'payload'
-import { afterChangeHook } from '@/collections/posts/hooks'
+import { afterChangeHook } from '@/collections/team/hooks'
 
-export const Posts: CollectionConfig = {
-  slug: 'posts',
+export const Team: CollectionConfig = {
+  slug: 'team',
   fields: [
     {
       name: 'Mitarbeiter',
