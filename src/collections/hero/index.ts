@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { afterChangeHook } from './hooks'
 
 export const Hero: CollectionConfig = {
   slug: 'hero',
@@ -15,4 +16,7 @@ export const Hero: CollectionConfig = {
       required: true,
     },
   ],
+  hooks: {
+    afterChange: [afterChangeHook],
+  },
 }
