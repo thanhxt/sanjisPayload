@@ -5,89 +5,67 @@ export default function MainDish() {
         <>
         <div>
             {/* Hero Section */}
-            <div style={{
-                position: 'relative',
-                width: '100%',
-                height: '60vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                marginBottom: '0',
-                background: '#000',
-            }}>
+            <div className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden mb-0 bg-black">
                 <Image
                     src="/Sanjis_Julio-14.jpg"
                     alt="Background"
                     width={1000}
                     height={1000}
-                    style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        filter: 'blur(8px) brightness(0.5)',
-                        zIndex: 1,
-                    }} />
-                <h1 style={{
-                    position: 'relative',
-                    color: '#fff',
-                    zIndex: 2,
-                    fontSize: '2.5rem',
-                    textAlign: 'center',
-                }}>
+                    className="absolute w-full h-full object-cover blur-md brightness-50 z-10"
+                />
+                <h1 className="relative text-white z-20 text-4xl text-center">
                     Hauptspeise
                 </h1>
             </div>
         </div>
-         <div style={{ background: '#18181b', color: '#fff', padding: '60px 0', minHeight: '100vh' }}>
-            <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
-                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: 24, fontWeight: 'bold' }}>MAIN DISH</h1>
-                <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap', justifyContent: 'space-between' }}>
+        <div className="bg-zinc-900 text-white py-16 min-h-screen">
+            <div className="max-w-[1200px] text-lg mx-auto px-4">
+                <h1 className="text-center text-4xl mb-6 font-bold">MAIN DISH</h1>
+                <div className="flex gap-12 flex-wrap justify-between">
                     {/* Left Column */}
-                    <div style={{ flex: 1, minWidth: 350 }}>
-                        <div style={{ marginBottom: 32 }}>
+                    <div className="flex-1 min-w-[350px]">
+                        <div className="mb-8">
                             <span>surf &amp; turf</span> 39.9<br />
                             100g Black Angus Roastbeef |
                             Black Tiger Prawns | Saisongemüse | Jasminreis<br />
-                            <span style={{ color: '#888', fontSize: '0.95rem' }}>100g black angus striploin | black tiger prawns | seasonal vegetables | jasmine rice</span>
+                            <span className="text-gray-500 text-sm">100g black angus striploin | black tiger prawns | seasonal vegetables | jasmine rice</span>
                         </div>
-                        <div style={{ marginBottom: 32 }}>
+                        <div className="mb-8">
                             <span>lamb chops</span> 44.9<br />
                             Lammkottlets (Neuseeland) |
                             Wilder Brokkoli | getrüffeltes Kartoffelpüree<br />
-                            <span style={{ color: '#888', fontSize: '0.95rem' }}>lamb chops (New Zealand) | wild broccoli | truffled mashed potatoes</span>
+                            <span className="text-gray-500 text-sm">lamb chops (New Zealand) | wild broccoli | truffled mashed potatoes</span>
                         </div>
-                        <div style={{ marginBottom: 32 }}>
+                        <div className="mb-8">
                             <span>french duck red sin</span> 34.9<br />
                             medium gegrillte Barbarieentenbrust |
                             Saisongemüse | Rotwein-Hoisin Soße | Jasminreis<br />
-                            <span style={{ color: '#888', fontSize: '0.95rem' }}>medium grilled barbary duck breast | seasonal vegetables | red wine hoisin sauce | jasmine rice</span>
+                            <span className="text-gray-500 text-sm">medium grilled barbary duck breast | seasonal vegetables | red wine hoisin sauce | jasmine rice</span>
                         </div>
-                        <div style={{ marginBottom: 32 }}>
+                        <div className="mb-8">
                             <span>salmon teriyaki</span> 31.9<br />
                             Lachs | Saisongemüse |
                             Teriyakisoße | Jasminreis<br />
-                            <span style={{ color: '#888', fontSize: '0.95rem' }}>salmon | seasonal vegetables | teriyaki sauce | jasmine rice</span>
+                            <span className="text-gray-500 text-sm">salmon | seasonal vegetables | teriyaki sauce | jasmine rice</span>
                         </div>
                     </div>
                     {/* Right Column */}
-                    <div style={{ flex: 1, minWidth: 350 }}>
-                        <div style={{ marginBottom: 32 }}>
+                    <div className="flex-1 min-w-[350px]">
+                        <div className="mb-8">
                             <span>crispy angus tamarind</span> 38.9<br />
                             panierte Black Angus Filetstreifen | grüner Spargel |
                             Zuckerschoten | Zwiebeln | Tamarindensoße | Jasminreis<br />
-                            <span style={{ color: '#888', fontSize: '0.95rem' }}>crispy black angus filet strips | green asparagus | sugar snap peas | onions | tamarind sauce | jasmine rice</span>
+                            <span className="text-gray-500 text-sm">crispy black angus filet strips | green asparagus | sugar snap peas | onions | tamarind sauce | jasmine rice</span>
                         </div>
-                        <div style={{ marginBottom: 32 }}>
+                        <div className="mb-8">
                             <span>tiger prawns thai basil</span> 39.9<br />
                             gegrillte Tiger Prawns | Saisongemüse | Thai-Basilikum | Jasminreis<br />
-                            <span style={{ color: '#888', fontSize: '0.95rem' }}>grilled tiger prawns | seasonal vegetables | thai-basil | jasmine rice</span>
+                            <span className="text-gray-500 text-sm">grilled tiger prawns | seasonal vegetables | thai-basil | jasmine rice</span>
                         </div>
-                        <div style={{ marginBottom: 32 }}>
+                        <div className="mb-8">
                             <span>crispy tofu curry</span> 23.9<br />
                             Tofu | Saisongemüse | rote Kokos-Curry Soße | Jasminreis<br />
-                            <span style={{ color: '#888', fontSize: '0.95rem' }}>tofu | seasonal vegetables | red coconut-curry sauce | jasmine rice</span>
+                            <span className="text-gray-500 text-sm">tofu | seasonal vegetables | red coconut-curry sauce | jasmine rice</span>
                         </div>
                     </div>
                 </div>
