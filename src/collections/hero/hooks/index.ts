@@ -6,7 +6,10 @@ export const afterChangeHook: CollectionAfterChangeHook = async ({ doc }) => {
     if (!doc.image) return doc;
 
     const pathToRevalidate = [
-        `/`
+        `/about`,
+        `/`,
+        `/speisekarte`,
+        `/kontakt`,
     ]
 
     await Promise.all([
