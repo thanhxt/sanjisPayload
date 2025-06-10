@@ -135,8 +135,8 @@ export interface AdminAuthOperations {
  */
 export interface Post {
   id: string;
-  Mitarbeiter?: string | null;
-  Bild?: (string | null) | Media;
+  Mitarbeiter: string;
+  Bild: string | Media;
   beschreibung?: string | null;
   updatedAt: string;
   createdAt: string;
