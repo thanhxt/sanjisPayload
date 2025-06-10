@@ -4,6 +4,8 @@ import config from "@payload-config";
 import { PostType } from "@/type/postType";
 import { Hero } from "@/type/heroType";
 
+export const revalidate = 60;
+
 export default async function About() {
   const payload = await getPayload({ config });
 
