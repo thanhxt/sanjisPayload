@@ -1,11 +1,9 @@
 "use client";
 
-import { Instagram, Mail, User, MapPin, AlertCircleIcon } from "lucide-react";
-import Image from "next/image";
-import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { Instagram, Mail, User, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Script from "next/script";
 import Link from "next/link";
 import { getCookie } from 'cookies-next';
@@ -116,43 +114,6 @@ export default function Contact() {
     };
 
     return (
-        <>
-        {/* Hero Section */}
-        <div style={{
-            position: 'relative',
-            width: '100%',
-            height: '60vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflow: 'hidden',
-            marginBottom: '0',
-            background: '#000',
-        }}>
-            <Image
-                src="/PJOS1858.jpg"
-                alt="Background"
-                width={1000}
-                height={1000}
-                style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    filter: 'blur(8px) brightness(0.5)',
-                    zIndex: 1,
-                }} />
-            <h1 style={{
-                position: 'relative',
-                color: '#fff',
-                zIndex: 2,
-                fontSize: '2.5rem',
-                textAlign: 'center',
-            }}>
-                Kontakt
-            </h1>
-        </div>
-
         <div className="relative bg-[#020002] text-white py-16 min-h-screen overflow-hidden">
             <div className="container mx-auto relative z-10 flex flex-col md:flex-row items-center md:items-stretch gap-12 justify-center">
                 {/* Left: Contact Form */}
@@ -285,6 +246,5 @@ export default function Contact() {
                 </div>
             </div>
         </div>
-        </>
     )
 }
