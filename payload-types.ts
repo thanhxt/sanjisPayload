@@ -63,29 +63,24 @@ export type SupportedTimezones =
 
 export interface Config {
   auth: {
-    customers: CustomerAuthOperations;
     admins: AdminAuthOperations;
   };
   blocks: {};
   collections: {
-    pages: Page;
     posts: Post;
     media: Media;
-    customers: Customer;
-    admins: Admin;
     hero: Hero;
+    admins: Admin;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
-    pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    customers: CustomersSelect<false> | CustomersSelect<true>;
-    admins: AdminsSelect<false> | AdminsSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
+    admins: AdminsSelect<false> | AdminsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -93,54 +88,16 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {
-    nav: Nav;
-  };
-  globalsSelect: {
-    nav: NavSelect<false> | NavSelect<true>;
-  };
+  globals: {};
+  globalsSelect: {};
   locale: null;
-  user:
-    | (Customer & {
-        collection: 'customers';
-      })
-    | (Admin & {
-        collection: 'admins';
-      });
+  user: Admin & {
+    collection: 'admins';
+  };
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
-}
-export interface CustomerAuthOperations {
-  forgotPassword:
-    | {
-        email: string;
-      }
-    | {
-        username: string;
-      };
-  login:
-    | {
-        email: string;
-        password: string;
-      }
-    | {
-        password: string;
-        username: string;
-      };
-  registerFirstUser: {
-    password: string;
-    username: string;
-    email: string;
-  };
-  unlock:
-    | {
-        email: string;
-      }
-    | {
-        username: string;
-      };
 }
 export interface AdminAuthOperations {
   forgotPassword:
@@ -171,16 +128,6 @@ export interface AdminAuthOperations {
     | {
         username: string;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: string;
-  title?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -241,22 +188,14 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "customers".
+ * via the `definition` "hero".
  */
-export interface Customer {
+export interface Hero {
   id: string;
-  name?: string | null;
+  title: string;
+  image: string | Media;
   updatedAt: string;
   createdAt: string;
-  email: string;
-  username: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -281,26 +220,11 @@ export interface Admin {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero".
- */
-export interface Hero {
-  id: string;
-  title: string;
-  image: string | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
   id: string;
   document?:
-    | ({
-        relationTo: 'pages';
-        value: string | Page;
-      } | null)
     | ({
         relationTo: 'posts';
         value: string | Post;
@@ -310,27 +234,18 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'customers';
-        value: string | Customer;
-      } | null)
-    | ({
-        relationTo: 'admins';
-        value: string | Admin;
-      } | null)
-    | ({
         relationTo: 'hero';
         value: string | Hero;
-      } | null);
-  globalSlug?: string | null;
-  user:
-    | {
-        relationTo: 'customers';
-        value: string | Customer;
-      }
-    | {
+      } | null)
+    | ({
         relationTo: 'admins';
         value: string | Admin;
-      };
+      } | null);
+  globalSlug?: string | null;
+  user: {
+    relationTo: 'admins';
+    value: string | Admin;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -340,15 +255,10 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string;
-  user:
-    | {
-        relationTo: 'customers';
-        value: string | Customer;
-      }
-    | {
-        relationTo: 'admins';
-        value: string | Admin;
-      };
+  user: {
+    relationTo: 'admins';
+    value: string | Admin;
+  };
   key?: string | null;
   value?:
     | {
@@ -372,15 +282,6 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages_select".
- */
-export interface PagesSelect<T extends boolean = true> {
-  title?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -447,20 +348,13 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "customers_select".
+ * via the `definition` "hero_select".
  */
-export interface CustomersSelect<T extends boolean = true> {
-  name?: T;
+export interface HeroSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
   updatedAt?: T;
   createdAt?: T;
-  email?: T;
-  username?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -480,16 +374,6 @@ export interface AdminsSelect<T extends boolean = true> {
   _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero_select".
- */
-export interface HeroSelect<T extends boolean = true> {
-  title?: T;
-  image?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -522,34 +406,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "nav".
- */
-export interface Nav {
-  id: string;
-  items: {
-    page: string | Page;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "nav_select".
- */
-export interface NavSelect<T extends boolean = true> {
-  items?:
-    | T
-    | {
-        page?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

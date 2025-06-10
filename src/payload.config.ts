@@ -1,16 +1,13 @@
 import sharp from 'sharp'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { buildConfig } from 'payload'
-import { Pages } from './collections/pages'
-import { Posts } from './collections/posts'
-import { Nav } from './globals/nav'
 import { de } from '@payloadcms/translations/languages/de'
 import { en } from '@payloadcms/translations/languages/en'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { buildConfig } from 'payload'
+import { Posts } from './collections/posts'
 import { Media } from './collections/media'
-import { Customers } from './collections/auth/customer'
-import { Admins } from './collections/auth/admin'
 import { Hero } from './collections/hero'
+import { Admins } from './collections/auth/admin'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -18,22 +15,16 @@ export default buildConfig({
 
   // Define and configure your collections in this array
   collections: [
-    Pages,
     Posts,
     Media,
-    Customers,
-    Admins,
     Hero,
+    Admins,
   ],
   upload: {
     limits: {
       fileSize: 1024 * 1024 * 5, // 5MB
     },
   },
-  // Define and configure your globals in this array
-  globals: [
-    Nav,
-  ],
   i18n: {
     fallbackLanguage: 'en',
     supportedLanguages: { de, en },
