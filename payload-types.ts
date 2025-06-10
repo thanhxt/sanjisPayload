@@ -67,7 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    posts: Post;
+    team: Team;
     media: Media;
     hero: Hero;
     admins: Admin;
@@ -77,7 +77,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    posts: PostsSelect<false> | PostsSelect<true>;
+    team: TeamSelect<false> | TeamSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
     admins: AdminsSelect<false> | AdminsSelect<true>;
@@ -131,9 +131,9 @@ export interface AdminAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
+ * via the `definition` "team".
  */
-export interface Post {
+export interface Team {
   id: string;
   Mitarbeiter: string;
   Bild: string | Media;
@@ -226,8 +226,8 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'posts';
-        value: string | Post;
+        relationTo: 'team';
+        value: string | Team;
       } | null)
     | ({
         relationTo: 'media';
@@ -285,9 +285,9 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts_select".
+ * via the `definition` "team_select".
  */
-export interface PostsSelect<T extends boolean = true> {
+export interface TeamSelect<T extends boolean = true> {
   Mitarbeiter?: T;
   Bild?: T;
   beschreibung?: T;

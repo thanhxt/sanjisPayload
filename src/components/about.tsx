@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { PostType } from "@/type/postType";
+import { Team } from "@/type/teamType";
 import { Hero } from "@/type/heroType";
 
 export const revalidate = 60;
@@ -15,13 +15,13 @@ export default async function About() {
   });
 
   // Get the posts
-  const resultPosts = await payload.find({
-    collection: 'posts',
+  const resultTeam = await payload.find({
+    collection: 'team',
   });
 
   const heroes: Hero[] = resultHero.docs as Hero[];
 
-  const posts: PostType[] = resultPosts.docs as PostType[];
+  const team: Team[] = resultTeam.docs as Team[];
 
   return (
     <div>
@@ -81,22 +81,22 @@ export default async function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {posts.map((post) => (
-              <div key={post.id} className="group">
+            {team.map((team) => (
+              <div key={team.id} className="group">
                 <div className="relative h-64 rounded-2xl overflow-hidden mb-6 shadow-xl">
                   <Image 
-                    src={post.Bild.url} 
-                    alt={post.Mitarbeiter}
+                    src={team.Bild.url} 
+                    alt={team.Mitarbeiter}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="text-xl font-medium text-white mb-1">
-                      {post.Mitarbeiter}
+                      {team.Mitarbeiter}
                     </h3>
                     <p className="text-yellow-400 text-sm font-light">
-                      {post.beschreibung}
+                      {team.beschreibung}
                     </p>
                   </div>
                 </div>

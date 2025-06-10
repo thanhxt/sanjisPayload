@@ -1,4 +1,4 @@
-export type PostType = {
+export type Team = {
     id: string
     createdAt: string
     updatedAt: string
