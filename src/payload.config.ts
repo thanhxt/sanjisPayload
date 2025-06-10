@@ -25,6 +25,11 @@ export default buildConfig({
     Admins,
     Hero,
   ],
+  upload: {
+    limits: {
+      fileSize: 1024 * 1024 * 5, // 5MB
+    },
+  },
   // Define and configure your globals in this array
   globals: [
     Nav,
