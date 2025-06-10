@@ -7,11 +7,13 @@ export const Posts: CollectionConfig = {
     {
       name: 'Mitarbeiter',
       type: 'text',
+      required: true,
     },
     {
       name: 'Bild',
       type: 'relationship',
       relationTo: 'media',
+      required: true,
     },
     {
       name: 'beschreibung',

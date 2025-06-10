@@ -11,7 +11,7 @@ export const Hero: CollectionConfig = {
     },
     {
       name: 'image',
-      type: 'upload',
+      type: 'relationship',
       relationTo: 'media',
       required: true,
     },
