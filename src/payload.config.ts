@@ -4,7 +4,7 @@ import { de } from '@payloadcms/translations/languages/de'
 import { en } from '@payloadcms/translations/languages/en'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { buildConfig } from 'payload'
-import { Posts } from './collections/posts'
+import { Team } from './collections/team'
 import { Media } from './collections/media'
 import { Hero } from './collections/hero'
 import { Admins } from './collections/auth/admin'
@@ -15,7 +15,7 @@ export default buildConfig({
 
   // Define and configure your collections in this array
   collections: [
-    Posts,
+    Team,
     Media,
     Hero,
     Admins,
