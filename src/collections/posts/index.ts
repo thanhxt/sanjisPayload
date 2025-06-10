@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { afterChangeHook } from '@/collections/posts/hooks'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -17,4 +18,7 @@ export const Posts: CollectionConfig = {
       type: 'text',
     },
   ],
+  hooks: {
+    afterChange: [afterChangeHook],
+  },
 }
