@@ -2,6 +2,10 @@ import type {
     CollectionAfterChangeHook,
 } from 'payload'
 
+/**
+ * This is the afterChangeHook for the team collection.
+ * It is used to revalidate the about page when the team collection is changed.
+ */
 export const afterChangeHook: CollectionAfterChangeHook = async ({ doc }) => {
     if (!doc.Bild) return doc;
 

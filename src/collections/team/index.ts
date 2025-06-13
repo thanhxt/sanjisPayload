@@ -1,6 +1,10 @@
 import type { CollectionConfig } from 'payload'
 import { afterChangeHook } from '@/collections/team/hooks'
 
+/**
+ * This is the team collection for the website.
+ * It is used to manage the team of the website.
+ */
 export const Team: CollectionConfig = {
   slug: 'team',
   fields: [

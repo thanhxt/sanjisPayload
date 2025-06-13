@@ -2,6 +2,10 @@ import type {
     CollectionAfterChangeHook,
 } from 'payload'
 
+/**
+ * This is the afterChangeHook for the hero collection.
+ * It is used to revalidate the about page when the hero collection is changed.
+ */
 export const afterChangeHook: CollectionAfterChangeHook = async ({ doc }) => {
     if (!doc.image) return doc;
 

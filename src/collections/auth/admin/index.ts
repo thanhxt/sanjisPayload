@@ -1,5 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
+/**
+ * This is the admin collection for the admins.
+ * It is used to manage the admins of the website.
+ */
 export const Admins: CollectionConfig = {
   slug: 'admins',
   fields: [

@@ -1,5 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
+/**
+ * This is the media collection for the website.
+ * It is used to manage the media of the website.
+ */
 export const Media: CollectionConfig = {
   slug: 'media',
   upload: {
