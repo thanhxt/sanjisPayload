@@ -3,10 +3,12 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { getCookie } from 'cookies-next';
 import { useState, useEffect } from "react";
+import { useLanguage } from "./contexts/language-context";
 
 
 export default function Maps() {
     const [showMap, setShowMap] = useState(false);
+    const { language } = useLanguage();
 
     useEffect(() => {
         const consent = getCookie('cookie_consent');
@@ -19,13 +21,13 @@ export default function Maps() {
         <div className="container mx-auto relative z-10 flex flex-col md:flex-row items-center md:items-stretch gap-8">
             {/* Left: Text */}
             <div className="flex-1 flex flex-col justify-center max-w-xl pl-8 md:pl-24 pr-0 md:pr-16">
-                <h1 className="text-4xl lg:text-5xl font-light tracking-wide mb-8">Parkmöglichkeiten</h1>
+                <h1 className="text-4xl lg:text-5xl font-light tracking-wide mb-8">{language === "de" ? "Parkmöglichkeiten" : "Parking"}</h1>
                 <div className="text-lg mb-4 text-gray-300">
-                    Geparkt werden kann am Straßenrand mit
-                    <span className="font-bold"> Parkschein</span> oder im nächsten <span className="font-bold">Parkhaus</span> 5 Minuten entfernt. <br /><br />
-                    <div className="flex flex-row gap-4">
-                        <Button><Link href="https://maps.app.goo.gl/dq8grbU2DrHrB4gw7">Parkhaus Ostbahnhof 500m</Link></Button>
-                        <Button><Link href="https://maps.app.goo.gl/g7ZxdfDtyF71aUno9">Parkhaus Hilton Hotel 450m</Link></Button>
+                    {language === "de" ? "Geparkt werden kann am Straßenrand mit" : "Parking is possible on the street edge with"}
+                    <span className="font-bold"> {language === "de" ? "Parkschein" : "Parking Ticket"}</span> {language === "de" ? "oder im nächsten" : "or in the next"} <span className="font-bold">{language === "de" ? "Parkhaus" : "Parking Garage"}</span> {language === "de" ? "5 Minuten entfernt." : "5 minutes away."} <br /><br />
+                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:gap-4 items-center md:items-start w-full px-6 md:px-0">
+                        <Button className="w-full md:w-auto text-sm"><Link href="https://maps.app.goo.gl/dq8grbU2DrHrB4gw7">{language === "de" ? "Parkhaus Ostbahnhof 500m" : "Ostbahnhof Parking 500m"}</Link></Button>
+                        <Button className="w-full md:w-auto text-sm"><Link href="https://maps.app.goo.gl/g7ZxdfDtyF71aUno9">{language === "de" ? "Parkhaus Hilton Hotel 450m" : "Hilton Hotel Parking 450m"}</Link></Button>
                     </div>
                 </div>
             </div>
@@ -44,7 +46,7 @@ export default function Maps() {
                 ) : (
                     <div className="absolute inset-0 z-0">
                         <div className="text-center text-gray-400">
-                            Um die Karte zu laden, stimmen Sie bitte der Verwendung von Cookies zu.
+                            {language === "de" ? "Um die Karte zu laden, stimmen Sie bitte der Verwendung von Cookies zu." : "To load the map, please accept the use of cookies."}
                         </div>
                     </div>
                 )}

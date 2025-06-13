@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HeroText from "../hero-text";
 
 export default function Steaks() {
     return (
@@ -12,15 +13,13 @@ export default function Steaks() {
                     height={1000}
                     className="absolute w-full h-full object-cover blur-lg brightness-50 z-10"
                 />
-                <h1 className="relative text-white z-20 text-4xl text-center">
-                    STEAKS
-                </h1>
+                <HeroText title="Steaks" titleEn="Steaks" />
             </div>
             {/* STEAKS Section Wireframe */}
             <div id="steaks" className="bg-zinc-900 text-white py-16 min-h-screen">
                 <div className="max-w-[1200px] text-lg mx-auto px-4">
                     {/* Top Row */}
-                    <div className="flex justify-between mb-10">
+                    <div className="flex flex-col md:flex-row justify-between mb-10">
                         <div className="flex-1 text-center border-t-2 border-b-2 border-gray-600 mx-4 py-6">
                             <div className="font-bold">- Hanging Tender -</div>
                             <div>saftig, zart &amp; aromatisch<br />
@@ -43,7 +42,7 @@ export default function Steaks() {
                         </div>
                     </div>
                     {/* Middle Row */}
-                    <div className="flex justify-between mb-10">
+                    <div className="flex flex-col md:flex-row justify-between mb-10">
                         <div className="flex-1 text-center border-t-2 border-b-2 border-gray-600 mx-4 py-6">
                             <div className="font-bold">- Flanksteak</div>
                             <div>mager, langfaserig &amp; mussig<br />
@@ -91,7 +90,7 @@ export default function Steaks() {
                         </div>
                     </div>
                     {/* Bottom Row */}
-                    <div className="flex justify-between mb-10">
+                    <div className="flex flex-col md:flex-row justify-between mb-10">
                         <div className="flex-1 text-center border-t-2 border-b-2 border-gray-600 mx-4 py-6">
                             <div className="font-bold">- Porterhouse -</div>
                             <div>Kombination aus Filetsteak &amp;<br />Striploin, getrennt durch ein T-förmigen Knochen<br />

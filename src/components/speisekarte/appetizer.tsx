@@ -1,4 +1,5 @@
 import Image from "next/image";
+import HeroText from "../hero-text";
 
 export default function Appetizer() {
     return (
@@ -13,9 +14,7 @@ export default function Appetizer() {
                     height={1000}
                     className="absolute w-full h-full object-cover blur-md brightness-50 z-10"
                 />
-                <h1 className="relative text-white z-20 text-4xl text-center">
-                    Vorspeise
-                </h1>
+                <HeroText title="Vorspeise" titleEn="Appetizer" />
             </div>
         </div>
         <div className="bg-zinc-900 text-white py-16 min-h-screen">

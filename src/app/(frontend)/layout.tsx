@@ -3,8 +3,9 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Cormorant_Garamond } from 'next/font/google'
-import { MenuContextProvider } from "@/components/menu-context";
 import CookieConsent from "@/components/cookieconsent";
+import { LanguageProvider } from "@/components/contexts/language-context";
+import { MenuContextProvider } from "@/components/contexts/menu-context";
 
 
 const geistSans = Geist({
@@ -58,12 +59,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${cormorant.className}`}
       >
-        <MenuContextProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </MenuContextProvider>
-        <CookieConsent />
+        <LanguageProvider>
+          <MenuContextProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </MenuContextProvider>
+          <CookieConsent />
+        </LanguageProvider>
       </body>
     </html>
   );

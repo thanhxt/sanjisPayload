@@ -1,13 +1,16 @@
 "use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useEffect, useState, useContext } from "react"
 import Link from "next/link"
-import { MenuContext, type MenuContextType } from "./menu-context"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { useEffect, useState, useContext } from "react"
+import { MenuContext, type MenuContextType } from "./contexts/menu-context"
+import { useLanguage } from "./contexts/language-context"
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false)
     const { menuOpen, setMenuOpen } = useContext(MenuContext) as MenuContextType;
+    const { language, setLanguage } = useLanguage();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,8 +25,20 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+        const handleLanguageChange = (value: 'de' | 'en') => {
+            setLanguage(value)
+        }
+
     return (
         <div>
+            {/* Flag Icons 
+            https://www.npmjs.com/package/flag-icons
+            https://flagicons.lipis.dev/
+            */}
+            <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
+                />
             <nav className={`fixed w-full z-50 transition-all duration-300 ${
                 menuOpen
                     ? 'bg-black'
@@ -42,11 +57,19 @@ export default function Navbar() {
                     </div>
                     {/* Desktop Nav */}
                     <ul className="nav-links flex space-x-8 text-xl">
-                        <li><Link href="/" className="hover:text-gray-400 font-light">Home</Link></li>
-                        <li><Link href="/about" className="hover:text-gray-400 font-light">About</Link></li>
-                        <li><Link href="/speisekarte" className="hover:text-gray-400 font-light">Speisekarte</Link></li>
-                        <li><Link href="/reservierung" className="hover:text-gray-400 font-light">Reservierungen</Link></li>
-                        <li><Link href="/kontakt" className="hover:text-gray-400 font-light">Kontakt</Link></li>
+                        <li><Link href="/" className="hover:text-gray-400 font-light">{language === "de" ? "Startseite" : "Home"}</Link></li>
+                        <li><Link href="/about" className="hover:text-gray-400 font-light">{language === "de" ? "Über uns" : "About"}</Link></li>
+                        <li><Link href="/speisekarte" className="hover:text-gray-400 font-light">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
+                        <li><Link href="/reservierung" className="hover:text-gray-400 font-light">{language === "de" ? "Reservierungen" : "Reservations"}</Link></li>
+                        <li><Link href="/kontakt" className="hover:text-gray-400 font-light">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
+                        <li> <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange}>
+                            <ToggleGroupItem value="de">
+                                <span className="fi fi-de"></span>
+                            </ToggleGroupItem>
+                            <ToggleGroupItem value="en">
+                                <span className="fi fi-us"></span>
+                            </ToggleGroupItem>
+                        </ToggleGroup></li>
                     </ul>
                     {/* Mobile Breadcrumb/Hamburger */}
                     <button
@@ -85,11 +108,21 @@ export default function Navbar() {
                             </button>
                         </div>
                         <ul className="flex flex-col items-start gap-6 px-8 text-xl mt-4">
-                            <li><Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">Home</Link></li>
-                            <li><Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">About Us</Link></li>
-                            <li><Link href="/speisekarte" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">Speisekarte</Link></li>
-                            <li><Link href="/reservierung" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">Reservieren</Link></li>
-                            <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">Kontakt</Link></li>
+                            <li><Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Startseite" : "Home"}</Link></li>
+                            <li><Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Über uns" : "About Us"}</Link></li>
+                            <li><Link href="/speisekarte" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
+                            <li><Link href="/reservierung" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Reservieren" : "Reservations"}</Link></li>
+                            <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
+                            <li className="mt-4">
+                                <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange}>
+                                    <ToggleGroupItem value="de">
+                                        <span className="fi fi-de"></span>
+                                    </ToggleGroupItem>
+                                    <ToggleGroupItem value="en">
+                                        <span className="fi fi-us"></span>
+                                    </ToggleGroupItem>
+                                </ToggleGroup>
+                            </li>
                         </ul>
                     </div>
                 </div>

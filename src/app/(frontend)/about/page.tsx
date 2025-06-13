@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { metadata } from '../layout';
-import AboutComponent from '@/components/about';
+import AboutComponent from '@/components/about/about';
 
 export default function About() {
     metadata.title = "Über uns | Sanji's";

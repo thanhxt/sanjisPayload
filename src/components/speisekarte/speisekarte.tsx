@@ -1,5 +1,11 @@
+'use client';
+
 import React from 'react';
+import { useLanguage } from '../contexts/language-context';
+import Link from 'next/link';
+
 export default function Speisekarte() {
+    const { language } = useLanguage();
     return (
         <div>
             {/* Menu Section */}
@@ -27,11 +33,11 @@ export default function Speisekarte() {
                     UNSERE SPEISEKARTE
                 </div>
                 {[
-                    { label: 'VORSPEISE', color: '#888', opacity: 0.5 },
-                    { label: 'STEAKS', color: '#888', opacity: 0.5 },
-                    { label: 'HAUPTSPEISE', color: '#888', opacity: 0.5 },
+                    { label: language === "de" ? 'VORSPEISE' : 'STARTERS', color: '#888', opacity: 0.5, id: 'vorspeise' },
+                    { label: language === "de" ? 'STEAKS' : 'STEAK', color: '#888', opacity: 0.5, id: 'steaks' },
+                    { label: language === "de" ? 'HAUPTSPEISE' : 'MAIN COURSE', color: '#888', opacity: 0.5, id: 'hauptspeise' },
                     //{ label: 'DESSERTS', color: '#888', opacity: 0.5 },
-                    { label: 'LUNCH', color: '#888', opacity: 0.5 },
+                    { label: 'LUNCH', color: '#888', opacity: 0.5, id: 'lunch' },
                 ].map((item) => (
                     <React.Fragment key={item.label}>
                         <div
@@ -48,8 +54,8 @@ export default function Speisekarte() {
                                 letterSpacing: '0.06em',
                             }}
                         >
-                            <a
-                                href={`/speisekarte/${item.label.toLowerCase()}`}
+                            <Link
+                                href={`/speisekarte/${item.id}`}
                                 style={{
                                     color: 'inherit',
                                     textDecoration: 'none',
@@ -57,7 +63,7 @@ export default function Speisekarte() {
                                 }}
                             >
                                 {item.label}
-                            </a>
+                            </Link>
                         </div>
                     </React.Fragment>
                 ))}

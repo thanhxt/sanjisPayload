@@ -2,8 +2,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { getCookie, setCookie } from 'cookies-next';
+import { useLanguage } from './contexts/language-context'
 
 export default function CookieConsent() {
+  const { language } = useLanguage();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -23,12 +25,12 @@ export default function CookieConsent() {
 
   return (
     <div className="fixed bottom-0 w-full bg-gray-900 text-white p-4 flex justify-center items-center z-50">
-      <span>Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern.</span>
+      <span>{language === "de" ? "Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern." : "This website uses cookies to improve your experience."}</span>
       <button
         onClick={accept}
         className="ml-4 bg-green-500 px-4 py-2 rounded"
       >
-        Akzeptieren
+        {language === "de" ? "Akzeptieren" : "Accept"}
       </button>
     </div>
   );
