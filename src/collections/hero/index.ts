@@ -7,6 +7,9 @@ import { afterChangeHook } from './hooks'
  */
 export const Hero: CollectionConfig = {
   slug: 'hero',
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: 'title',

@@ -7,6 +7,9 @@ import { afterChangeHook } from '@/collections/team/hooks'
  */
 export const Team: CollectionConfig = {
   slug: 'team',
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: 'Mitarbeiter',
