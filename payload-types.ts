@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     hero: Hero;
     admins: Admin;
+    menuMainDish: MenuMainDish;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
     admins: AdminsSelect<false> | AdminsSelect<true>;
+    menuMainDish: MenuMainDishSelect<false> | MenuMainDishSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -220,6 +222,20 @@ export interface Admin {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuMainDish".
+ */
+export interface MenuMainDish {
+  id: string;
+  position?: number | null;
+  titleDE: string;
+  price: number;
+  descriptionDE?: string | null;
+  descriptionEN?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -240,6 +256,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'admins';
         value: string | Admin;
+      } | null)
+    | ({
+        relationTo: 'menuMainDish';
+        value: string | MenuMainDish;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -374,6 +394,19 @@ export interface AdminsSelect<T extends boolean = true> {
   _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuMainDish_select".
+ */
+export interface MenuMainDishSelect<T extends boolean = true> {
+  position?: T;
+  titleDE?: T;
+  price?: T;
+  descriptionDE?: T;
+  descriptionEN?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

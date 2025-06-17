@@ -8,6 +8,7 @@ import { Team } from './collections/team'
 import { Media } from './collections/media'
 import { Hero } from './collections/hero'
 import { Admins } from './collections/auth/admin'
+import { MenuMainDish } from './collections/menuMainDish'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -19,6 +20,7 @@ export default buildConfig({
     Media,
     Hero,
     Admins,
+    MenuMainDish,
   ],
   upload: {
     limits: {
