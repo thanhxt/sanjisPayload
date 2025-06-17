@@ -30,7 +30,7 @@ export default function Speisekarte() {
                     padding: '24px 0 40px 0',
                     color: '#fff',
                 }}>
-                    UNSERE SPEISEKARTE
+                    {language === "de" ? "UNSERE SPEISEKARTE" : "OUR MENU"}
                 </div>
                 {[
                     { label: language === "de" ? 'VORSPEISE' : 'STARTERS', color: '#888', opacity: 0.5, id: 'vorspeise' },
