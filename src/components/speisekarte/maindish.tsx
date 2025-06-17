@@ -67,7 +67,7 @@ export default function MainDish() {
             <div className="bg-black text-white py-16 min-h-screen">
                 <div className="flex flex-col md:flex-row bg-black text-white p-4 md:p-10 items-center justify-center">
                     <Image 
-                    src="/hauptspeiseSchrift.png" 
+                    src="/HauptspeiseSchrift.png" 
                     alt="Main Dish" 
                     width={170} 
                     height={120}
