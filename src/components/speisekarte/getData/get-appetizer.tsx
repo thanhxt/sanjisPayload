@@ -11,8 +11,6 @@ export default async function getAppetizerDish() {
 
     const appetizerDish = result.docs as MenuAppetizerDish[];
     appetizerDish.sort((a, b) => (a.position || 0) - (b.position || 0));
-
-    console.log(appetizerDish);
-
+    
     return appetizerDish;
 }
