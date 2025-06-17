@@ -9,6 +9,7 @@ import { Media } from './collections/media'
 import { Hero } from './collections/hero'
 import { Admins } from './collections/auth/admin'
 import { MenuMainDish } from './collections/menuMainDish'
+import { MenuAppetizerDish } from './collections/menuAppetizerDish'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -21,6 +22,7 @@ export default buildConfig({
     Hero,
     Admins,
     MenuMainDish,
+    MenuAppetizerDish,
   ],
   upload: {
     limits: {

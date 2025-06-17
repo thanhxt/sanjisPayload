@@ -72,6 +72,7 @@ export interface Config {
     hero: Hero;
     admins: Admin;
     menuMainDish: MenuMainDish;
+    menuAppetizerDish: MenuAppetizerDish;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,6 +84,7 @@ export interface Config {
     hero: HeroSelect<false> | HeroSelect<true>;
     admins: AdminsSelect<false> | AdminsSelect<true>;
     menuMainDish: MenuMainDishSelect<false> | MenuMainDishSelect<true>;
+    menuAppetizerDish: MenuAppetizerDishSelect<false> | MenuAppetizerDishSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -236,6 +238,20 @@ export interface MenuMainDish {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuAppetizerDish".
+ */
+export interface MenuAppetizerDish {
+  id: string;
+  position?: number | null;
+  title: string;
+  price: number;
+  descriptionDE?: string | null;
+  descriptionEN?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -260,6 +276,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'menuMainDish';
         value: string | MenuMainDish;
+      } | null)
+    | ({
+        relationTo: 'menuAppetizerDish';
+        value: string | MenuAppetizerDish;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -402,6 +422,19 @@ export interface AdminsSelect<T extends boolean = true> {
 export interface MenuMainDishSelect<T extends boolean = true> {
   position?: T;
   titleDE?: T;
+  price?: T;
+  descriptionDE?: T;
+  descriptionEN?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuAppetizerDish_select".
+ */
+export interface MenuAppetizerDishSelect<T extends boolean = true> {
+  position?: T;
+  title?: T;
   price?: T;
   descriptionDE?: T;
   descriptionEN?: T;
