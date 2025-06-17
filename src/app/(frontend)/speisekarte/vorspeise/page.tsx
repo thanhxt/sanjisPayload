@@ -1,4 +1,4 @@
-import Appetizer from "@/components/speisekarte/appetizer";
+import Appetizer from "@/components/speisekarte/vorspeise/appetizer";
 import BackMenuButton from "@/components/speisekarte/backMenuButton";
 import { metadata } from "../../layout";
 import Head from "next/head";
