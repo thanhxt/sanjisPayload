@@ -1,5 +1,4 @@
 "use client";
-import HeroImage from "../hero";
 import HeroText from "../hero-text";
 import Image from "next/image";
 import { useLanguage } from "../contexts/language-context";
