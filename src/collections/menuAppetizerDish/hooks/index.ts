@@ -1,13 +1,13 @@
 import { CollectionAfterChangeHook } from "payload";
 
 export const afterChangeHook: CollectionAfterChangeHook = async ({ doc }) => {
-    if (!doc.Bild) return doc;
+    if (!doc.title) return doc;
 
     const pathToRevalidate = [
         `/speisekarte/vorspeise`
     ]
 
-    await Promise.all([
+    await Promise.all(
         pathToRevalidate.map(path =>
             fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate?secret=${process.env.REVALIDATE_SECRET}`, {
                 method: 'POST',
@@ -15,5 +15,7 @@ export const afterChangeHook: CollectionAfterChangeHook = async ({ doc }) => {
                 body: JSON.stringify({ path }),
             })
         )
-    ])
+    )
+
+    return doc;
 }
