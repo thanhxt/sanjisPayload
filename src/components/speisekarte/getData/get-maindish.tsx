@@ -2,6 +2,8 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import { MainDish } from "@/type/mainDishType";
 
+export const revalidate = 60;
+
 export default async function getMainDish() {
     const payload = await getPayload({ config })
 
