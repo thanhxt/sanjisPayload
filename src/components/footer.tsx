@@ -43,7 +43,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 w-full px-4 md:px-8 mb-8 text-center gap-6">
           {/* Links */}
           <div className="flex flex-col items-center">
-            <h3 className="font-bold tracking-widest mb-2 text-lg">{t.links[language]}</h3>
+            <h2 className="font-bold tracking-widest mb-2 text-lg">{t.links[language]}</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/speisekarte" className="hover:text-yellow-400 hover:underline">
@@ -65,7 +65,7 @@ export default function Footer() {
 
           {/* Opening Hours */}
           <div className="flex flex-col items-center">
-            <h3 className="font-bold tracking-widest mb-2 text-lg">{t.opening[language]}</h3>
+            <h2 className="font-bold tracking-widest mb-2 text-lg">{t.opening[language]}</h2>
             <div className="text-xs md:text-sm text-gray-300 space-y-2">
               <div>
                 {t.weekdays[language]}<br />
@@ -81,7 +81,7 @@ export default function Footer() {
 
           {/* Socials */}
           <div className="flex flex-col items-center">
-            <h3 className="font-bold tracking-widest mb-2 text-lg">{t.socials[language]}</h3>
+            <h2 className="font-bold tracking-widest mb-2 text-lg">{t.socials[language]}</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="https://www.instagram.com/sanjis.kitchen/" className="hover:text-yellow-400 hover:underline">

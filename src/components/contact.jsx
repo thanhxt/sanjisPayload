@@ -209,7 +209,7 @@ export default function Contact() {
                 <div className="flex-1 flex flex-col justify-center max-w-xl md:pl-8 mt-12 md:mt-0">
                     <h2 className="text-3xl font-bold mb-6 text-left">{language === "de" ? "Unsere Informationen" : "Our Information"}</h2>
                     <div className="mb-6">
-                        <h3 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Öffnungszeiten" : "Opening Hours"}</h3>
+                        <h2 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Öffnungszeiten" : "Opening Hours"}</h2>
                         <div className="text-gray-300 text-base">
                             <div>Montag – Donnerstag: 12:00 – 23:00</div>
                             <div>Freitag – Samstag: 12:00 – 00:00</div>
@@ -217,14 +217,14 @@ export default function Contact() {
                         </div>
                     </div>
                     <div className="mb-6">
-                        <h3 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Adresse" : "Address"}</h3>
+                        <h2 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Adresse" : "Address"}</h2>
                         <div className="flex items-center gap-2 text-gray-300 text-base">
                             <MapPin className="w-5 h-5 text-yellow-400" />
                             {language === "de" ? "Kellerstraße 32, 81667 München" : "Kellerstraße 32, 81667 Munich"}
                         </div>
                     </div>
                     <div className="mb-6">
-                        <h3 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Kontakt" : "Contact"}</h3>
+                        <h2 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Kontakt" : "Contact"}</h2>
                         <div className="flex items-center gap-2 text-gray-300 text-base mb-1">
                             <Mail className="w-5 h-5 text-yellow-400" />
                             <a href="mailto:info@sanjiskitchen.de" className="hover:text-yellow-400 transition">{language === "de" ? "info@sanjiskitchen.de" : "info@sanjiskitchen.de"}</a>
@@ -235,7 +235,7 @@ export default function Contact() {
                         </div>
                     </div>
                     <div>
-                        <h3 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Social Media" : "Social Media"}</h3>
+                        <h2 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Social Media" : "Social Media"}</h2>
                             <div className="flex gap-4 mt-2">
                             <Link href="https://www.instagram.com/sanjis.kitchen/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition">
                                 <Instagram className="w-8 h-8" />
