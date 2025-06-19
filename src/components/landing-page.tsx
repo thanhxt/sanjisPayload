@@ -33,6 +33,7 @@ export default function LandingPage() {
                         alt="Sanji's Kitchen Logo" 
                         width={192}
                         height={192}
+                        priority
                         className="w-full h-full invert" 
                     />
                 </div>

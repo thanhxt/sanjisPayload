@@ -35,7 +35,15 @@ export default function Reservations() {
         <div className="relative bg-[#020002] text-white py-16 min-h-screen flex items-center justify-center overflow-hidden">
             {/* Blurred Background Image */}
             <div className="absolute inset-0 z-0">
-                <Image src="/Sanjis_Julio-34.jpg" alt="Background" fill className="object-cover blur-sm opacity-40" />
+                <Image 
+                    src="/Sanjis_Julio-34.jpg" 
+                    alt="Background" 
+                    width={1920}
+                    height={1080}
+                    quality={75}
+                    priority
+                    className="object-cover blur-sm opacity-40" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />
             </div>
             {/* Content */}

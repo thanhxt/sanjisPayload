@@ -10,8 +10,10 @@ export default function Lunch() {
                 <Image
                     src="/Sanjis_Julio-36.jpg"
                     alt="Background"
-                    width={1000}
-                    height={1000}
+                    width={1920}
+                    height={1080}
+                    quality={75}
+                    priority
                     className="absolute w-full h-full object-cover blur-md brightness-50 z-10"
                 />
                 <HeroText title="Mittagstisch" titleEn="Lunch" />
