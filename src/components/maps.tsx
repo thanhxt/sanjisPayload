@@ -25,9 +25,17 @@ export default function Maps() {
                 <div className="text-lg mb-4 text-gray-300">
                     {language === "de" ? "Geparkt werden kann am Straßenrand mit" : "Parking is possible on the street edge with"}
                     <span className="font-bold"> {language === "de" ? "Parkschein" : "Parking Ticket"}</span> {language === "de" ? "oder im nächsten" : "or in the next"} <span className="font-bold">{language === "de" ? "Parkhaus" : "Parking Garage"}</span> {language === "de" ? "5 Minuten entfernt." : "5 minutes away."} <br /><br />
-                    <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:gap-4 items-center md:items-start w-full px-6 md:px-0">
-                        <Button className="w-full md:w-auto text-sm"><Link href="https://maps.app.goo.gl/dq8grbU2DrHrB4gw7">{language === "de" ? "Parkhaus Ostbahnhof 500m" : "Ostbahnhof Parking 500m"}</Link></Button>
-                        <Button className="w-full md:w-auto text-sm"><Link href="https://maps.app.goo.gl/g7ZxdfDtyF71aUno9">{language === "de" ? "Parkhaus Hilton Hotel 450m" : "Hilton Hotel Parking 450m"}</Link></Button>
+                    <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:gap-6 items-center md:items-start w-full px-6 md:px-0">
+                        <Button className="w-full md:w-auto text-base min-h-[44px] px-6">
+                            <Link href="https://maps.app.goo.gl/dq8grbU2DrHrB4gw7" className="block py-2 px-2">
+                                {language === "de" ? "Parkhaus Ostbahnhof 500m" : "Ostbahnhof Parking 500m"}
+                            </Link>
+                        </Button>
+                        <Button className="w-full md:w-auto text-base min-h-[44px] px-6">
+                            <Link href="https://maps.app.goo.gl/g7ZxdfDtyF71aUno9" className="block py-2 px-2">
+                                {language === "de" ? "Parkhaus Hilton Hotel 450m" : "Hilton Hotel Parking 450m"}
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </div>

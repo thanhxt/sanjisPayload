@@ -57,16 +57,16 @@ export default function Navbar() {
                     </div>
                     {/* Desktop Nav */}
                     <ul className="nav-links flex space-x-8 text-xl">
-                        <li><Link href="/" className="hover:text-gray-400 font-light">{language === "de" ? "Startseite" : "Home"}</Link></li>
-                        <li><Link href="/about" className="hover:text-gray-400 font-light">{language === "de" ? "Über uns" : "About"}</Link></li>
-                        <li><Link href="/speisekarte" className="hover:text-gray-400 font-light">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
-                        <li><Link href="/reservierung" className="hover:text-gray-400 font-light">{language === "de" ? "Reservierungen" : "Reservations"}</Link></li>
-                        <li><Link href="/kontakt" className="hover:text-gray-400 font-light">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
-                        <li> <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange}>
-                            <ToggleGroupItem value="de">
+                        <li><Link href="/" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Startseite" : "Home"}</Link></li>
+                        <li><Link href="/about" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Über uns" : "About"}</Link></li>
+                        <li><Link href="/speisekarte" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
+                        <li><Link href="/reservierung" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierungen" : "Reservations"}</Link></li>
+                        <li><Link href="/kontakt" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
+                        <li> <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
+                            <ToggleGroupItem value="de" aria-label="Switch to German" className="min-h-[44px] min-w-[44px] px-4">
                                 <span className="fi fi-de"></span>
                             </ToggleGroupItem>
-                            <ToggleGroupItem value="en">
+                            <ToggleGroupItem value="en" aria-label="Switch to English" className="min-h-[44px] min-w-[44px] px-4">
                                 <span className="fi fi-us"></span>
                             </ToggleGroupItem>
                         </ToggleGroup></li>
@@ -108,17 +108,17 @@ export default function Navbar() {
                             </button>
                         </div>
                         <ul className="flex flex-col items-start gap-6 px-8 text-xl mt-4">
-                            <li><Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Startseite" : "Home"}</Link></li>
-                            <li><Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Über uns" : "About Us"}</Link></li>
-                            <li><Link href="/speisekarte" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
-                            <li><Link href="/reservierung" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Reservieren" : "Reservations"}</Link></li>
-                            <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
+                            <li><Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Startseite" : "Home"}</Link></li>
+                            <li><Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Über uns" : "About Us"}</Link></li>
+                            <li><Link href="/speisekarte" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
+                            <li><Link href="/reservierung" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservieren" : "Reservations"}</Link></li>
+                            <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                             <li className="mt-4">
-                                <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange}>
-                                    <ToggleGroupItem value="de">
+                                <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
+                                    <ToggleGroupItem value="de" aria-label="Switch to German" className="min-h-[44px] min-w-[44px] px-4">
                                         <span className="fi fi-de"></span>
                                     </ToggleGroupItem>
-                                    <ToggleGroupItem value="en">
+                                    <ToggleGroupItem value="en" aria-label="Switch to English" className="min-h-[44px] min-w-[44px] px-4">
                                         <span className="fi fi-us"></span>
                                     </ToggleGroupItem>
                                 </ToggleGroup>
