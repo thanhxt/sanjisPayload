@@ -1,6 +1,11 @@
 import type { CollectionAfterChangeHook } from 'payload'
 
-import type { User } from '../../../../payload-types'   
+import type { User } from '../../../../payload-types'
+
+interface LoginRequestBody {
+  email?: string
+  password?: string
+}
 
 export const loginAfterCreate: CollectionAfterChangeHook<User> = async ({
   doc,
@@ -8,7 +13,7 @@ export const loginAfterCreate: CollectionAfterChangeHook<User> = async ({
   req,
 }) => {
   if (operation === 'create' && req.body) {
-    const body = req.body as any
+    const body = req.body as LoginRequestBody
     const { email, password } = body
 
     if (email && password) {
