@@ -4,6 +4,17 @@ const nodemailer = require('nodemailer')
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 
+// Define types for better type safety
+interface OrderItem {
+  itemName: string
+  quantity: number
+  totalPrice: number
+}
+
+interface EmailError extends Error {
+  message: string
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -71,20 +82,6 @@ export async function POST(request: NextRequest) {
       style: 'currency',
       currency: currency || 'EUR'
     }).format(voucherValue)
-
-    // Create order items HTML
-    const orderItemsHtml = orderItems && orderItems.length > 0 
-      ? orderItems.map((item: any) => `
-          <tr>
-            <td style="padding: 8px; border-bottom: 1px solid #eee;">${item.itemName}</td>
-            <td style="padding: 8px; border-bottom: 1px solid #eee; text-align: center;">${item.quantity}</td>
-            <td style="padding: 8px; border-bottom: 1px solid #eee; text-align: right;">${new Intl.NumberFormat('de-DE', {
-              style: 'currency',
-              currency: currency || 'EUR'
-            }).format(item.totalPrice)}</td>
-          </tr>
-        `).join('')
-      : '<tr><td colspan="3" style="padding: 8px; text-align: center; color: #666;">Keine Details verfügbar</td></tr>'
 
     const message = {
       from: `Sanjis Kitchen <${process.env.EMAIL_FROM}>`,
@@ -369,7 +366,7 @@ export async function POST(request: NextRequest) {
                     </tr>
                   </thead>
                   <tbody>
-                    ${orderItems.map((item: any) => `
+                    ${orderItems.map((item: OrderItem) => `
                       <tr>
                         <td>${item.itemName}</td>
                         <td class="quantity">${item.quantity}</td>
@@ -475,10 +472,11 @@ export async function POST(request: NextRequest) {
       isDuplicate: false
     })
 
-  } catch (error: any) {
-    console.error('Error sending order confirmation email:', error)
+  } catch (error: unknown) {
+    const emailError = error as EmailError
+    console.error('Error sending order confirmation email:', emailError)
     return NextResponse.json(
-      { error: 'Failed to send order confirmation email', details: error.message },
+      { error: 'Failed to send order confirmation email', details: emailError.message },
       { status: 500 }
     )
   }
