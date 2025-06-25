@@ -7,9 +7,12 @@ import { buildConfig } from 'payload'
 import { Team } from './collections/team'
 import { Media } from './collections/media'
 import { Hero } from './collections/hero'
-import { Admins } from './collections/auth/admin'
+import { Users } from './collections/user'
 import { MenuMainDish } from './collections/menuMainDish'
 import { MenuAppetizerDish } from './collections/menuAppetizerDish'
+import { Voucher } from './collections/voucher'
+import { Order } from './collections/order'
+import { Admin } from './collections/admin'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -20,9 +23,12 @@ export default buildConfig({
     Team,
     Media,
     Hero,
-    Admins,
+    Users,
     MenuMainDish,
     MenuAppetizerDish,
+    Voucher,
+    Order,
+    Admin,
   ],
   upload: {
     limits: {

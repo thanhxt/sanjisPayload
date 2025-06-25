@@ -1,10 +1,14 @@
 import type { CollectionConfig } from 'payload'
 import { afterChangeHook } from '@/collections/menuAppetizerDish/hooks'
+import { checkRole } from '../user/access/checkRole'
 
 export const MenuAppetizerDish: CollectionConfig = {
   slug: 'menuAppetizerDish',
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => checkRole(['admin'], user),
+    create: ({ req: { user } }) => checkRole(['admin'], user),
+    update: ({ req: { user } }) => checkRole(['admin'], user),
+    delete: ({ req: { user } }) => checkRole(['admin'], user),
   },
   fields: [
     {
