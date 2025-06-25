@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { stripe } from '@/lib/stripe'
 
-export async function fetchClientSecret() {
+async function fetchClientSecret() {
     const origin = (await headers()).get('origin')
 
     // Create Checkout Sessions from body params.
