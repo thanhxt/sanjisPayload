@@ -5,7 +5,7 @@ import { checkRole } from '../user/access/checkRole'
 export const MenuAppetizerDish: CollectionConfig = {
   slug: 'menuAppetizerDish',
   access: {
-    read: ({ req: { user } }) => checkRole(['admin'], user),
+    read: () => true,
     create: ({ req: { user } }) => checkRole(['admin'], user),
     update: ({ req: { user } }) => checkRole(['admin'], user),
     delete: ({ req: { user } }) => checkRole(['admin'], user),
