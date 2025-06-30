@@ -1,24 +1,6 @@
-import Image from "next/image";
-import HeroText from "../hero-text";
-
 export default function Lunch() {
     return (
         <>
-        <div>
-            {/* Hero Section */}
-            <div className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden mb-0 bg-black">
-                <Image
-                    src="/Sanjis_Julio-36.jpg"
-                    alt="Background"
-                    width={1920}
-                    height={1080}
-                    quality={75}
-                    priority
-                    className="absolute w-full h-full object-cover blur-md brightness-50 z-10"
-                />
-                <HeroText title="Mittagstisch" titleEn="Lunch" />
-            </div>
-        </div>
         <div className="bg-zinc-900 text-white py-16 min-h-screen">
             <div className="max-w-[900px] text-lg mx-auto px-4">
                 <h1 className="text-center text-4xl mb-2 font-bold">LUNCH</h1>

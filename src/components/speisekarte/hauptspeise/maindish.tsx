@@ -12,7 +12,7 @@ export default async function MainDish() {
         <div className="bg-black text-white">
             <div>
                 {/* Hero Section */}
-                <div className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden mb-0 bg-black">
+                <div className="relative w-full h-[40vh] flex items-center justify-center overflow-hidden mb-0 bg-black">
                     <Image
                         src="/Sanjis_Julio-14.jpg"
                         alt="Background"
