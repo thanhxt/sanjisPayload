@@ -61,8 +61,8 @@ export default function Navbar() {
                         <li><Link href="/about" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Über uns" : "About"}</Link></li>
                         <li><Link href="/speisekarte" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
                         <li><Link href="/reservierung" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierungen" : "Reservations"}</Link></li>
-                        <li><Link href="/kontakt" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                         <li><Link href="/voucher" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
+                        <li><Link href="/kontakt" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                         <li> <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
                             <ToggleGroupItem value="de" aria-label="Switch to German" className="min-h-[44px] min-w-[44px] px-4">
                                 <span className="fi fi-de"></span>
