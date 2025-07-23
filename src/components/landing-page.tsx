@@ -15,7 +15,7 @@ export default function LandingPage() {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover"
             >
-                <source src="/LandingPageVideo.mp4" type="video/mp4" />
+                <source src="/LandingPageVideo2.MOV" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
