@@ -34,6 +34,11 @@ export const MenuMainDish: CollectionConfig = {
       type: 'text',
     },
   ],
+  admin: {
+    useAsTitle: 'titleDE',
+    group: 'Menu',
+    description: 'Manage main dishes',
+  },
   hooks: {
     afterChange: [afterChangeHook],
   },

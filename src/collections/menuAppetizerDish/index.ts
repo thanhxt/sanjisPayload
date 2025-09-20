@@ -34,6 +34,11 @@ export const MenuAppetizerDish: CollectionConfig = {
       type: 'text',
     },
   ],
+  admin: {
+    useAsTitle: 'title',
+    group: 'Menu',
+    description: 'Manage appetizer dishes',
+  },
   hooks: {
     afterChange: [afterChangeHook],
   },
