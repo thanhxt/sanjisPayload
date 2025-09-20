@@ -6,7 +6,7 @@ export default function Lunch() {
     const { language } = useLanguage();
     return (
         <>
-        <div className="bg-zinc-900 text-white py-16 min-h-screen">
+        <div className="bg-black text-white py-16 min-h-screen">
             <div className="max-w-[900px] text-lg mx-auto px-4">
                 <h1 className="text-center text-4xl mb-2 font-bold">LUNCH</h1>
                 <div className="text-center text-gray-300 text-lg mb-8">

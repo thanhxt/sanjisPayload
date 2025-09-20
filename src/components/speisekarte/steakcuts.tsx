@@ -4,7 +4,7 @@ export default function Steaks() {
     const { language } = useLanguage();
 
     return (
-        <div id="steaks" className="bg-zinc-900 text-white py-16 min-h-screen">
+        <div id="steaks" className="bg-black text-white py-16 min-h-screen">
             <div className="max-w-[1200px] text-lg mx-auto px-4">
                     {/* Top Row */}
                     <div className="flex flex-col md:flex-row justify-between mb-10">
@@ -44,7 +44,7 @@ export default function Steaks() {
                     <div className="border-2 border-gray-600 p-8 my-10 text-center bg-zinc-800">
                         <div className="font-bold text-3xl mb-3">SANJI&apos;S CHOICE</div>
                         <div className="font-bold text-xl mb-2">Wagyu A5</div>
-                        <div className="text-base mb-2">{language === "de" ? "Zarte und saftige Wagyu Cuts in höchster Qualität aus der<br />Provinz Miyazaki in Japan" : "Tender and juicy Wagyu cuts of the highest quality from the<br />Miyazaki province in Japan"}</div>
+                        <div className="text-base mb-2">{language === "de" ? "Zarte und saftige Wagyu Cuts in höchster Qualität aus der Provinz Miyazaki in Japan" : "Tender and juicy Wagyu cuts of the highest quality from the Miyazaki province in Japan"}</div>
                         <div className="flex justify-center gap-10 text-base font-medium">
                             <span>Entrecôte 45 | p. 100G</span>
                             <span>Filet 60€ | p. 100G</span>

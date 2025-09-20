@@ -1,6 +1,10 @@
+"use client"
+import { useLanguage } from "../contexts/language-context";
+
 export default function Sides() {
+    const { language } = useLanguage();
     return (
-        <div className="bg-zinc-900 text-white py-16 min-h-screen">
+        <div className="bg-black text-white py-16 min-h-screen">
             <div className="max-w-[1100px] text-lg mx-auto px-4">
                 <h1 className="text-center text-4xl mb-6 font-bold">SIDES</h1>
                 <div className="flex gap-12 flex-wrap justify-between">
@@ -8,17 +12,88 @@ export default function Sides() {
                     <div className="flex-1 min-w-[320px]">
                         <div className="mb-6">french fries 6,9</div>
                         <div className="mb-6">truffled french fries with parmesan 9,9</div>
-                        <div className="mb-6">Bratkartoffeln mit Schalotten 8,9</div>
-                        <div className="mb-6">Wilder Brokkoli mit Knoblauch, Zwiebeln und Sesam 9,9</div>
-                        <div className="mb-6">getrüffeltes Kartoffelpüree 9,9</div>
-                        <div className="mb-6">Babyspinat Salat mit Zwiebeln &amp; Sesamdressing 8,9</div>
+                        <div className="mb-6">
+                            {language === "de" ? 
+                            <>
+                                Bratkartoffeln mit Schalotten 8,9
+                            </> : 
+                            <>
+                                Fried Potatoes with shallots 8,9
+                            </>
+                            }
+                        </div>
+                        <div className="mb-6">
+                            {language === "de" ? 
+                            <>
+                                Wildes Brokkoli mit Knoblauch, Zwiebeln und Sesam 9,9
+                            </> : 
+                            <>
+                                Wild broccoli with garlic, onions and sesame 9,9
+                            </>
+                            }
+                        </div>
+                        <div className="mb-6">
+                            {language === "de" ? 
+                            <>
+                                Getrüffeltes Kartoffelpüree 9,9
+                            </> : 
+                            <>
+                                Truffled potato puree 9,9
+                            </>
+                            }
+                        </div>
+                        <div className="mb-6">
+                            {language === "de" ? 
+                            <>
+                                Babyspinat Salat mit Zwiebeln &amp; Sesamdressing 8,9
+                            </> : 
+                            <>
+                                Baby spinach salad with onions &amp; sesame dressing 8,9
+                            </>
+                            }
+                        </div>
                     </div>
                     {/* Right Column */}
                     <div className="flex-1 min-w-[320px]">
-                        <div className="mb-6">Beilagensalat klein / groß 6,9 / 8,9</div>
-                        <div className="mb-6">Jasmin Reis 3</div>
-                        <div className="mb-6">Hausgemachter Kimchi 5</div>
-                        <div className="mb-6">Bio Sauerteigbrot von Julius Brantner Brothandwerk 4,5</div>
+                        <div className="mb-6">
+                            {language === "de" ? 
+                            <>
+                                Beilagensalat klein / groß 6,9 / 8,9
+                            </> : 
+                            <>
+                                Side salad small / large 6,9 / 8,9
+                            </>
+                            }
+                        </div>
+                        <div className="mb-6">
+                            {language === "de" ? 
+                            <>
+                                Jasmin Reis 3
+                            </> : 
+                            <>
+                                Jasmine rice 3
+                            </>
+                            }
+                        </div>
+                        <div className="mb-6">
+                            {language === "de" ? 
+                            <>
+                                Hausgemachter Kimchi 5
+                            </> : 
+                            <>
+                                Homemade Kimchi 5
+                            </>
+                            }
+                        </div>
+                        <div className="mb-6">
+                            {language === "de" ? 
+                            <>
+                                Bio Sauerteigbrot von Julius Brantner Brothandwerk 4,5
+                            </> : 
+                            <>
+                                Organic sourdough bread from Julius Brantner Brothandwerk 4,5
+                            </>
+                            }</div>
                         {/* Sauces Box */}
                         <div className="bg-zinc-800 text-white border-2 border-gray-600 rounded-lg mt-10 p-8 max-w-[350px]">
                             <div className="font-bold text-xl mb-4">Homemade Sauces</div>
