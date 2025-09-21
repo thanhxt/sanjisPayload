@@ -4,19 +4,22 @@ import React, { useState } from 'react';
 import { useLanguage } from '../contexts/language-context';
 import AppetizerClient from './vorspeise/appetizerClient';
 import MainDishClient from './hauptspeise/maindishClient';
+import SteaksClient from './steaks/steaksClient';
 import Steaks from './steaks';
 import Lunch from './lunch';
 import { MenuAppetizerDish } from '@/type/appetizerDishType';
 import { MainDish } from '@/type/mainDishType';
+import { SteaksDish } from '@/type/steaksdishType';
 
 // Create a wrapper component for async data fetching
 const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive: boolean }) => {
     const [appetizerItems, setAppetizerItems] = useState<MenuAppetizerDish[]>([]);
     const [mainDishItems, setMainDishItems] = useState<MainDish[]>([]);
+    const [steaksDishItems, setSteaksDishItems] = useState<SteaksDish[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
     React.useEffect(() => {
-        if (isActive && (sectionId === 'vorspeise' || sectionId === 'hauptspeise')) {
+        if (isActive && (sectionId === 'vorspeise' || sectionId === 'hauptspeise' || sectionId === 'steaks')) {
             setIsLoading(true);
             
             if (sectionId === 'vorspeise' && appetizerItems.length === 0) {
@@ -41,6 +44,13 @@ const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive
                         console.error('Error fetching main dish items:', error);
                         setIsLoading(false);
                     });
+            } else if (sectionId === 'steaks' && steaksDishItems.length === 0) {
+                fetch('/api/menu-steaksdish')
+                    .then(res => res.json())
+                    .then(items => {
+                        setSteaksDishItems(items);
+                        setIsLoading(false);
+                    });
             } else {
                 setIsLoading(false);
             }
@@ -63,7 +73,7 @@ const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive
         case 'hauptspeise':
             return <MainDishClient menuItems={mainDishItems} />;
         case 'steaks':
-            return <Steaks />;
+            return <SteaksClient menuItems={steaksDishItems} />;
         case 'lunch':
             return <Lunch />;
         default:

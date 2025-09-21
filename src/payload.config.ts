@@ -10,6 +10,9 @@ import { Hero } from './collections/hero'
 import { Users } from './collections/user'
 import { MenuMainDish } from './collections/menuMainDish'
 import { MenuAppetizerDish } from './collections/menuAppetizerDish'
+import { MenuSteaksDish } from './collections/menuSteaksDish'
+import { MenuSteaksSharing } from './collections/menuSteaksSharing'
+import { MenuSanjisChoice } from './collections/menuSanjisChoice'
 import { Voucher } from './collections/voucher'
 import { Order } from './collections/order'
 import { Admin } from './collections/admin'
@@ -26,6 +29,9 @@ export default buildConfig({
     Users,
     MenuMainDish,
     MenuAppetizerDish,
+    MenuSteaksDish,
+    MenuSteaksSharing,
+    MenuSanjisChoice,
     Voucher,
     Order,
     Admin,

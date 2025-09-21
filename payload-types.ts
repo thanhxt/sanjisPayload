@@ -73,6 +73,9 @@ export interface Config {
     users: User;
     menuMainDish: MenuMainDish;
     menuAppetizerDish: MenuAppetizerDish;
+    menuSteaksDish: MenuSteaksDish;
+    menuSteaksSharing: MenuSteaksSharing;
+    menuSanjisChoice: MenuSanjisChoice;
     vouchers: Voucher;
     orders: Order;
     admin: Admin;
@@ -88,6 +91,9 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     menuMainDish: MenuMainDishSelect<false> | MenuMainDishSelect<true>;
     menuAppetizerDish: MenuAppetizerDishSelect<false> | MenuAppetizerDishSelect<true>;
+    menuSteaksDish: MenuSteaksDishSelect<false> | MenuSteaksDishSelect<true>;
+    menuSteaksSharing: MenuSteaksSharingSelect<false> | MenuSteaksSharingSelect<true>;
+    menuSanjisChoice: MenuSanjisChoiceSelect<false> | MenuSanjisChoiceSelect<true>;
     vouchers: VouchersSelect<false> | VouchersSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
     admin: AdminSelect<false> | AdminSelect<true>;
@@ -235,6 +241,8 @@ export interface User {
   password?: string | null;
 }
 /**
+ * Manage main dishes
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuMainDish".
  */
@@ -249,6 +257,8 @@ export interface MenuMainDish {
   createdAt: string;
 }
 /**
+ * Manage appetizer dishes
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuAppetizerDish".
  */
@@ -259,6 +269,68 @@ export interface MenuAppetizerDish {
   price: number;
   descriptionDE?: string | null;
   descriptionEN?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage steaks dishes
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSteaksDish".
+ */
+export interface MenuSteaksDish {
+  id: string;
+  titleDE: string;
+  descriptionDE?: string | null;
+  descriptionEN?: string | null;
+  regionDE?: string | null;
+  regionEN?: string | null;
+  weightSmall?: number | null;
+  priceSmall?: number | null;
+  weightLarge?: number | null;
+  priceLarge?: number | null;
+  position?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage steaks sharing
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSteaksSharing".
+ */
+export interface MenuSteaksSharing {
+  id: string;
+  titleDE: string;
+  descriptionDE?: string | null;
+  descriptionEN?: string | null;
+  regionDE?: string | null;
+  regionEN?: string | null;
+  weightSmall?: number | null;
+  priceSmall?: number | null;
+  weightLarge?: number | null;
+  priceLarge?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage sanjis choice
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSanjisChoice".
+ */
+export interface MenuSanjisChoice {
+  id: string;
+  titleDE: string;
+  steaktitle?: string | null;
+  descriptionDE?: string | null;
+  descriptionEN?: string | null;
+  stake1?: string | null;
+  price1?: number | null;
+  stakeWeight1?: number | null;
+  stake2?: string | null;
+  price2?: number | null;
+  stakeWeight2?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -467,6 +539,18 @@ export interface PayloadLockedDocument {
         value: string | MenuAppetizerDish;
       } | null)
     | ({
+        relationTo: 'menuSteaksDish';
+        value: string | MenuSteaksDish;
+      } | null)
+    | ({
+        relationTo: 'menuSteaksSharing';
+        value: string | MenuSteaksSharing;
+      } | null)
+    | ({
+        relationTo: 'menuSanjisChoice';
+        value: string | MenuSanjisChoice;
+      } | null)
+    | ({
         relationTo: 'vouchers';
         value: string | Voucher;
       } | null)
@@ -636,6 +720,59 @@ export interface MenuAppetizerDishSelect<T extends boolean = true> {
   price?: T;
   descriptionDE?: T;
   descriptionEN?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSteaksDish_select".
+ */
+export interface MenuSteaksDishSelect<T extends boolean = true> {
+  titleDE?: T;
+  descriptionDE?: T;
+  descriptionEN?: T;
+  regionDE?: T;
+  regionEN?: T;
+  weightSmall?: T;
+  priceSmall?: T;
+  weightLarge?: T;
+  priceLarge?: T;
+  position?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSteaksSharing_select".
+ */
+export interface MenuSteaksSharingSelect<T extends boolean = true> {
+  titleDE?: T;
+  descriptionDE?: T;
+  descriptionEN?: T;
+  regionDE?: T;
+  regionEN?: T;
+  weightSmall?: T;
+  priceSmall?: T;
+  weightLarge?: T;
+  priceLarge?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSanjisChoice_select".
+ */
+export interface MenuSanjisChoiceSelect<T extends boolean = true> {
+  titleDE?: T;
+  steaktitle?: T;
+  descriptionDE?: T;
+  descriptionEN?: T;
+  stake1?: T;
+  price1?: T;
+  stakeWeight1?: T;
+  stake2?: T;
+  price2?: T;
+  stakeWeight2?: T;
   updatedAt?: T;
   createdAt?: T;
 }
