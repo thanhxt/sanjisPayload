@@ -5,11 +5,10 @@ import { useLanguage } from '../contexts/language-context';
 import AppetizerClient from './vorspeise/appetizerClient';
 import MainDishClient from './hauptspeise/maindishClient';
 import SteaksClient from './steaks/steaksClient';
-import Steaks from './steaks';
 import Lunch from './lunch';
 import { MenuAppetizerDish } from '@/type/appetizerDishType';
 import { MainDish } from '@/type/mainDishType';
-import { SteaksDish } from '@/type/steaksdishType';
+import { SteaksDish } from '@/type/steaksDishType';
 
 // Create a wrapper component for async data fetching
 const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive: boolean }) => {
@@ -55,7 +54,7 @@ const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive
                 setIsLoading(false);
             }
         }
-    }, [isActive, sectionId, appetizerItems.length, mainDishItems.length]);
+    }, [isActive, sectionId, appetizerItems.length, mainDishItems.length, steaksDishItems.length]);
 
     if (!isActive) return null;
 

@@ -1,6 +1,6 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { SteaksDish } from "@/type/steaksdishType";
+import { SteaksDish } from "@/type/steaksDishType";
 
 export const revalidate = 60;
 

@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import { useLanguage } from "../../contexts/language-context";
-import { SteaksDish } from "@/type/steaksdishType";
+import { SteaksDish } from "@/type/steaksDishType";
 
 export default function SteaksClient({ menuItems }: { menuItems: SteaksDish[] }) {
     const { language } = useLanguage();
@@ -15,7 +15,7 @@ export default function SteaksClient({ menuItems }: { menuItems: SteaksDish[] })
                     {/* Image on the left */}
                     <div className="order-1 md:order-1 flex-shrink-0">
                         <Image 
-                            src="/HauptspeiseSchrift.png" 
+                            src="/MAINDISHES.svg" 
                             alt="Main Dish" 
                             width={170} 
                             height={120}
