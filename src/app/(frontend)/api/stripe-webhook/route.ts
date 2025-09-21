@@ -18,8 +18,8 @@ export async function POST(req: Request) {
       sig!,
       process.env.STRIPE_WEBHOOK_INVOICE!
     )
-  } catch (err: any) {
-    console.error('Webhook signature verification failed.', err.message)
+  } catch (err: unknown) {
+    console.error('Webhook signature verification failed.', err instanceof Error ? err.message : 'Unknown error')
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
   }
 
