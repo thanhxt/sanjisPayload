@@ -1,53 +1,70 @@
 "use client"
 import { useLanguage } from "../contexts/language-context";
+import Image from "next/image";
 
 export default function Sharing() {
     const { language } = useLanguage();
     return (
         <div className="bg-black text-white py-16 min-h-screen">
             <div className="max-w-[900px] text-lg mx-auto px-4">
-                <h1 className="text-center text-4xl mb-6 font-bold">SHARING</h1>
-                <div className="text-center mb-4 text-lg">
-                    {language === "de" ? 
-                        <>
-                            Ab 3 Personen<br />
-                        </> : 
-                        <>
-                            Starts at 3 persons<br />
-                        </>
-                    }
-                </div>
-                <div className="text-center mb-8 text-lg">
-                    {language === "de" ? 
-                        <>
-                            Am Tisch flambiert &amp; tranchiert<br />
-                        </> : 
-                        <>
-                            Flambéed &amp; carved at the table<br />
-                        </>
-                    }
-                </div>
-                {/* Juicy Menu */}
-                <div className="bg-zinc-800 text-white border-2 border-gray-500 rounded-md mb-8 py-8 text-center">
-                    <div className="text-3xl font-bold mb-2">JUICY MENU</div>
-                    <div className="text-xl font-medium mb-4">p.p. 250G / 46</div>
-                    <div className="text-lg text-white">
-                        Hanging Tender<br />
-                        Entrecôte<br />
-                        Flanksteak
+                
+                <div className="mb-10 flex flex-col md:flex-row items-center justify-center">
+                    {/* Image on the left */}
+                    <div className="order-1 md:order-1 flex-shrink-0">
+                        <Image 
+                            src="/SHARING.svg" 
+                            alt="Sharing" 
+                            width={170} 
+                            height={120}
+                            className="mb-6 md:mb-0 hidden md:block"
+                        />
+                    </div>
+                    {/* Text on the right */}
+                    <div className="order-2 md:order-2 flex-1 w-full">
+                        <div className="text-center mb-4 text-lg">
+                            {language === "de" ? 
+                                <>
+                                    Ab 3 Personen<br />
+                                </> : 
+                                <>
+                                    Starts at 3 persons<br />
+                                </>
+                            }
+                        </div>
+                        <div className="text-center mb-8 text-lg">
+                            {language === "de" ? 
+                                <>
+                                    Am Tisch flambiert &amp; tranchiert<br />
+                                </> : 
+                                <>
+                                    Flambéed &amp; carved at the table<br />
+                                </>
+                            }
+                        </div>
+                        {/* Juicy Menu */}
+                        <div className="bg-zinc-800 text-white border-2 border-gray-500 rounded-md mb-8 py-8 text-center">
+                            <div className="text-3xl font-bold mb-2">JUICY MENU</div>
+                            <div className="text-xl font-medium mb-4">p.p. 250G / 46</div>
+                            <div className="text-lg text-white">
+                                Hanging Tender<br />
+                                Entrecôte<br />
+                                Flanksteak
+                            </div>
+                        </div>
+                        {/* Tender Menu */}
+                        <div className="bg-zinc-800 text-white border-2 border-gray-500 rounded-md mb-8 py-8 text-center">
+                            <div className="text-3xl font-bold mb-2">TENDER MENU</div>
+                            <div className="text-xl font-medium mb-4">p.p. 200G / 47</div>
+                            <div className="text-lg text-white">
+                                Filet<br />
+                                Hanging Tender
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {/* Tender Menu */}
-                <div className="bg-zinc-800 text-white border-2 border-gray-500 rounded-md mb-8 py-8 text-center">
-                    <div className="text-3xl font-bold mb-2">TENDER MENU</div>
-                    <div className="text-xl font-medium mb-4">p.p. 200G / 47</div>
-                    <div className="text-lg text-white">
-                        Filet<br />
-                        Hanging Tender
-                    </div>
-                </div>
+
                 {/* rum & flames section */}
-                <div className="text-center mt-10">
+                <div className="text-center mt-10 ml-10">
                     <div className="font-bold text-xl mb-3">rum &amp; flames</div>
                     <div className="text-base mb-4 text-white">
                         {language === "de" ? 

@@ -4,6 +4,8 @@ import { useLanguage } from "../../contexts/language-context";
 import { SteaksDish } from "@/type/steaksDishType";
 import { SteaksDishChoice } from "@/type/steaksDishChoiceType";
 import { SteaksDishSharing } from "@/type/steaksDishSharingType";
+import Sharing from "../sharing";
+import Sides from "../sides";
 
 export default function SteaksClient({ steaksItems, steakChoiceItems, steakSharingItems }: { 
     steaksItems: SteaksDish[], 
@@ -112,6 +114,10 @@ export default function SteaksClient({ steaksItems, steakChoiceItems, steakShari
                             Upgrade! Surf &amp; Turf + Black Tiger Prawns 17,9
                         </div>
                     </div>
+                </div>
+                <div>
+                    <Sharing />
+                    <Sides />       
                 </div>
             </div>
         </div>
