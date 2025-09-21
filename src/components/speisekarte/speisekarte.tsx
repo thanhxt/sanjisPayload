@@ -9,12 +9,16 @@ import Lunch from './lunch';
 import { MenuAppetizerDish } from '@/type/appetizerDishType';
 import { MainDish } from '@/type/mainDishType';
 import { SteaksDish } from '@/type/steaksDishType';
+import { SteaksDishChoice } from '@/type/steaksDishChoiceType';
+import { SteaksDishSharing } from '@/type/steaksDishSharingType';
 
 // Create a wrapper component for async data fetching
 const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive: boolean }) => {
     const [appetizerItems, setAppetizerItems] = useState<MenuAppetizerDish[]>([]);
     const [mainDishItems, setMainDishItems] = useState<MainDish[]>([]);
     const [steaksDishItems, setSteaksDishItems] = useState<SteaksDish[]>([]);
+    const [steaksDishChoiceItems, setSteaksDishChoiceItems] = useState<SteaksDishChoice[]>([]);
+    const [steaksDishSharingItems, setSteaksDishSharingItems] = useState<SteaksDishSharing[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
     React.useEffect(() => {
@@ -50,11 +54,23 @@ const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive
                         setSteaksDishItems(items);
                         setIsLoading(false);
                     });
+                    fetch('/api/menu-steaksdishchoice')
+                    .then(res => res.json())
+                    .then(items => {
+                        setSteaksDishChoiceItems(items);
+                        setIsLoading(false);
+                    });
+                    fetch('/api/menu-steaksdishsharing')
+                    .then(res => res.json())
+                    .then(items => {
+                        setSteaksDishSharingItems(items);
+                        setIsLoading(false);
+                    });
             } else {
                 setIsLoading(false);
             }
         }
-    }, [isActive, sectionId, appetizerItems.length, mainDishItems.length, steaksDishItems.length]);
+    }, [isActive, sectionId, appetizerItems.length, mainDishItems.length, steaksDishItems.length, steaksDishChoiceItems.length]);
 
     if (!isActive) return null;
 
@@ -72,7 +88,9 @@ const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive
         case 'hauptspeise':
             return <MainDishClient menuItems={mainDishItems} />;
         case 'steaks':
-            return <SteaksClient menuItems={steaksDishItems} />;
+            return <SteaksClient steaksItems={steaksDishItems} 
+            steakChoiceItems={steaksDishChoiceItems} 
+            steakSharingItems={steaksDishSharingItems} />;
         case 'lunch':
             return <Lunch />;
         default:

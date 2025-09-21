@@ -2,11 +2,15 @@ import Image from "next/image";
 import HeroText from "../../hero-text";
 import SteaksClient from "./steaksClient";
 import getSteaksDish from "../getData/get-steaksdish";
+import getSteaksDishChoice from "../getData/get-steaksdishchoice";
+import getSteaksDishSharing from "../getData/get-steaksdishsharing";
 
 export const revalidate = 60;
 
 export default async function Steaks() {
     const steaks = await getSteaksDish();
+    const steakChoice = await getSteaksDishChoice();
+    const steakSharing = await getSteaksDishSharing();
 
     return (
         <div className="bg-black text-white">
@@ -25,7 +29,7 @@ export default async function Steaks() {
                     <HeroText title="Steaks" titleEn="Steaks" />
                 </div>
             </div>
-            <SteaksClient menuItems={steaks} />
+            <SteaksClient steaksItems={steaks} steakChoiceItems={steakChoice} steakSharingItems={steakSharing} />
         </div>
     );
 }
