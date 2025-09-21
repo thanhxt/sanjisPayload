@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { SteaksDish } from "@/type/steaksdishType";
+import { SteaksDish } from "@/type/steaksDishType";
 
 export async function GET() {
     try {
