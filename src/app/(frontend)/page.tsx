@@ -2,7 +2,7 @@ import Introduction from "@/components/introduction"
 import LandingPage from "@/components/landing-page"
 import Reservations from "@/components/reservations"
 import Maps from "@/components/maps"
-import Gallery from "@/components/gallery"
+import Gallery from "@/components/gallery/gallery"
 import { metadata } from "./layout"
 
 export default function Home() {
