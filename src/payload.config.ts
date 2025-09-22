@@ -16,6 +16,7 @@ import { MenuSanjisChoice } from './collections/menuSanjisChoice'
 import { Voucher } from './collections/voucher'
 import { Order } from './collections/order'
 import { Admin } from './collections/admin'
+import { Gallery } from './collections/gallery'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -27,6 +28,7 @@ export default buildConfig({
     Media,
     Hero,
     Users,
+    Gallery,
     MenuMainDish,
     MenuAppetizerDish,
     MenuSteaksDish,

@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     hero: Hero;
     users: User;
+    gallery: Gallery;
     menuMainDish: MenuMainDish;
     menuAppetizerDish: MenuAppetizerDish;
     menuSteaksDish: MenuSteaksDish;
@@ -89,6 +90,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
     menuMainDish: MenuMainDishSelect<false> | MenuMainDishSelect<true>;
     menuAppetizerDish: MenuAppetizerDishSelect<false> | MenuAppetizerDishSelect<true>;
     menuSteaksDish: MenuSteaksDishSelect<false> | MenuSteaksDishSelect<true>;
@@ -239,6 +241,18 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: string;
+  title: string;
+  images: string | Media;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * Manage main dishes
@@ -531,6 +545,10 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
+        relationTo: 'gallery';
+        value: string | Gallery;
+      } | null)
+    | ({
         relationTo: 'menuMainDish';
         value: string | MenuMainDish;
       } | null)
@@ -696,6 +714,17 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  title?: T;
+  images?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
