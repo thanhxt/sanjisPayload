@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { checkRole } from '../user/access/checkRole'
 
 /**
  * This is the voucher collection for the website.
@@ -8,9 +9,34 @@ export const Voucher: CollectionConfig = {
   slug: 'vouchers',
   access: {
     read: () => true,
-    create: () => true,
+    create: ({ req: { user } }) => checkRole(['admin','editor'], user),
     update: () => true,
-    delete: () => true,
+    delete: ({ req: { user } }) => checkRole(['admin','editor'], user),
+  },
+  timestamps: true,
+  hooks: {
+    beforeChange: [
+      ({ data, req, operation, originalDoc }) => {
+        if (operation !== 'update') return data
+        const user = req?.user
+        // Only use user.id, as _id is not present on the User type
+        const editorId = user?.id
+        const editorEmail = user?.email
+        const now = new Date().toISOString()
+        const previousHistory = Array.isArray(originalDoc?.editHistory) ? originalDoc.editHistory : []
+        const newEntry = {
+          editedAt: now,
+          editor: editorId || null,
+          editorEmail: editorEmail || null,
+        }
+
+        return {
+          ...data,
+          updatedBy: editorId || null,
+          editHistory: [...previousHistory, newEntry],
+        }
+      },
+    ],
   },
   fields: [
     {
@@ -18,6 +44,9 @@ export const Voucher: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin','editor'], user),
+      },
       admin: {
         description: 'Unique voucher code (e.g., SANJIS2024)',
       },
@@ -26,6 +55,9 @@ export const Voucher: CollectionConfig = {
       name: 'value',
       type: 'number',
       required: true,
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin','editor'], user),
+      },
       admin: {
         description: 'Voucher value in the specified currency (e.g., 25 for 25€)',
       },
@@ -49,6 +81,9 @@ export const Voucher: CollectionConfig = {
           value: 'CHF',
         },
       ],
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin','editor'], user),
+      },
       admin: {
         description: 'Currency of the voucher value',
       },
@@ -57,6 +92,9 @@ export const Voucher: CollectionConfig = {
       name: 'expiresAt',
       type: 'date',
       required: true,
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin','editor'], user),
+      },
       admin: {
         description: 'Expiration date of the voucher',
         date: {
@@ -68,6 +106,9 @@ export const Voucher: CollectionConfig = {
       name: 'isRedeemed',
       type: 'checkbox',
       defaultValue: false,
+      access:{
+        update: ({ req: { user } }) => checkRole(['admin','editor','user'], user),        
+      },
       admin: {
         description: 'Whether the voucher has been redeemed',
       },
@@ -86,6 +127,9 @@ export const Voucher: CollectionConfig = {
     {
       name: 'orderId',
       type: 'text',
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin','editor'], user),
+      },
       admin: {
         description: 'Related order ID when voucher was used',
         condition: (data) => data.isRedeemed === true,
@@ -94,14 +138,69 @@ export const Voucher: CollectionConfig = {
     {
       name: 'description',
       type: 'text',
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin','editor'], user),
+      },
       admin: {
         description: 'Optional description for the voucher',
       },
     },
+    {
+      name: 'updatedBy',
+      type: 'relationship',
+      relationTo: 'users',
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin'], user),
+      },
+      admin: {
+        description: 'Last user who edited this voucher',
+        readOnly: true,
+      },
+    },
+    {
+      name: 'editHistory',
+      type: 'array',
+      defaultValue: [],
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin'], user),
+      },
+      admin: {
+        description: 'History of edits to this voucher',
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: 'editedAt',
+          type: 'date',
+          required: true,
+          admin: {
+            readOnly: true,
+            date: {
+              pickerAppearance: 'dayAndTime',
+            },
+          },
+        },
+        {
+          name: 'editor',
+          type: 'relationship',
+          relationTo: 'users',
+          admin: {
+            readOnly: true,
+          },
+        },
+        {
+          name: 'editorEmail',
+          type: 'text',
+          admin: {
+            readOnly: true,
+          },
+        },
+      ],
+    },
   ],
   admin: {
     useAsTitle: 'code',
-    defaultColumns: ['code', 'value', 'currency', 'expiresAt', 'isRedeemed'],
+    defaultColumns: ['code', 'value', 'currency', 'expiresAt', 'isRedeemed', 'updatedBy'],
     group: 'Commerce',
   },
 }

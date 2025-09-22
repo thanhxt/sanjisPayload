@@ -386,6 +386,21 @@ export interface Voucher {
    * Optional description for the voucher
    */
   description?: string | null;
+  /**
+   * Last user who edited this voucher
+   */
+  updatedBy?: (string | null) | User;
+  /**
+   * History of edits to this voucher
+   */
+  editHistory?:
+    | {
+        editedAt: string;
+        editor?: (string | null) | User;
+        editorEmail?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -818,6 +833,15 @@ export interface VouchersSelect<T extends boolean = true> {
   redeemedAt?: T;
   orderId?: T;
   description?: T;
+  updatedBy?: T;
+  editHistory?:
+    | T
+    | {
+        editedAt?: T;
+        editor?: T;
+        editorEmail?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
