@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { checkRole } from '../user/access/checkRole'
 
 /**
  * This is the order collection for the website.
@@ -8,9 +9,9 @@ export const Order: CollectionConfig = {
   slug: 'orders',
   access: {
     read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => true,
+    create: ({ req: { user } }) => checkRole(['admin'], user),
+    update: ({ req: { user } }) => checkRole(['admin'], user),
+    delete: ({ req: { user } }) => checkRole(['admin'], user),
   },
   fields: [
     {

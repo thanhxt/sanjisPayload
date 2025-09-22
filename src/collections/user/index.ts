@@ -28,7 +28,7 @@ export const Users: CollectionConfig = {
     update: editor, // Editors and admins can update users
     delete: admins, // Only admins can delete users
     unlock: admins, // Only admins can unlock users
-    admin: ({ req: { user } }) => checkRole(['admin', 'editor'], user), // Both admins and editors can access admin panel
+    admin: ({ req: { user } }) => checkRole(['admin', 'editor', 'user'], user), // Admins, editors, and users can access admin panel
   },
   hooks: {
     afterChange: [loginAfterCreate],
