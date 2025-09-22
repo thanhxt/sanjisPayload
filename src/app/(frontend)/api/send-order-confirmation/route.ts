@@ -400,7 +400,7 @@ export async function POST(request: NextRequest) {
               </div>
               
               <div class="voucher-section">
-                <h3 style="font-size: 22px; margin-bottom: 15px; font-weight: 600;">🎁 Ihr exklusiver Gutschein</h3>
+                <h3 style="font-size: 22px; margin-bottom: 15px; font-weight: 600;"> Ihr exklusiver Gutschein</h3>
                 <p style="margin-bottom: 20px; opacity: 0.9;">
                   Als Dankeschön für Ihre Bestellung erhalten Sie einen exklusiven Gutschein für Ihren nächsten Besuch!
                 </p>
