@@ -240,19 +240,19 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
                   <div className="space-y-3 text-sm">
                     <div className="flex items-center space-x-3">
                       <Mail className="w-4 h-4 text-gray-400" />
-                      <a href="mailto:orders@example.com" className="text-blue-400 hover:text-blue-300 transition-colors">
-                        orders@example.com
+                      <a href="mailto:info@sanjiskitchen.de" className="text-blue-400 hover:text-blue-300 transition-colors">
+                        info@sanjiskitchen.de
                       </a>
                     </div>
                     <div className="flex items-center space-x-3">
                       <Phone className="w-4 h-4 text-gray-400" />
-                      <a href="tel:+49123456789" className="text-blue-400 hover:text-blue-300 transition-colors">
-                        +49 123 456 789
+                      <a href="tel:+498937505678" className="text-blue-400 hover:text-blue-300 transition-colors">
+                        +49 89 37505678
                       </a>
                     </div>
                     <div className="flex items-center space-x-3">
                       <MapPin className="w-4 h-4 text-gray-400" />
-                      <span className="text-gray-300">München, Deutschland</span>
+                      <span className="text-gray-300">Kellerstrasse 32, 81667 München, Deutschland</span>
                     </div>
                   </div>
                 </div>
