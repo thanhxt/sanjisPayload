@@ -53,6 +53,18 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    // Debug: Check if environment variables are set
+    console.log('EMAIL_FROM:', process.env.EMAIL_FROM ? 'SET' : 'NOT SET')
+    console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? 'SET' : 'NOT SET')
+    
+    if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASSWORD) {
+      console.error('Missing email environment variables')
+      return NextResponse.json(
+        { error: 'Email configuration missing' },
+        { status: 500 }
+      )
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -61,7 +73,13 @@ export async function POST(request: NextRequest) {
       },
       tls: {
         rejectUnauthorized: false,
-      }
+      },
+      // Additional Gmail-specific settings
+      pool: true,
+      maxConnections: 1,
+      maxMessages: 3,
+      rateDelta: 20000,
+      rateLimit: 5
     })
 
     // Format the expiration date
@@ -454,7 +472,21 @@ export async function POST(request: NextRequest) {
 
     console.log('Sending order confirmation email to:', customerEmail)
 
-    await transporter.sendMail(message)
+    // Test the connection first
+    try {
+      await transporter.verify()
+      console.log('Email server connection verified')
+    } catch (verifyError: unknown) {
+      console.error('Email server connection failed:', verifyError)
+      return NextResponse.json(
+        { error: 'Email server connection failed', details: verifyError instanceof Error ? verifyError.message : 'Unknown error' },
+        { status: 500 }
+      )
+    }
+
+    // Send the email
+    const info = await transporter.sendMail(message)
+    console.log('Email sent successfully:', info.messageId)
     
     // Mark the order as having received an email
     await payload.update({
