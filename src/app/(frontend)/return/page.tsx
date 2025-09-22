@@ -91,7 +91,7 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
               description: `Voucher for successful payment - Session: ${session_id}`
             }
 
-            const voucherResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/create-voucher`, {
+            const voucherResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/create-voucher`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
                   orderItems: orderItems
                 }
 
-                const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/send-order-confirmation`, {
+                const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-order-confirmation`, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
