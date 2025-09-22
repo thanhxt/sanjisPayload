@@ -63,7 +63,7 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
           notes: `Stripe Session: ${session_id}`
         }
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/create-order`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/create-order`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
