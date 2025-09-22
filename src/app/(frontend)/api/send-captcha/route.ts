@@ -1,31 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-    const { token } = await request.json();
-    console.log(token);
-    console.log(process.env.CAPTCHA_SECRET_PRODUCTION);
-
     try {
-        const response = await fetch(
-            process.env.CAPTCHA_VERIFY_URL || '',
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    secret: process.env.CAPTCHA_SECRET_PRODUCTION,
-                    response: `${token}`,
-                }),
-            }
-        );
+        const { token } = await request.json();
+
+        if (!token) {
+            return NextResponse.json(
+                { success: false, message: "Missing captcha token" },
+                { status: 400 }
+            );
+        }
+
+        // ✅ Forward client IP (important for Elysia rate-limit in CapJS)
+        const ip =
+            request.headers.get("x-forwarded-for") ||
+            request.headers.get("cf-connecting-ip") ||
+            "127.0.0.1"; // fallback in dev
+
+        const response = await fetch(process.env.CAPTCHA_VERIFY_URL || "", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-forwarded-for": ip, // 👈 This fixes the warning
+            },
+            body: JSON.stringify({
+                secret: process.env.CAPTCHA_SECRET_PRODUCTION,
+                response: token,
+            }),
+        });
+
         const data = await response.json();
-        console.log(data);
+        console.log("CAPTCHA verify result:", data);
+
+        // You can return the captcha server's result directly
+        return NextResponse.json(data, { status: 200 });
     } catch (error) {
-        console.error(error);
-        return NextResponse.json({ message: "Error verifying token", success: false }, { status: 500 });
+        console.error("Captcha verify error:", error);
+        return NextResponse.json(
+            { success: false, message: "Error verifying captcha" },
+            { status: 500 }
+        );
     }
-
-
-    return NextResponse.json( { message: "Token received", success: true }, { status: 200 } );
 }
