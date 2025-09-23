@@ -8,7 +8,7 @@ import { checkRole } from '../user/access/checkRole'
 export const Media: CollectionConfig = {
   slug: 'media',
   access: {
-    read: ({ req: { user } }) => checkRole(['admin','editor'], user),
+    read: () => true,
     create: ({ req: { user } }) => checkRole(['admin'], user),
     update: ({ req: { user } }) => checkRole(['admin'], user),
     delete: ({ req: { user } }) => checkRole(['admin'], user),
