@@ -17,6 +17,7 @@ export default async function Appetizer() {
                 width={1000} 
                 height={1000}
                 className="absolute w-full h-full object-cover blur-md brightness-50 z-0"
+                priority
                 />
                 <HeroText title="Vorspeisen" titleEn="Appetizers" />
             </div>

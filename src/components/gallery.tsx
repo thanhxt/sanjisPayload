@@ -15,10 +15,10 @@ export default function Gallery() {
                     <video src="/gallery1.mp4" autoPlay muted loop style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
                 </div>
                 <div className="center-grid">
-                    <div className="grid-item"><Image src={images[1]} alt="center1" width={400} height={400} quality={95} loading="lazy" style={{ objectFit: 'cover', borderRadius: '8px' }} /></div>
-                    <div className="grid-item"><Image src={images[2]} alt="center2" width={400} height={400} quality={95} loading="lazy" style={{ objectFit: 'cover', borderRadius: '8px' }} /></div>
-                    <div className="grid-item"><Image src={images[3]} alt="center3" width={400} height={400} quality={95} loading="lazy" style={{ objectFit: 'cover', borderRadius: '8px' }} /></div>
-                    <div className="grid-item"><Image src={images[4]} alt="center4" width={400} height={400} quality={95} loading="lazy" style={{ objectFit: 'cover', borderRadius: '8px' }} /></div>
+                    <div className="grid-item"><Image src={images[1]} alt="center1" width={400} height={400} quality={95} loading="eager" style={{ objectFit: 'cover', borderRadius: '8px' }} /></div>
+                    <div className="grid-item"><Image src={images[2]} alt="center2" width={400} height={400} quality={95} loading="eager" style={{ objectFit: 'cover', borderRadius: '8px' }} /></div>
+                    <div className="grid-item"><Image src={images[3]} alt="center3" width={400} height={400} quality={95} loading="eager" style={{ objectFit: 'cover', borderRadius: '8px' }} /></div>
+                    <div className="grid-item"><Image src={images[4]} alt="center4" width={400} height={400} quality={95} loading="eager" style={{ objectFit: 'cover', borderRadius: '8px' }} /></div>
                 </div>
                 <div className="side right">
                     <video src="/gallery2.mp4" autoPlay muted loop style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />

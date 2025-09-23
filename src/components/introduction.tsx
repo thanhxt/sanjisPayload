@@ -24,7 +24,7 @@ export default function Introduction() {
 				{/* Right: Image */}
 				<div className="order-2 md:order-none flex-1 relative flex items-center justify-center md:justify-end min-h-0 h-auto md:pl-16 pr-6 md:pr-0 md:pr-16 mt-8 md:mt-0 z-0">
 					<div className="w-full h-[360px] sm:w-[400px] sm:h-[380px] md:w-[700px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl relative z-10 mx-auto">
-						<Image src="/LandingPageImage1.jpg" alt="Restaurant Interior" fill className="object-cover object-center" />
+						<Image src="/LandingPageImage1.jpg" alt="Restaurant Interior" fill className="object-cover object-center" priority />
 					</div>
 				</div>
 			</div>

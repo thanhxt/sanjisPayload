@@ -19,7 +19,7 @@ export default function GalleryContent({ gallery }: { gallery: Gallery[] }) {
                                 width={400} 
                                 height={400} 
                                 quality={95}
-                                loading="lazy"
+                                loading="eager"
                                 style={{ objectFit: 'cover', borderRadius: '8px' }}
                             />
                         </div>
