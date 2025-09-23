@@ -106,7 +106,7 @@ export default function Speisekarte() {
         { label: language === "de" ? 'VORSPEISE' : 'STARTERS', color: '#888', opacity: 0.5, id: 'vorspeise' },
         { label: language === "de" ? 'STEAKS' : 'STEAK', color: '#888', opacity: 0.5, id: 'steaks' },
         { label: language === "de" ? 'HAUPTSPEISE' : 'MAIN COURSE', color: '#888', opacity: 0.5, id: 'hauptspeise' },
-        { label: 'LUNCH', color: '#888', opacity: 0.5, id: 'lunch' },
+        // { label: 'LUNCH', color: '#888', opacity: 0.5, id: 'lunch' },
     ];
 
     const handleMenuClick = (itemId: string) => {

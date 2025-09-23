@@ -18,27 +18,27 @@ export default function Sides() {
                                 Bratkartoffeln mit Schalotten 8,9
                             </> : 
                             <>
-                                Fried Potatoes with shallots 8,9
+                                fried potatoes with shallots 8,9
                             </>
                             }
                         </div>
                         <div className="mb-6">
                             {language === "de" ? 
                             <>
-                                Wildes Brokkoli mit Knoblauch, Zwiebeln und Sesam 9,9
+                                wildes Brokkoli mit Knoblauch, Zwiebeln und Sesam 9,9
                             </> : 
                             <>
-                                Wild broccoli with garlic, onions and sesame 9,9
+                                wild broccoli with garlic, onions and sesame 9,9
                             </>
                             }
                         </div>
                         <div className="mb-6">
                             {language === "de" ? 
                             <>
-                                Getrüffeltes Kartoffelpüree 9,9
+                                getrüffeltes Kartoffelpüree 9,9
                             </> : 
                             <>
-                                Truffled potato puree 9,9
+                                truffled mashed potato 9,9
                             </>
                             }
                         </div>
@@ -48,7 +48,7 @@ export default function Sides() {
                                 Babyspinat Salat mit Zwiebeln &amp; Sesamdressing 8,9
                             </> : 
                             <>
-                                Baby spinach salad with onions &amp; sesame dressing 8,9
+                                baby spinach salad with onions &amp; sesame dressing 8,9
                             </>
                             }
                         </div>
@@ -61,7 +61,7 @@ export default function Sides() {
                                 Beilagensalat klein / groß 6,9 / 8,9
                             </> : 
                             <>
-                                Side salad small / large 6,9 / 8,9
+                                side salad small / large 6,9 / 8,9
                             </>
                             }
                         </div>
@@ -78,10 +78,10 @@ export default function Sides() {
                         <div className="mb-6">
                             {language === "de" ? 
                             <>
-                                Hausgemachter Kimchi 5
+                                hausgemachter Kimchi 5
                             </> : 
                             <>
-                                Homemade Kimchi 5
+                                homemade kimchi 5
                             </>
                             }
                         </div>
@@ -91,14 +91,13 @@ export default function Sides() {
                                 Bio Sauerteigbrot von Julius Brantner Brothandwerk 4,5
                             </> : 
                             <>
-                                Organic sourdough bread from Julius Brantner Brothandwerk 4,5
+                                organic sourdough bread from Julius Brantner Brothandwerk 4,5
                             </>
                             }</div>
                         {/* Sauces Box */}
                         <div className="bg-zinc-800 text-white border-2 border-gray-600 rounded-lg mt-10 p-8 max-w-[350px]">
                             <div className="font-bold text-xl mb-4">Homemade Sauces</div>
                             <div className="flex justify-between mb-2"><span>ssamjang</span><span>2</span></div>
-                            <div className="flex justify-between mb-2"><span>jus</span><span>5</span></div>
                             <div className="flex justify-between mb-2"><span>Sanji&apos;s chimichurri</span><span>4</span></div>
                             <div className="flex justify-between mb-2"><span>truffle mayo</span><span>5</span></div>
                             <div className="flex justify-between mb-2"><span>wasabi mayo</span><span>3</span></div>

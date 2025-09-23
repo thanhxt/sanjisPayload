@@ -8,7 +8,7 @@ export default function AppetizerClient({ menuItems }: { menuItems: MenuAppetize
         
     const starterSharing = [
         { title: "spicy salmon tatare" },
-        { title: "flamed yellowfin tuna tataki" },
+        { title: "yellowfin tuna tataki" },
         { title: "wagyu beef la lot" },
         { title: "green mango duck salad" },
     ];
@@ -55,7 +55,7 @@ export default function AppetizerClient({ menuItems }: { menuItems: MenuAppetize
                     <div className="font-bold text-2xl md:text-3xl mb-4">
                         STARTER SHARING <br /> 
                         <span className="text-base md:text-lg text-gray-500">
-                            {language === "de" ? "ab 2 Personen - 25 p.p." : "starts at 2 persons - 25 p.p."}
+                            {language === "de" ? "ab 2 Personen - 24,90 p.p." : "starts at 2 persons - 24,90 p.p."}
                         </span>
                     </div>
                     {/* Starter Sharing */}
