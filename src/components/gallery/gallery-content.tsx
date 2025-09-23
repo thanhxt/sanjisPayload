@@ -8,7 +8,16 @@ export default function GalleryContent({ gallery }: { gallery: Gallery[] }) {
         <div className="gallery-outer">
             <div className="gallery-inner">
                 <div className="side left">
-                    <video src="/gallery1.mp4" autoPlay muted loop style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
+                    <video 
+                        src="/gallery1.mp4" 
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline
+                        disablePictureInPicture
+                        controls={false}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
+                    />
                 </div>
                 <div className="center-grid">
                     {gallery.map((item) => (
@@ -26,7 +35,16 @@ export default function GalleryContent({ gallery }: { gallery: Gallery[] }) {
                     ))}
                 </div>
                 <div className="side right">
-                    <video src="/gallery2.mp4" autoPlay muted loop style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
+                    <video 
+                        src="/gallery2.mp4" 
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline
+                        disablePictureInPicture
+                        controls={false}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
+                    />
                 </div>
             </div>
             <style jsx>{`
