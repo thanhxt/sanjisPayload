@@ -119,19 +119,18 @@ export default function SteaksClient({ steaksItems, steakChoiceItems, steakShari
                     <Sharing />
                     <Sides />   
                     <div className="text-center text-sm md:text-base">
-                    {language === "de" ? <>
-                    Wenn sie auf bestimmte Zutaten allergisch reagieren - Fragen Sie bitte unsere Mitarbeiter nach der Allergen - Informationskarte
-                    </> : <>
-                    If you are allergic to certain ingredients - please ask our staff for the allergen information card
-                    </>}
-                    <br />
-                    {language === "de" ? <>
-                    Alle Preise in € inklusive 19% Mehrwertsteuer
-                    </> : <>
-                    All prices in € including 19% VAT
-                    </>}
-                    All prices in € including 19% VAT
-                </div>    
+                        {language === "de" ? <>
+                        Wenn sie auf bestimmte Zutaten allergisch reagieren - Fragen Sie bitte unsere Mitarbeiter nach der Allergen - Informationskarte
+                        </> : <>
+                        If you are allergic to certain ingredients - please ask our staff for the allergen information card
+                        </>}
+                        <br />
+                        {language === "de" ? <>
+                        Alle Preise in € inklusive 19% Mehrwertsteuer
+                        </> : <>
+                        All prices in € including 19% VAT
+                        </>}
+                    </div>    
                 </div>
             </div>
         </div>

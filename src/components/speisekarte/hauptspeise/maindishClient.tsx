@@ -43,7 +43,6 @@ export default function MainDishClient({ menuItems }: { menuItems: MainDish[] })
                     </> : <>
                     All prices in € including 19% VAT
                     </>}
-                    All prices in € including 19% VAT
                 </div>
             </div>
     )
