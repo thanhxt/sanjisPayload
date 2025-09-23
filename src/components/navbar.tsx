@@ -60,7 +60,7 @@ export default function Navbar() {
                         <li><Link href="/" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Startseite" : "Home"}</Link></li>
                         <li><Link href="/about" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Über uns" : "About"}</Link></li>
                         <li><Link href="/speisekarte" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
-                        <li><Link href="/reservierung" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierungen" : "Reservations"}</Link></li>
+                        <li><Link href="https://www.opentable.de/r/sanjis-steak-grill-and-bar-reservations-munchen?restref=347604&lang=de-DE&ot_source=Restaurant%20website" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
                         <li><Link href="/voucher" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
                         <li><Link href="/kontakt" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                         <li> <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
@@ -112,7 +112,7 @@ export default function Navbar() {
                             <li><Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Startseite" : "Home"}</Link></li>
                             <li><Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Über uns" : "About Us"}</Link></li>
                             <li><Link href="/speisekarte" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
-                            <li><Link href="/reservierung" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
+                            <li><Link href="https://www.opentable.de/r/sanjis-steak-grill-and-bar-reservations-munchen?restref=347604&lang=de-DE&ot_source=Restaurant%20website" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
                             <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                             <li className="mt-4">
                                 <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
