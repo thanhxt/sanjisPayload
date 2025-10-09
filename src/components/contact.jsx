@@ -213,7 +213,7 @@ export default function Contact() {
                         <div className="text-gray-300 text-base">
                             <div>Montag – Donnerstag: 12:00 – 23:00</div>
                             <div>Freitag – Samstag: 12:00 – 00:00</div>
-                            <div>Sonntag: 12:30 - 14:30 | 17:00 – 23:00</div>
+                            <div>Sonntag: 12:00 - 14:30 | 17:00 – 23:00</div>
                         </div>
                     </div>
                     <div className="mb-6">
