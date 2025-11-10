@@ -17,6 +17,7 @@ import { Voucher } from './collections/voucher'
 import { Order } from './collections/order'
 import { Admin } from './collections/admin'
 import { Gallery } from './collections/gallery'
+import { OpeningTimes } from './collections/openingTimes'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -37,6 +38,7 @@ export default buildConfig({
     Voucher,
     Order,
     Admin,
+    OpeningTimes,
   ],
   upload: {
     limits: {

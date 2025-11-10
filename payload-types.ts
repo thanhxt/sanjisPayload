@@ -80,6 +80,7 @@ export interface Config {
     vouchers: Voucher;
     orders: Order;
     admin: Admin;
+    Oeffnungzeiten: Oeffnungzeiten;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -99,6 +100,7 @@ export interface Config {
     vouchers: VouchersSelect<false> | VouchersSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
     admin: AdminSelect<false> | AdminSelect<true>;
+    Oeffnungzeiten: OeffnungzeitenSelect<false> | OeffnungzeitenSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -537,6 +539,23 @@ export interface Admin {
   createdAt: string;
 }
 /**
+ * Manage opening times
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Oeffnungzeiten".
+ */
+export interface Oeffnungzeiten {
+  id: string;
+  Feld1: string;
+  Uhrzeit1?: string | null;
+  Feld2?: string | null;
+  Uhrzeit2?: string | null;
+  Feld3?: string | null;
+  Uhrzeit3?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -594,6 +613,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'admin';
         value: string | Admin;
+      } | null)
+    | ({
+        relationTo: 'Oeffnungzeiten';
+        value: string | Oeffnungzeiten;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -889,6 +912,20 @@ export interface AdminSelect<T extends boolean = true> {
   isActive?: T;
   isPublic?: T;
   environment?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Oeffnungzeiten_select".
+ */
+export interface OeffnungzeitenSelect<T extends boolean = true> {
+  Feld1?: T;
+  Uhrzeit1?: T;
+  Feld2?: T;
+  Uhrzeit2?: T;
+  Feld3?: T;
+  Uhrzeit3?: T;
   updatedAt?: T;
   createdAt?: T;
 }
