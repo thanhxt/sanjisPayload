@@ -74,7 +74,8 @@ export default function Footer() {
               </div>
               <div>
                 {t.weekend[language]}<br />
-                12:00 – 00:00
+                12:00 – 14:30<br />
+                17:00 - 00:00
               </div>
               <div>
                 {t.Sunday[language]}<br />
