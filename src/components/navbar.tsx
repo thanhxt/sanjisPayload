@@ -9,20 +9,24 @@ import { useLanguage } from "./contexts/language-context"
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isMounted, setIsMounted] = useState(false)
     const { menuOpen, setMenuOpen } = useContext(MenuContext) as MenuContextType;
     const { language, setLanguage } = useLanguage();
 
     useEffect(() => {
+        setIsMounted(true)
         const handleScroll = () => {
-            if (window.scrollY > 50) {
+            if (typeof window !== 'undefined' && window.scrollY > 50) {
                 setIsScrolled(true)
             } else {
                 setIsScrolled(false)
             }
         }
 
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
+        if (typeof window !== 'undefined') {
+            window.addEventListener('scroll', handleScroll)
+            return () => window.removeEventListener('scroll', handleScroll)
+        }
     }, [])
 
         const handleLanguageChange = (value: 'de' | 'en') => {
@@ -63,7 +67,7 @@ export default function Navbar() {
                         <li><Link href="https://www.opentable.de/r/sanjis-steak-grill-and-bar-reservations-munchen?restref=347604&lang=de-DE&ot_source=Restaurant%20website" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
                         <li><Link href="/voucher" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
                         <li><Link href="/kontakt" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
-                        <li> <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
+                        <li> <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
                             <ToggleGroupItem value="de" aria-label="Switch to German" className="min-h-[44px] min-w-[44px] px-4">
                                 <span className="fi fi-de"></span>
                             </ToggleGroupItem>
@@ -116,7 +120,7 @@ export default function Navbar() {
                             <li><Link href="/voucher" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
                             <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                             <li className="mt-4">
-                                <ToggleGroup type="single" defaultValue={language} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
+                                <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
                                     <ToggleGroupItem value="de" aria-label="Switch to German" className="min-h-[44px] min-w-[44px] px-4">
                                         <span className="fi fi-de"></span>
                                     </ToggleGroupItem>
