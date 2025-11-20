@@ -11,7 +11,6 @@ if (typeof window === 'undefined') {
     length: 0,
   };
 
-  // @ts-expect-error Assigning localStorage polyfill for SSR environment
   global.localStorage = localStorageMock;
 }
 
