@@ -37,11 +37,9 @@ const setStoredLanguage = (lang: 'de' | 'en') => {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   // Initialize with 'de' to avoid hydration mismatch, then update in useEffect
   const [language, setLanguageState] = useState<'de' | 'en'>('de');
-  const [isMounted, setIsMounted] = useState(false);
 
   // Only access localStorage after component mounts (client-side)
   useEffect(() => {
-    setIsMounted(true);
     const storedLanguage = getStoredLanguage();
     setLanguageState(storedLanguage);
   }, []);
