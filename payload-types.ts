@@ -63,16 +63,24 @@ export type SupportedTimezones =
 
 export interface Config {
   auth: {
-    admins: AdminAuthOperations;
+    users: UserAuthOperations;
   };
   blocks: {};
   collections: {
     team: Team;
     media: Media;
     hero: Hero;
-    admins: Admin;
+    users: User;
+    gallery: Gallery;
     menuMainDish: MenuMainDish;
     menuAppetizerDish: MenuAppetizerDish;
+    menuSteaksDish: MenuSteaksDish;
+    menuSteaksSharing: MenuSteaksSharing;
+    menuSanjisChoice: MenuSanjisChoice;
+    vouchers: Voucher;
+    orders: Order;
+    admin: Admin;
+    Oeffnungzeiten: Oeffnungzeiten;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -82,9 +90,17 @@ export interface Config {
     team: TeamSelect<false> | TeamSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
-    admins: AdminsSelect<false> | AdminsSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
     menuMainDish: MenuMainDishSelect<false> | MenuMainDishSelect<true>;
     menuAppetizerDish: MenuAppetizerDishSelect<false> | MenuAppetizerDishSelect<true>;
+    menuSteaksDish: MenuSteaksDishSelect<false> | MenuSteaksDishSelect<true>;
+    menuSteaksSharing: MenuSteaksSharingSelect<false> | MenuSteaksSharingSelect<true>;
+    menuSanjisChoice: MenuSanjisChoiceSelect<false> | MenuSanjisChoiceSelect<true>;
+    vouchers: VouchersSelect<false> | VouchersSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
+    admin: AdminSelect<false> | AdminSelect<true>;
+    Oeffnungzeiten: OeffnungzeitenSelect<false> | OeffnungzeitenSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -95,43 +111,31 @@ export interface Config {
   globals: {};
   globalsSelect: {};
   locale: null;
-  user: Admin & {
-    collection: 'admins';
+  user: User & {
+    collection: 'users';
   };
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
-export interface AdminAuthOperations {
-  forgotPassword:
-    | {
-        email: string;
-      }
-    | {
-        username: string;
-      };
-  login:
-    | {
-        email: string;
-        password: string;
-      }
-    | {
-        password: string;
-        username: string;
-      };
-  registerFirstUser: {
-    password: string;
-    username: string;
+export interface UserAuthOperations {
+  forgotPassword: {
     email: string;
+    password: string;
   };
-  unlock:
-    | {
-        email: string;
-      }
-    | {
-        username: string;
-      };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -202,27 +206,59 @@ export interface Hero {
   createdAt: string;
 }
 /**
+ * Manage all users: admins, editors, and regular users
+ *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "admins".
+ * via the `definition` "users".
  */
-export interface Admin {
+export interface User {
   id: string;
-  name?: string | null;
+  /**
+   * User's first name
+   */
+  firstName?: string | null;
+  /**
+   * User's last name
+   */
+  lastName?: string | null;
+  /**
+   * User roles - Admin: full access, Editor: content management, User: basic access
+   */
+  roles?: ('admin' | 'editor' | 'user')[] | null;
+  /**
+   * Whether this user account is active
+   */
+  isActive?: boolean | null;
+  /**
+   * Last login date
+   */
+  lastLogin?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
-  username: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
-  _verified?: boolean | null;
-  _verificationToken?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: string;
+  title: string;
+  images: string | Media;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage main dishes
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuMainDish".
  */
@@ -237,6 +273,8 @@ export interface MenuMainDish {
   createdAt: string;
 }
 /**
+ * Manage appetizer dishes
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuAppetizerDish".
  */
@@ -247,6 +285,273 @@ export interface MenuAppetizerDish {
   price: number;
   descriptionDE?: string | null;
   descriptionEN?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage steaks dishes
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSteaksDish".
+ */
+export interface MenuSteaksDish {
+  id: string;
+  titleDE: string;
+  descriptionDE?: string | null;
+  descriptionEN?: string | null;
+  regionDE?: string | null;
+  regionEN?: string | null;
+  weightSmall?: number | null;
+  priceSmall?: number | null;
+  weightLarge?: number | null;
+  priceLarge?: number | null;
+  position?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage steaks sharing
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSteaksSharing".
+ */
+export interface MenuSteaksSharing {
+  id: string;
+  titleDE: string;
+  descriptionDE?: string | null;
+  descriptionEN?: string | null;
+  regionDE?: string | null;
+  regionEN?: string | null;
+  weightSmall?: number | null;
+  priceSmall?: number | null;
+  weightLarge?: number | null;
+  priceLarge?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage sanjis choice
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSanjisChoice".
+ */
+export interface MenuSanjisChoice {
+  id: string;
+  titleDE: string;
+  steaktitle?: string | null;
+  descriptionDE?: string | null;
+  descriptionEN?: string | null;
+  stake1?: string | null;
+  price1?: number | null;
+  stakeWeight1?: number | null;
+  stake2?: string | null;
+  price2?: number | null;
+  stakeWeight2?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vouchers".
+ */
+export interface Voucher {
+  id: string;
+  /**
+   * Unique voucher code (e.g., SANJIS2024)
+   */
+  code: string;
+  /**
+   * Voucher value in the specified currency (e.g., 25 for 25€)
+   */
+  value: number;
+  /**
+   * Currency of the voucher value
+   */
+  currency: 'EUR' | 'USD' | 'CHF';
+  /**
+   * Expiration date of the voucher
+   */
+  expiresAt: string;
+  /**
+   * Whether the voucher has been redeemed
+   */
+  isRedeemed?: boolean | null;
+  /**
+   * Date when the voucher was redeemed
+   */
+  redeemedAt?: string | null;
+  /**
+   * Related order ID when voucher was used
+   */
+  orderId?: string | null;
+  /**
+   * Optional description for the voucher
+   */
+  description?: string | null;
+  /**
+   * Last user who edited this voucher
+   */
+  updatedBy?: (string | null) | User;
+  /**
+   * History of edits to this voucher
+   */
+  editHistory?:
+    | {
+        editedAt: string;
+        editor?: (string | null) | User;
+        editorEmail?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: string;
+  /**
+   * Order amount in the specified currency
+   */
+  amount: number;
+  /**
+   * Currency of the order amount
+   */
+  currency: 'EUR' | 'USD' | 'CHF';
+  /**
+   * Current status of the payment
+   */
+  paymentStatus: 'pending' | 'paid' | 'failed';
+  /**
+   * Email address of the customer
+   */
+  customerEmail: string;
+  /**
+   * Stripe Payment Intent ID for tracking the payment
+   */
+  stripePaymentIntentId?: string | null;
+  /**
+   * Vouchers used in this order
+   */
+  vouchers?: (string | Voucher)[] | null;
+  /**
+   * Items included in this order
+   */
+  orderItems?:
+    | {
+        /**
+         * Name of the ordered item
+         */
+        itemName: string;
+        /**
+         * Quantity of the item
+         */
+        quantity: number;
+        /**
+         * Price per unit
+         */
+        unitPrice: number;
+        /**
+         * Total price for this item (quantity * unitPrice)
+         */
+        totalPrice: number;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Date when the order was placed
+   */
+  orderDate: string;
+  /**
+   * Date when the payment was completed
+   */
+  paymentDate?: string | null;
+  /**
+   * Name of the customer
+   */
+  customerName?: string | null;
+  /**
+   * Phone number of the customer
+   */
+  customerPhone?: string | null;
+  /**
+   * Additional notes for the order
+   */
+  notes?: string | null;
+  /**
+   * Whether the order confirmation email was sent
+   */
+  emailSent?: boolean | null;
+  /**
+   * Date when the order confirmation email was sent
+   */
+  emailSentAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage admin panel settings and configurations
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin".
+ */
+export interface Admin {
+  id: string;
+  /**
+   * A descriptive title for this admin panel setting
+   */
+  title: string;
+  /**
+   * Category of this admin setting
+   */
+  category: 'site-config' | 'admin-settings' | 'system-config' | 'feature-flags' | 'api-settings';
+  /**
+   * Unique identifier for this setting (e.g., "maintenance_mode", "max_upload_size")
+   */
+  key: string;
+  /**
+   * The configuration value (can be JSON, string, number, etc.)
+   */
+  value?: string | null;
+  /**
+   * The data type of the value
+   */
+  dataType: 'string' | 'number' | 'boolean' | 'json' | 'array';
+  /**
+   * Description of what this setting controls and how to use it
+   */
+  description?: string | null;
+  /**
+   * Whether this setting is currently active/enabled
+   */
+  isActive?: boolean | null;
+  /**
+   * Whether this setting can be accessed by frontend/public API
+   */
+  isPublic?: boolean | null;
+  /**
+   * Which environments this setting applies to
+   */
+  environment?: ('development' | 'staging' | 'production')[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage opening times
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Oeffnungzeiten".
+ */
+export interface Oeffnungzeiten {
+  id: string;
+  Feld1: string;
+  Uhrzeit1?: string | null;
+  Feld2?: string | null;
+  Uhrzeit2?: string | null;
+  Feld3?: string | null;
+  Uhrzeit3?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -270,8 +575,12 @@ export interface PayloadLockedDocument {
         value: string | Hero;
       } | null)
     | ({
-        relationTo: 'admins';
-        value: string | Admin;
+        relationTo: 'users';
+        value: string | User;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: string | Gallery;
       } | null)
     | ({
         relationTo: 'menuMainDish';
@@ -280,11 +589,39 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'menuAppetizerDish';
         value: string | MenuAppetizerDish;
+      } | null)
+    | ({
+        relationTo: 'menuSteaksDish';
+        value: string | MenuSteaksDish;
+      } | null)
+    | ({
+        relationTo: 'menuSteaksSharing';
+        value: string | MenuSteaksSharing;
+      } | null)
+    | ({
+        relationTo: 'menuSanjisChoice';
+        value: string | MenuSanjisChoice;
+      } | null)
+    | ({
+        relationTo: 'vouchers';
+        value: string | Voucher;
+      } | null)
+    | ({
+        relationTo: 'orders';
+        value: string | Order;
+      } | null)
+    | ({
+        relationTo: 'admin';
+        value: string | Admin;
+      } | null)
+    | ({
+        relationTo: 'Oeffnungzeiten';
+        value: string | Oeffnungzeiten;
       } | null);
   globalSlug?: string | null;
   user: {
-    relationTo: 'admins';
-    value: string | Admin;
+    relationTo: 'users';
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -296,8 +633,8 @@ export interface PayloadLockedDocument {
 export interface PayloadPreference {
   id: string;
   user: {
-    relationTo: 'admins';
-    value: string | Admin;
+    relationTo: 'users';
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -398,22 +735,34 @@ export interface HeroSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "admins_select".
+ * via the `definition` "users_select".
  */
-export interface AdminsSelect<T extends boolean = true> {
-  name?: T;
+export interface UsersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  roles?: T;
+  isActive?: T;
+  lastLogin?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
-  username?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
-  _verified?: T;
-  _verificationToken?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  title?: T;
+  images?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -438,6 +787,145 @@ export interface MenuAppetizerDishSelect<T extends boolean = true> {
   price?: T;
   descriptionDE?: T;
   descriptionEN?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSteaksDish_select".
+ */
+export interface MenuSteaksDishSelect<T extends boolean = true> {
+  titleDE?: T;
+  descriptionDE?: T;
+  descriptionEN?: T;
+  regionDE?: T;
+  regionEN?: T;
+  weightSmall?: T;
+  priceSmall?: T;
+  weightLarge?: T;
+  priceLarge?: T;
+  position?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSteaksSharing_select".
+ */
+export interface MenuSteaksSharingSelect<T extends boolean = true> {
+  titleDE?: T;
+  descriptionDE?: T;
+  descriptionEN?: T;
+  regionDE?: T;
+  regionEN?: T;
+  weightSmall?: T;
+  priceSmall?: T;
+  weightLarge?: T;
+  priceLarge?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSanjisChoice_select".
+ */
+export interface MenuSanjisChoiceSelect<T extends boolean = true> {
+  titleDE?: T;
+  steaktitle?: T;
+  descriptionDE?: T;
+  descriptionEN?: T;
+  stake1?: T;
+  price1?: T;
+  stakeWeight1?: T;
+  stake2?: T;
+  price2?: T;
+  stakeWeight2?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vouchers_select".
+ */
+export interface VouchersSelect<T extends boolean = true> {
+  code?: T;
+  value?: T;
+  currency?: T;
+  expiresAt?: T;
+  isRedeemed?: T;
+  redeemedAt?: T;
+  orderId?: T;
+  description?: T;
+  updatedBy?: T;
+  editHistory?:
+    | T
+    | {
+        editedAt?: T;
+        editor?: T;
+        editorEmail?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  amount?: T;
+  currency?: T;
+  paymentStatus?: T;
+  customerEmail?: T;
+  stripePaymentIntentId?: T;
+  vouchers?: T;
+  orderItems?:
+    | T
+    | {
+        itemName?: T;
+        quantity?: T;
+        unitPrice?: T;
+        totalPrice?: T;
+        id?: T;
+      };
+  orderDate?: T;
+  paymentDate?: T;
+  customerName?: T;
+  customerPhone?: T;
+  notes?: T;
+  emailSent?: T;
+  emailSentAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin_select".
+ */
+export interface AdminSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  key?: T;
+  value?: T;
+  dataType?: T;
+  description?: T;
+  isActive?: T;
+  isPublic?: T;
+  environment?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Oeffnungzeiten_select".
+ */
+export interface OeffnungzeitenSelect<T extends boolean = true> {
+  Feld1?: T;
+  Uhrzeit1?: T;
+  Feld2?: T;
+  Uhrzeit2?: T;
+  Feld3?: T;
+  Uhrzeit3?: T;
   updatedAt?: T;
   createdAt?: T;
 }

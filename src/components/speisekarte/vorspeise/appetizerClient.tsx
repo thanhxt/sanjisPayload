@@ -8,7 +8,7 @@ export default function AppetizerClient({ menuItems }: { menuItems: MenuAppetize
         
     const starterSharing = [
         { title: "spicy salmon tatare" },
-        { title: "flamed yellowfin tuna tataki" },
+        { title: "yellowfin tuna tataki" },
         { title: "wagyu beef la lot" },
         { title: "green mango duck salad" },
     ];
@@ -42,18 +42,20 @@ export default function AppetizerClient({ menuItems }: { menuItems: MenuAppetize
 
              {/* Starter Sharing Section */}
              <div className="flex flex-col md:flex-row bg-black text-white p-4 md:p-10 items-center justify-center gap-6 md:gap-30">
-                <Image 
-                src="/Sanjis_Julio-27.jpg" 
-                alt="Appetizer" 
-                width={150} 
-                height={150}
-                className="rounded-full mb-6 md:mb-0"
-                />
+                <div className="mb-6 md:mb-0">
+                    <Image 
+                        src="/sanjislogo.svg" 
+                        alt="Sanji's logo" 
+                        width={150} 
+                        height={150}
+                        className="object-contain invert"
+                    />
+                </div>
                 <div className=" text-white border-2 border-black rounded-md mt-4 md:mt-10 p-6 md:p-8 w-full md:max-w-[350px]">
                     <div className="font-bold text-2xl md:text-3xl mb-4">
                         STARTER SHARING <br /> 
                         <span className="text-base md:text-lg text-gray-500">
-                            {language === "de" ? "ab 2 Personen - 25 p.p." : "starts at 2 persons - 25 p.p."}
+                            {language === "de" ? "ab 2 Personen - 24,90 p.p." : "starts at 2 persons - 24,90 p.p."}
                         </span>
                     </div>
                     {/* Starter Sharing */}

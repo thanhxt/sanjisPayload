@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { afterChangeHook } from '@/collections/team/hooks'
+import { checkRole } from '../user/access/checkRole'
 
 /**
  * This is the team collection for the website.
@@ -8,7 +9,11 @@ import { afterChangeHook } from '@/collections/team/hooks'
 export const Team: CollectionConfig = {
   slug: 'team',
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => checkRole(['admin'], user),
+    create: ({ req: { user } }) => checkRole(['admin'], user),
+    update: ({ req: { user } }) => checkRole(['admin'], user),
+    delete: ({ req: { user } }) => checkRole(['admin'], user),
+
   },
   fields: [
     {

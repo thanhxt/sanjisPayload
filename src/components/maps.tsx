@@ -43,12 +43,12 @@ export default function Maps() {
             <div className="w-full h-[350px] md:w-[720px] md:h-[420px] rounded-xl overflow-hidden shadow-lg relative z-10 inset-y-0 right-0" >
                 {showMap ? (
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6934.883595245024!2d11.596559500000001!3d48.1296125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479ddfcbd59e3def%3A0xac6d87a717fc5cfb!2sSANJI&#39;S%20Steak%2C%20Grill%20%26%20Bar!5e1!3m2!1sde!2sde!4v1747258110502!5m2!1sde!2sde" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.995380297236!2d11.593979212041823!3d48.12961247112273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479ddfcbd59e3def%3A0xac6d87a717fc5cfb!2sSANJI&#39;S%20Steak%2C%20Grill%20%26%20Bar!5e0!3m2!1sde!2sde!4v1758555134926!5m2!1sde!2sde" 
                     width="100%" 
                     height="100%" 
                     style={{border:0}} 
                     allowFullScreen={true} 
-                    loading="lazy" 
+                    loading="eager" 
                     referrerPolicy="no-referrer-when-downgrade">
                 </iframe>
                 ) : (

@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@/lib/localStorage-polyfill";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Cormorant_Garamond } from 'next/font/google'

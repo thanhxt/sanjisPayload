@@ -19,6 +19,7 @@ export default async function HeroImage(props: { slug: string }) {
                   alt="Exquisite Japanese cuisine"
                   fill
                   className="object-cover"
+                  priority
                 />
         </div>
     )

@@ -10,7 +10,7 @@ export default function MainDishClient({ menuItems }: { menuItems: MainDish[] })
         <div className="bg-black text-white py-16 min-h-screen">
                 <div className="flex flex-col md:flex-row bg-black text-white p-4 md:p-10 items-center justify-center">
                     <Image 
-                    src="/HauptspeiseSchrift.png" 
+                    src="/MAINDISHES.svg" 
                     alt="Main Dish" 
                     width={170} 
                     height={120}
@@ -30,6 +30,19 @@ export default function MainDishClient({ menuItems }: { menuItems: MainDish[] })
                             </div>
                         ))}
                     </div>
+                </div>
+                <div className="text-center text-sm md:text-base">
+                    {language === "de" ? <>
+                    Wenn sie auf bestimmte Zutaten allergisch reagieren - Fragen Sie bitte unsere Mitarbeiter nach der Allergen - Informationskarte
+                    </> : <>
+                    If you are allergic to certain ingredients - please ask our staff for the allergen information card
+                    </>}
+                    <br />
+                    {language === "de" ? <>
+                    Alle Preise in € inklusive 19% Mehrwertsteuer
+                    </> : <>
+                    All prices in € including 19% VAT
+                    </>}
                 </div>
             </div>
     )

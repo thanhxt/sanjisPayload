@@ -15,7 +15,7 @@ export default function LandingPage() {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover"
             >
-                <source src="/LandingPageVideo.mp4" type="video/mp4" />
+                <source src="/LandingPageVideo2.MOV" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
@@ -40,10 +40,12 @@ export default function LandingPage() {
                 <ChevronDown 
                 className="w-12 h-12 text-white animate-bounce cursor-pointer" 
                 onClick={() => {
-                    window.scrollTo({
-                        top: window.innerHeight,
-                        behavior: 'smooth'
-                    });
+                    if (typeof window !== 'undefined') {
+                        window.scrollTo({
+                            top: window.innerHeight,
+                            behavior: 'smooth'
+                        });
+                    }
                 }} />
             </div>
         </div>

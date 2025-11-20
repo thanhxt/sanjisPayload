@@ -19,7 +19,8 @@ export default function Footer() {
     reservation: { de: 'Reservierung',      en: 'Reservation' },
     opening:     { de: 'Öffnungszeiten',    en: 'Opening Hours' },
     weekdays:    { de: 'Montag - Freitag',  en: 'Monday - Friday' },
-    weekend:     { de: 'Samstag - Sonntag', en: 'Saturday - Sunday' },
+    Sunday:      { de: 'Sonntag',           en: 'Sunday' },
+    saturday:    { de: 'Samstag',           en: 'Samstag' },
     socials:     { de: 'Socials',           en: 'Socials' },
     rights:      { de: 'Alle Rechte vorbehalten', en: 'All rights reserved' },
     privacy:     { de: 'Datenschutz',       en: 'Privacy Policy' },
@@ -72,9 +73,14 @@ export default function Footer() {
                 17:00 – 00:00
               </div>
               <div>
-                {t.weekend[language]}<br />
+                {t.saturday[language]}<br />
                 12:00 – 14:30<br />
-                17:00 – 00:00
+                17:00 - 00:00
+              </div>
+              <div>
+                {t.Sunday[language]}<br />
+                12:00 - 14:30<br />
+                17:00 – 23:00
               </div>
             </div>
           </div>

@@ -10,13 +10,14 @@ export default async function Appetizer() {
     return (
         <div className="bg-black text-white">
             {/* Hero Image */}
-            <div className="relative w-full h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden mb-0 bg-black z-0">
+            <div className="relative w-full h-[40vh] flex items-center justify-center overflow-hidden mb-0 bg-black z-0">
                 <Image
                 src="/Sanjis_Julio-27.jpg" 
                 alt="Appetizer" 
                 width={1000} 
                 height={1000}
                 className="absolute w-full h-full object-cover blur-md brightness-50 z-0"
+                priority
                 />
                 <HeroText title="Vorspeisen" titleEn="Appetizers" />
             </div>

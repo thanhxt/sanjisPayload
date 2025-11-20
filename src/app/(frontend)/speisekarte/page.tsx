@@ -17,7 +17,7 @@ export default function SpeisekartePage() {
             </Head>
             <div>
                 {/* Hero Section */}
-                <div className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden mb-0 bg-black">
+                <div className="relative w-full h-[40vh] flex items-center justify-center overflow-hidden mb-0 bg-black">
                     <HeroImage slug="speisekarteHero" />
                     <HeroText title="Speisekarte" titleEn="Menu" />
                 </div>

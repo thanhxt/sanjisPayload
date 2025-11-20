@@ -7,9 +7,17 @@ import { buildConfig } from 'payload'
 import { Team } from './collections/team'
 import { Media } from './collections/media'
 import { Hero } from './collections/hero'
-import { Admins } from './collections/auth/admin'
+import { Users } from './collections/user'
 import { MenuMainDish } from './collections/menuMainDish'
 import { MenuAppetizerDish } from './collections/menuAppetizerDish'
+import { MenuSteaksDish } from './collections/menuSteaksDish'
+import { MenuSteaksSharing } from './collections/menuSteaksSharing'
+import { MenuSanjisChoice } from './collections/menuSanjisChoice'
+import { Voucher } from './collections/voucher'
+import { Order } from './collections/order'
+import { Admin } from './collections/admin'
+import { Gallery } from './collections/gallery'
+import { OpeningTimes } from './collections/openingTimes'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -20,9 +28,17 @@ export default buildConfig({
     Team,
     Media,
     Hero,
-    Admins,
+    Users,
+    Gallery,
     MenuMainDish,
     MenuAppetizerDish,
+    MenuSteaksDish,
+    MenuSteaksSharing,
+    MenuSanjisChoice,
+    Voucher,
+    Order,
+    Admin,
+    OpeningTimes,
   ],
   upload: {
     limits: {

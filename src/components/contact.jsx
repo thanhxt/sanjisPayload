@@ -58,7 +58,7 @@ export default function Contact() {
     }, []);
 
     const sendCaptcha = async (token) => {
-        const res = await fetch("http://localhost:3000/api/send-captcha", {
+        const res = await fetch( `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-captcha`, {
             method: "POST",
             body: JSON.stringify({ token }),
         });
@@ -87,7 +87,7 @@ export default function Contact() {
 
         try {
             // Make sure this uses the correct URL for your environment
-            const apiUrl = 'http://localhost:3000/api/send-email-node';
+            const apiUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-email-node`;
             
             const res = await fetch(apiUrl, {
                 method: 'POST',
@@ -211,9 +211,9 @@ export default function Contact() {
                     <div className="mb-6">
                         <h2 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Öffnungszeiten" : "Opening Hours"}</h2>
                         <div className="text-gray-300 text-base">
-                            <div>Montag – Donnerstag: 12:00 – 23:00</div>
-                            <div>Freitag – Samstag: 12:00 – 00:00</div>
-                            <div>Sonntag: 17:00 – 23:00</div>
+                            <div>Montag - Freitag: 17:00 – 00:00</div>
+                            <div>Samstag: 12:00 – 14:30 | 17:00 - 00:00</div>
+                            <div>Sonntag: 12:00 - 14:30 | 17:00 - 23:00</div>
                         </div>
                     </div>
                     <div className="mb-6">
