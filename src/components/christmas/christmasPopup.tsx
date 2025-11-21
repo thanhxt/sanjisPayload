@@ -83,7 +83,7 @@ export default function ChristmasPopup() {
             {/* BILD BEREICH */}
             <div className="relative w-full h-auto bg-white">
               <Image 
-                src="/christmas.jpg" 
+                src="/christmas.jpeg" 
                 alt="Sanji's Christmas Special"
                 width={800}
                 height={1000}

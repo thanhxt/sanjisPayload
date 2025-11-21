@@ -28,7 +28,7 @@ export default function ChristmasPage() {
         {/* Container für das Bild */}
         <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-black/80 border border-[#C5A059]/20">
           <Image
-            src="/christmas-menu.jpg" 
+            src="/christmas-menu.jpeg" 
             alt="Sanji's Christmas Menu Gänge"
             width={800}
             height={1200}
