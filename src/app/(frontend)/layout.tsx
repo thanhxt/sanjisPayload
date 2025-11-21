@@ -7,6 +7,7 @@ import { Cormorant_Garamond } from 'next/font/google'
 import CookieConsent from "@/components/cookieconsent";
 import { LanguageProvider } from "@/components/contexts/language-context";
 import { MenuContextProvider } from "@/components/contexts/menu-context";
+import ChristmasPopup from "@/components/christmas/christmasPopup";
 
 
 const geistSans = Geist({
@@ -63,6 +64,7 @@ export default function RootLayout({
         <LanguageProvider>
           <MenuContextProvider>
             <Navbar />
+            <ChristmasPopup />
             {children}
             <Footer />
           </MenuContextProvider>
