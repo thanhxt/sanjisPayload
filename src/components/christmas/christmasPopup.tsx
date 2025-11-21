@@ -83,7 +83,7 @@ export default function ChristmasPopup() {
             {/* BILD BEREICH */}
             <div className="relative w-full h-auto bg-white">
               <Image 
-                src="/christmas.png" 
+                src="/christmas.jpg" 
                 alt="Sanji's Christmas Special"
                 width={800}
                 height={1000}
@@ -101,7 +101,7 @@ export default function ChristmasPopup() {
                 
                 {/* BUTTON 1: ZUM MENÜ (Interne Seite) */}
                 <Link 
-                  href="/christmas.jpg" 
+                  href="/christmas" 
                   onClick={handleClosePopup}
                   className={buttonBaseClass}
                 >
