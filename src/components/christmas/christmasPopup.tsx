@@ -101,7 +101,7 @@ export default function ChristmasPopup() {
                 
                 {/* BUTTON 1: ZUM MENÜ (Interne Seite) */}
                 <Link 
-                  href="/christmas" 
+                  href="/christmas.jpg" 
                   onClick={handleClosePopup}
                   className={buttonBaseClass}
                 >
@@ -113,7 +113,7 @@ export default function ChristmasPopup() {
 
                 {/* BUTTON 2: RESERVIEREN (Extern) */}
                 <a 
-                  href="https://www.opentable.de/r/sanjis-steak-grill-and-bar-reservations-munchen?restref=347604&lang=de-DE&ot_source=Restaurant%20website" 
+                  href="https://www.opentable.com/booking/experiences-availability?rid=347604&restref=347604&experienceId=593388&utm_source=external&utm_medium=referral&utm_campaign=shared" 
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleClosePopup}
