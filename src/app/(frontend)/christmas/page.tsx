@@ -12,10 +12,10 @@ export default function ChristmasPage() {
       {/* === INTRO TEXT === */}
       <div className="text-center mt-32 mb-12 px-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <h1 className="text-3xl md:text-5xl font-serif text-white mb-4">
-          The Christmas <span className="text-[#C5A059] italic">Experience</span>
+          Black Angus vs Wagyu
         </h1>
         <p className="text-gray-400 max-w-md mx-auto text-sm leading-relaxed">
-          Ein kulinarisches Fest für die Sinne. Genießen Sie am 26.12.2025 unser exklusiv kreiertes 6-Gänge Menü.
+          Ein kulinarisches Fest für die Sinne. Genießen Sie am 26.12.2025 unser exklusiv kreiertes 6-Gänge Black Angus vs Wagyu Menü.
         </p>
       </div>
 
