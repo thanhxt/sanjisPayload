@@ -17,6 +17,9 @@ export default function Footer() {
     menu:        { de: 'Speisekarte',      en: 'Menu' },
     about:       { de: 'Über uns',         en: 'About' },
     reservation: { de: 'Reservierung',      en: 'Reservation' },
+    contact:     { de: 'Kontakt',          en: 'Contact' },
+    voucher:     { de: 'Gutschein',        en: 'Voucher' },
+    christmas:   { de: 'Weihnachten',      en: 'Christmas' },
     opening:     { de: 'Öffnungszeiten',    en: 'Opening Hours' },
     weekdays:    { de: 'Montag - Freitag',  en: 'Monday - Friday' },
     Sunday:      { de: 'Sonntag',           en: 'Sunday' },
@@ -47,18 +50,33 @@ export default function Footer() {
             <h2 className="font-bold tracking-widest mb-2 text-lg">{t.links[language]}</h2>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/speisekarte" className="hover:text-yellow-400 hover:underline">
-                  {t.menu[language]}
-                </Link>
-              </li>
-              <li>
                 <Link href="/about" className="hover:text-yellow-400 hover:underline">
                   {t.about[language]}
                 </Link>
               </li>
               <li>
+                <Link href="/speisekarte" className="hover:text-yellow-400 hover:underline">
+                  {t.menu[language]}
+                </Link>
+              </li>
+              <li>
+                <Link href="/weihnachten" className="hover:text-yellow-400 hover:underline">
+                  {t.christmas[language]}
+                </Link>
+              </li>
+              <li>
                 <Link href="/reservierung" className="hover:text-yellow-400 hover:underline">
                   {t.reservation[language]}
+                </Link>
+              </li>
+              <li>
+                <Link href="/voucher" className="hover:text-yellow-400 hover:underline">
+                  {t.voucher[language]}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-yellow-400 hover:underline">
+                  {t.contact[language]}
                 </Link>
               </li>
             </ul>
