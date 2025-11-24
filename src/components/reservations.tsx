@@ -2,14 +2,16 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { getCookie } from 'cookies-next';
 import { useLanguage } from './contexts/language-context';
+import { useCookieConsent, showConsentPreferences } from '@/hooks/useCookieConsent';
+import { Button } from './ui/button';
 
 export default function Reservations() {
     const { language } = useLanguage();
+    const hasConsent = useCookieConsent('functionality');
+
     React.useEffect(() => {
-        const consent = getCookie('cookie_consent');
-        if (!consent) return;
+        if (!hasConsent) return;
 
         const scriptDE = document.createElement('script');
         scriptDE.src = "//www.opentable.de/widget/reservation/loader?rid=347604&type=standard&theme=wide&color=2&dark=false&iframe=true&domain=de&lang=de-DE&newtab=false&ot_source=Restaurant%20website&cfe=true";
@@ -18,7 +20,7 @@ export default function Reservations() {
         const scriptEN = document.createElement('script');
         scriptEN.src = "//www.opentable.de/widget/reservation/loader?rid=347604&type=standard&theme=wide&color=2&dark=false&iframe=true&domain=de&lang=en-US&newtab=false&ot_source=Restaurant%20website&cfe=true";
         scriptEN.async = true;
-        
+
 
         const widgetContainer = document.getElementById('ot-res-widget');
         if (widgetContainer) {
@@ -29,20 +31,20 @@ export default function Reservations() {
                 widgetContainer.appendChild(scriptEN);
             }
         }
-    }, [language]);
+    }, [language, hasConsent]);
 
     return (
         <div className="relative bg-[#020002] text-white py-16 min-h-screen flex items-center justify-center overflow-hidden">
             {/* Blurred Background Image */}
             <div className="absolute inset-0 z-0">
-                <Image 
-                    src="/Sanjis_Julio-34.jpg" 
-                    alt="Background" 
+                <Image
+                    src="/Sanjis_Julio-34.jpg"
+                    alt="Background"
                     width={1920}
                     height={1080}
                     quality={75}
                     priority
-                    className="object-cover blur-sm opacity-40" 
+                    className="object-cover blur-sm opacity-40"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />
             </div>
@@ -55,9 +57,20 @@ export default function Reservations() {
                     </p>
                 </div>
                 <div className="w-full max-w-4xl flex justify-center">
-                    <div 
-                        id="ot-res-widget"
-                    ></div>
+                    {hasConsent ? (
+                        <div id="ot-res-widget"></div>
+                    ) : (
+                        <div className="text-center p-8 bg-black/50 rounded-lg backdrop-blur-sm">
+                            <p className="mb-4 text-gray-300">
+                                {language === "de"
+                                    ? "Um eine Reservierung vorzunehmen, stimmen Sie bitte den funktionalen Cookies zu."
+                                    : "To make a reservation, please accept functional cookies."}
+                            </p>
+                            <Button onClick={showConsentPreferences} variant="outline" className="text-black border-white hover:bg-white/20">
+                                {language === "de" ? "Cookie-Einstellungen öffnen" : "Open Cookie Settings"}
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

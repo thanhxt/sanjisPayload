@@ -4,7 +4,7 @@ import "@/lib/localStorage-polyfill";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Cormorant_Garamond } from 'next/font/google'
-import CookieConsent from "@/components/cookieconsent";
+import CookieConsentComponent from "@/components/cookie-consent/CookieConsentComponent";
 import { LanguageProvider } from "@/components/contexts/language-context";
 import { MenuContextProvider } from "@/components/contexts/menu-context";
 import ChristmasPopup from "@/components/christmas/christmasPopup";
@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const cormorant = Cormorant_Garamond({ 
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   style: ['normal', 'italic']
@@ -68,7 +68,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </MenuContextProvider>
-          <CookieConsent />
+          <CookieConsentComponent />
         </LanguageProvider>
       </body>
     </html>

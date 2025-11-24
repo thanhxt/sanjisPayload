@@ -81,6 +81,7 @@ export interface Config {
     orders: Order;
     admin: Admin;
     Oeffnungzeiten: Oeffnungzeiten;
+    'consent-logs': ConsentLog;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -101,6 +102,7 @@ export interface Config {
     orders: OrdersSelect<false> | OrdersSelect<true>;
     admin: AdminSelect<false> | AdminSelect<true>;
     Oeffnungzeiten: OeffnungzeitenSelect<false> | OeffnungzeitenSelect<true>;
+    'consent-logs': ConsentLogsSelect<false> | ConsentLogsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -557,6 +559,32 @@ export interface Oeffnungzeiten {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consent-logs".
+ */
+export interface ConsentLog {
+  id: string;
+  consentId: string;
+  timestamp?: string | null;
+  /**
+   * Anonymized IP Address (SHA-256)
+   */
+  ipHash?: string | null;
+  preferences:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  userAgent?: string | null;
+  policyVersion?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -617,6 +645,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'Oeffnungzeiten';
         value: string | Oeffnungzeiten;
+      } | null)
+    | ({
+        relationTo: 'consent-logs';
+        value: string | ConsentLog;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -926,6 +958,20 @@ export interface OeffnungzeitenSelect<T extends boolean = true> {
   Uhrzeit2?: T;
   Feld3?: T;
   Uhrzeit3?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consent-logs_select".
+ */
+export interface ConsentLogsSelect<T extends boolean = true> {
+  consentId?: T;
+  timestamp?: T;
+  ipHash?: T;
+  preferences?: T;
+  userAgent?: T;
+  policyVersion?: T;
   updatedAt?: T;
   createdAt?: T;
 }
