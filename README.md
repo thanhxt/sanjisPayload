@@ -31,10 +31,17 @@ Welcome to the official website repository for Sanji's Kitchen. This is a modern
 │   │   │   │   ├── stripe/            # Stripe integration
 │   │   │   │   ├── menu-appetizer/    # Menu data API
 │   │   │   │   ├── menu-maindish/     # Menu data API
+│   │   │   │   ├── menu-steaksdish/   # Steak menu API
+│   │   │   │   ├── menu-steaksdishchoice/ # Steak choice API
+│   │   │   │   ├── menu-steaksdishsharing/ # Steak sharing API
 │   │   │   │   ├── send-email/        # Contact form
+│   │   │   │   ├── send-email-node/   # Node-based email sender
 │   │   │   │   ├── send-captcha/      # CAPTCHA verification
+│   │   │   │   ├── stripe-webhook/    # Stripe webhook handler
+│   │   │   │   ├── test-email/        # Email testing
 │   │   │   │   └── revalidate/        # Cache invalidation
 │   │   │   ├── about/                 # About us page
+│   │   │   ├── christmas/             # Christmas special page
 │   │   │   ├── speisekarte/           # Menu pages
 │   │   │   │   ├── vorspeise/         # Appetizers
 │   │   │   │   ├── hauptspeise/       # Main dishes
@@ -53,10 +60,14 @@ Welcome to the official website repository for Sanji's Kitchen. This is a modern
 │   │   └── (payload)/        # PayloadCMS admin routes
 │   ├── collections/          # PayloadCMS collections
 │   │   ├── admin/            # Admin settings
+│   │   ├── gallery/          # Gallery images
 │   │   ├── hero/             # Hero content
 │   │   ├── media/            # Media management
 │   │   ├── menuAppetizerDish/  # Appetizer items
 │   │   ├── menuMainDish/     # Main dish items
+│   │   ├── menuSanjisChoice/ # Sanji's choice items
+│   │   ├── menuSteaksDish/   # Steak items
+│   │   ├── menuSteaksSharing/ # Steak sharing items
 │   │   ├── order/            # Order management
 │   │   ├── team/             # Team members
 │   │   ├── user/             # User management
@@ -85,7 +96,8 @@ Welcome to the official website repository for Sanji's Kitchen. This is a modern
 - **Modern Design**: Responsive design with Tailwind CSS v4 and beautiful typography using Cormorant Garamond and Geist fonts
 - **Beautiful UI Components**: Built with shadcn/ui for consistent, accessible components
 - **Multi-language Support**: German (primary) and English support with internationalization
-- **Interactive Menu Display**: Dynamic menu with categories (appetizers, main dishes, steaks, lunch, desserts)
+- **Interactive Menu Display**: Dynamic menu with categories (appetizers, main dishes, steaks, sharing steaks, Sanji's choice, lunch, desserts)
+- **Seasonal Specials**: Dedicated pages for seasonal events (e.g., Christmas)
 - **Location & Contact**: Maps integration and contact information
 - **Reservation System**: Online table reservation functionality via Open Table
 - **Image Gallery**: Restaurant photo gallery with video content
@@ -203,10 +215,11 @@ This project uses the latest technologies:
 The admin panel is accessible at `/admin` and provides comprehensive management:
 
 ### Content Management
-- **Menu Management**: Add/edit appetizers, main dishes, steaks, and specials
+- **Menu Management**: Add/edit appetizers, main dishes, steaks, sharing steaks, Sanji's choice, and specials
 - **Team Management**: Manage team member profiles and information
 - **Hero Content**: Update homepage hero sections and images
 - **Media Library**: Upload and organize restaurant images with automatic resizing
+- **Gallery Management**: Manage photo gallery content
 
 ### E-commerce Management  
 - **Order Tracking**: View and manage all voucher orders
