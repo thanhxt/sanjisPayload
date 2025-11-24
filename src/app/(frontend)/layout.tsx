@@ -8,6 +8,8 @@ import CookieConsentComponent from "@/components/cookie-consent/CookieConsentCom
 import { LanguageProvider } from "@/components/contexts/language-context";
 import { MenuContextProvider } from "@/components/contexts/menu-context";
 import ChristmasPopup from "@/components/christmas/christmasPopup";
+import "@/lib/init-cleanup";
+
 
 
 const geistSans = Geist({

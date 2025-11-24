@@ -54,27 +54,26 @@ export default function Datenschutz() {
                 <section className="mb-8">
                     <h2 className="text-xl font-bold mb-3">{language === "de" ? "4. Hosting" : "4. Hosting"}</h2>
                     <p>
-                        {language === "de" ? "Wir hosten sämtliche Inhalte unserer Website auf einem von uns gemieteten Virtual Private Server (VPS). Dabei überlassen wir die Serverinfrastruktur keinem externen Shared-Hosting-Anbieter; alle Daten verbleiben ausschließlich auf unserem VPS." : "We host all the content of our website on a rented Virtual Private Server (VPS). We do not lease the server infrastructure to any external shared hosting provider; all data remains exclusively on our VPS."}
+                        {language === "de" ? "Wir hosten die Inhalte unserer Website bei folgendem Anbieter:" : "We host the content of our website with the following provider:"}
+                    </p>
+                    <p className="mt-2 font-bold">
+                        {language === "de" ? "IONOS SE" : "IONOS SE"}
+                    </p>
+                    <p className="mt-2">
+                        {language === "de" ? "Der Anbieter ist ein externer Dienstleister. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Anbieters gespeichert. Hierbei kann es sich v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Webseitenzugriffe und sonstige Daten, die über eine Website generiert werden, handeln." : "The provider is an external service provider. The personal data collected on this website is stored on the provider's servers. This may include, in particular, IP addresses, contact requests, meta and communication data, contract data, contact details, names, website accesses and other data generated via a website."}
                     </p>
                     <p className="mt-3">
-                        {language === "de" ? "Auf diesem VPS werden automatisch technische Logfiles angelegt, sobald Sie unsere Website besuchen. Folgende Informationen werden protokolliert:" : "On this VPS, technical log files are automatically created as soon as you visit our website. The following information is recorded:"}
+                        {language === "de" ? "Das Hosting erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO)." : "Hosting takes place for the purpose of fulfilling the contract with our potential and existing customers (Art. 6 Para. 1 lit. b GDPR) and in the interest of a secure, fast and efficient provision of our online offer by a professional provider (Art. 6 Para. 1 lit. f GDPR)."}
                     </p>
-                    <ul className="list-disc pl-5 mt-2.5">
-                        <li>{language === "de" ? "Browsertyp und Browserversion" : "Browser type and version"}</li>
-                        <li>{language === "de" ? "Verwendetes Betriebssystem" : "Used operating system"}</li>
-                        <li>{language === "de" ? "Referrer-URL (die zuvor besuchte Seite)" : "Referrer URL (the previously visited page)"}</li>
-                        <li>{language === "de" ? "Hostname des zugreifenden Rechners" : "Hostname of the accessing computer"}</li>
-                        <li>{language === "de" ? "Uhrzeit der Serveranfrage" : "Time of server request"}</li>
-                        <li>{language === "de" ? "IP-Adresse" : "IP address"}</li>
-                    </ul>
-                    <p className="mt-3">
-                        {language === "de" ? "Eine Zusammenführung dieser Logdaten mit anderen Datenquellen findet nicht statt. Die Speicherung dient ausschließlich dem Zweck der technischen Absicherung, Fehleranalyse und Optimierung des Betriebs unserer Website. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer stabilen, sicheren Bereitstellung)." : "A merging of these log data with other data sources does not take place. The storage serves exclusively the purpose of technical security, error analysis, and optimization of the operation of our website. Legal basis is Art. 6 Abs. 1 lit. f DSGVO (legitimate interest in a stable, secure provision)."}
+
+                    <h3 className="text-lg font-bold mb-2 mt-4">{language === "de" ? "Auftragsverarbeitung" : "Data Processing Agreement"}</h3>
+                    <p>
+                        {language === "de" ? "Wir haben einen Vertrag über Auftragsverarbeitung (AVV) mit dem oben genannten Anbieter geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet." : "We have concluded a data processing agreement (DPA) with the above-mentioned provider. This is a contract required by data protection law, which ensures that the provider processes the personal data of our website visitors only in accordance with our instructions and in compliance with the GDPR."}
                     </p>
-                    <p className="mt-3">
-                        {language === "de" ? "Zusätzlich zu den technischen Logfiles speichern wir auf unserem VPS auch eine Datenbank mit Ihren Cookie-Einwilligungsentscheidungen (siehe Abschnitt 5: Cookies). Die dort gespeicherten IP-Adressen werden mittels SHA-256-Hashing anonymisiert und sind nicht mehr auf Sie zurückführbar." : "In addition to the technical log files, we also store a database with your cookie consent decisions on our VPS (see Section 5: Cookies). The IP addresses stored there are anonymized using SHA-256 hashing and can no longer be traced back to you."}
-                    </p>
-                    <p className="mt-3">
-                        {language === "de" ? "Da alle Daten ausschließlich auf unserem VPS verbleiben, erfolgt keine Weitergabe an Dritte, soweit nicht eine gesetzliche Verpflichtung (z. B. behördliche Anforderung) hierzu besteht. Der Zugriff auf den Server ist auf autorisierte Administratoren beschränkt." : "Since all data remains exclusively on our VPS, no transfer to third parties takes place, unless there is a legal obligation (e.g. legal requirement) to do so. Access to the server is restricted to authorized administrators."}
+
+                    <h3 className="text-lg font-bold mb-2 mt-4">{language === "de" ? "Technische Logfiles & Consent-Datenbank" : "Technical Logfiles & Consent Database"}</h3>
+                    <p>
+                        {language === "de" ? "Auf dem Server werden automatisch technische Logfiles angelegt (z.B. IP-Adresse, Browser, Uhrzeit). Zusätzlich speichern wir auf dem Server eine Datenbank mit Ihren Cookie-Einwilligungsentscheidungen (siehe Abschnitt 5). Die dort gespeicherten IP-Adressen werden mittels SHA-256-Hashing anonymisiert." : "Technical log files are automatically created on the server (e.g. IP address, browser, time). In addition, we store a database with your cookie consent decisions on the server (see Section 5). The IP addresses stored there are anonymized using SHA-256 hashing."}
                     </p>
                 </section>
 
@@ -115,7 +114,7 @@ export default function Datenschutz() {
                         <li>{language === "de" ? "Die Version der Datenschutzerklärung, die bei der Einwilligung gültig war" : "The version of the privacy policy that was valid at the time of consent"}</li>
                     </ul>
                     <p className="mt-3">
-                        {language === "de" ? "Diese Daten werden nicht an Dritte weitergegeben und dienen ausschließlich dem Nachweis Ihrer Einwilligung. Die Löschung erfolgt nach 36 Monaten oder wenn die Nachweispflicht entfällt. Rechtsgrundlage für diese Verarbeitung ist Art. 6 Abs. 1 lit. c DSGVO (rechtliche Verpflichtung) in Verbindung mit Art. 7 Abs. 1 DSGVO." : "This data is not shared with third parties and is used exclusively to document your consent. Deletion takes place after 36 months or when the documentation obligation lapses. The legal basis for this processing is Art. 6 Para. 1 lit. c GDPR (legal obligation) in conjunction with Art. 7 Para. 1 GDPR."}
+                        {language === "de" ? "Diese Daten werden nicht an Dritte weitergegeben und dienen ausschließlich dem Nachweis Ihrer Einwilligung. Die Löschung erfolgt automatisch nach 12 Monaten oder wenn die Nachweispflicht entfällt. Rechtsgrundlage für diese Verarbeitung ist Art. 6 Abs. 1 lit. c DSGVO (rechtliche Verpflichtung) in Verbindung mit Art. 7 Abs. 1 DSGVO." : "This data is not shared with third parties and is used exclusively to document your consent. Deletion takes place automatically after 12 months or when the documentation obligation lapses. The legal basis for this processing is Art. 6 Para. 1 lit. c GDPR (legal obligation) in conjunction with Art. 7 Para. 1 GDPR."}
                     </p>
                     <p className="mt-3">
                         {language === "de" ? "Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Der Widerruf berührt nicht die Rechtmäßigkeit der bis dahin erfolgten Verarbeitung." : "You can revoke your consent at any time with effect for the future. The revocation does not affect the lawfulness of the processing carried out until then."}
