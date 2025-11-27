@@ -13,7 +13,7 @@ export default function Introduction() {
 				<div className="order-1 md:order-none flex-1 flex flex-col justify-center max-w-xl pl-6 pr-6 md:pl-24 md:pr-16 z-20">
 					<h1 className="text-5xl lg:text-6xl font-light tracking-wide mb-8 mt-8">{language === "de" ? "WILLKOMMEN IM" : "WELCOME TO"} <br />SANJI&apos;S</h1>
 					<p className="text-lg text-gray-300 mb-10 max-w-md">
-					{language === "de" ? "Entdecken Sie die perfekte Fusion aus Qualität, Geschmack und südostasiatischem Ambiente bei Sanjis. Wir laden Sie ein, sich zurückzulehnen, zu entspannen und das Beste zu genießen, was die Welt der kulinarischen Köstlichkeiten zu bieten hat." : "Discover the perfect fusion of quality, taste, and Southeast Asian ambiance at Sanjis. We invite you to relax, unwind, and enjoy the best that the world of culinary delights has to offer."}
+						{language === "de" ? "Entdecken Sie die perfekte Fusion aus Qualität, Geschmack und südostasiatischem Ambiente bei Sanjis. Wir laden Sie ein, sich zurückzulehnen, zu entspannen und das Beste zu genießen, was die Welt der kulinarischen Köstlichkeiten zu bieten hat." : "Discover the perfect fusion of quality, taste, and Southeast Asian ambiance at Sanjis. We invite you to relax, unwind, and enjoy the best that the world of culinary delights has to offer."}
 					</p>
 					<button className="border border-gray-400 text-gray-200 text-2xl hover:bg-gray-800 transition rounded mt-4 mb-6 w-max tracking-widest min-h-[44px] min-w-[44px] relative z-20">
 						<Link href="/about" className="block px-6 py-4">
