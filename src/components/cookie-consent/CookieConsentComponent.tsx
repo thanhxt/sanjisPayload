@@ -42,9 +42,12 @@ export default function CookieConsentComponent() {
     useEffect(() => {
         CookieConsent.run({
             ...cookieConsentConfig,
-            onConsent: () => {
+            onFirstConsent: () => {
                 window.dispatchEvent(new Event('cookie_consent_updated'));
                 logConsent();
+            },
+            onConsent: () => {
+                window.dispatchEvent(new Event('cookie_consent_updated'));
             },
             onChange: () => {
                 window.dispatchEvent(new Event('cookie_consent_updated'));
