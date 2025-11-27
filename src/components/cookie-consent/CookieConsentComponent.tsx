@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { Cookie } from 'lucide-react';
 import * as CookieConsent from 'vanilla-cookieconsent';
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import { cookieConsentConfig, POLICY_VERSION } from './cookieconsent-config';
@@ -56,6 +57,14 @@ export default function CookieConsentComponent() {
         CookieConsent.setLanguage(language);
     }, [language]);
 
-    return null;
+    return (
+        <button
+            onClick={() => CookieConsent.showPreferences()}
+            className="fixed bottom-4 left-4 z-50 p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full shadow-lg hover:bg-white/20 transition-all duration-300 group"
+            aria-label={language === 'de' ? 'Cookie-Einstellungen' : 'Cookie Settings'}
+        >
+            <Cookie className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        </button>
+    );
 }
 

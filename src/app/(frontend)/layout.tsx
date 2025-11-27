@@ -4,7 +4,7 @@ import "@/lib/localStorage-polyfill";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Cormorant_Garamond } from 'next/font/google'
-import CookieConsentComponent from "@/components/cookie-consent/CookieConsentComponent";
+import CookieConsentComponent from "@/components/cookie-consent";
 import { LanguageProvider } from "@/components/contexts/language-context";
 import { MenuContextProvider } from "@/components/contexts/menu-context";
 import ChristmasPopup from "@/components/christmas/christmasPopup";
