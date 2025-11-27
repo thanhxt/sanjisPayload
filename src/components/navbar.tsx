@@ -29,9 +29,9 @@ export default function Navbar() {
         }
     }, [])
 
-        const handleLanguageChange = (value: 'de' | 'en') => {
-            setLanguage(value)
-        }
+    const handleLanguageChange = (value: 'de' | 'en') => {
+        setLanguage(value)
+    }
 
     return (
         <div>
@@ -40,16 +40,15 @@ export default function Navbar() {
             https://flagicons.lipis.dev/
             */}
             <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
-                />
-            <nav className={`fixed w-full z-50 transition-all duration-300 ${
-                menuOpen
-                    ? 'bg-black'
-                    : isScrolled
-                        ? 'bg-[#00000099] backdrop-blur-sm'
-                        : 'bg-transparent'
-            } text-white py-4`}>
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
+            />
+            <nav className={`fixed w-full z-50 transition-all duration-300 ${menuOpen
+                ? 'bg-black'
+                : isScrolled
+                    ? 'bg-[#00000099] backdrop-blur-sm'
+                    : 'bg-transparent'
+                } text-white py-4`}>
                 <div className="container mx-auto flex justify-between items-center px-4 md:px-8">
                     <div className="text-lg font-bold">
                         <Link href="/">
@@ -65,7 +64,7 @@ export default function Navbar() {
                         <li><Link href="/about" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Über uns" : "About"}</Link></li>
                         <li><Link href="/speisekarte" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
                         <li><Link href="/christmas" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Weihnachten" : "Christmas"}</Link></li>
-                        <li><Link href="https://www.opentable.de/r/sanjis-steak-grill-and-bar-reservations-munchen?restref=347604&lang=de-DE&ot_source=Restaurant%20website" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
+                        <li><Link href="/reservierung" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
                         <li><Link href="/voucher" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
                         <li><Link href="/kontakt" className="hover:text-gray-400 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                         <li> <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language">
@@ -118,7 +117,7 @@ export default function Navbar() {
                             <li><Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Über uns" : "About Us"}</Link></li>
                             <li><Link href="/speisekarte" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
                             <li><Link href="/christmas" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Weihnachten" : "Christmas"}</Link></li>
-                            <li><Link href="https://www.opentable.de/r/sanjis-steak-grill-and-bar-reservations-munchen?restref=347604&lang=de-DE&ot_source=Restaurant%20website" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
+                            <li><Link href="/reservierung" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
                             <li><Link href="/voucher" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
                             <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 font-light block py-2 px-4 min-h-[44px] min-w-[44px]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                             <li className="mt-4">

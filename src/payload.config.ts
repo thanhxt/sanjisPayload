@@ -18,6 +18,7 @@ import { Order } from './collections/order'
 import { Admin } from './collections/admin'
 import { Gallery } from './collections/gallery'
 import { OpeningTimes } from './collections/openingTimes'
+import { ConsentLogs } from './collections/consentLogs'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -39,6 +40,7 @@ export default buildConfig({
     Order,
     Admin,
     OpeningTimes,
+    ConsentLogs,
   ],
   upload: {
     limits: {

@@ -6,12 +6,13 @@ import { Input } from "./ui/input";
 import { useState, useEffect } from "react";
 import Script from "next/script";
 import Link from "next/link";
-import { getCookie } from 'cookies-next';
 import CookieAlert from "./alerts/cookieAlert";
 import FillAlert from "./alerts/fillAlert";
 import CaptchaAlert from "./alerts/captchaAlert";
 import SucessEmailAlert from "./alerts/sucessEmailAlert";
 import { useLanguage } from "./contexts/language-context";
+import { useCookieConsent } from "@/hooks/useCookieConsent";
+import * as CookieConsent from 'vanilla-cookieconsent';
 
 export default function Contact() {
 
@@ -20,17 +21,17 @@ export default function Contact() {
     const [name, setName] = useState('');
     const [subject, setSubject] = useState('');
     const [captchaToken, setCaptchaToken] = useState('');
-    const [showCaptcha, setShowCaptcha] = useState(false);
     const [showCookieAlert, setShowCookieAlert] = useState(false);
     const [showFillAlert, setShowFillAlert] = useState(false);
     const [showCaptchaAlert, setShowCaptchaAlert] = useState(false);
     const [showSucessEmailAlert, setShowSucessEmailAlert] = useState(false);
     const { language } = useLanguage();
 
+    // Check for necessary cookies (which covers Captcha)
+    const showCaptcha = useCookieConsent('necessary');
+
     useEffect(() => {
-        const consent = getCookie('cookie_consent');
-        setShowCaptcha(!!consent);
-        if (!consent) return;
+        if (!showCaptcha) return;
 
         const handleCaptchaSolve = (e) => {
             const token = e.detail.token;
@@ -55,10 +56,10 @@ export default function Contact() {
                 widget.removeEventListener("solve", handleCaptchaSolve);
             }
         };
-    }, []);
+    }, [showCaptcha]);
 
     const sendCaptcha = async (token) => {
-        const res = await fetch( `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-captcha`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-captcha`, {
             method: "POST",
             body: JSON.stringify({ token }),
         });
@@ -67,7 +68,8 @@ export default function Contact() {
     };
 
     const sendEmail = async () => {
-        const consent = getCookie('cookie_consent');
+        // Double check consent
+        const consent = CookieConsent.acceptedCategory('necessary');
         if (!consent) {
             setShowCookieAlert(true);
             return;
@@ -88,7 +90,7 @@ export default function Contact() {
         try {
             // Make sure this uses the correct URL for your environment
             const apiUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-email-node`;
-            
+
             const res = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -121,46 +123,46 @@ export default function Contact() {
                 {/* Left: Contact Form */}
                 <div className="flex-1 flex flex-col justify-center max-w-xl md:pr-8 p-6 md:p-10 ">
                     <h1 className="text-5xl font-bold mb-8 text-left">{language === "de" ? "Kontaktieren Sie uns" : "Contact Us"}</h1>
-                    
+
                     <form className="space-y-6" >
                         <div>
                             <label htmlFor="name" className="block mb-2 text-lg font-medium text-gray-300">{language === "de" ? "Dein Name" : "Your Name"}</label>
-                            <Input 
-                                id="name" 
-                                name="name" 
-                                type="text" 
-                                placeholder={language === "de" ? "Dein Name" : "Your Name"} 
-                                required value={name} 
+                            <Input
+                                id="name"
+                                name="name"
+                                type="text"
+                                placeholder={language === "de" ? "Dein Name" : "Your Name"}
+                                required value={name}
                                 onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div>
                             <label htmlFor="email" className="block mb-2 text-lg font-medium text-gray-300">{language === "de" ? "Deine E-Mail-Adresse" : "Your Email Address"}</label>
-                            <Input 
-                                id="email" 
-                                name="email" 
-                                type="email" 
-                                placeholder={language === "de" ? "Deine E-Mail-Adresse" : "Your Email Address"} 
-                                required value={email} 
+                            <Input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder={language === "de" ? "Deine E-Mail-Adresse" : "Your Email Address"}
+                                required value={email}
                                 onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div>
                             <label htmlFor="subject" className="block mb-2 text-lg font-medium text-gray-300">{language === "de" ? "Betreff" : "Subject"}</label>
-                            <Input 
-                                id="subject" 
-                                name="subject" 
-                                type="text" 
-                                placeholder={language === "de" ? "Betreff" : "Subject"} 
-                                required value={subject} 
+                            <Input
+                                id="subject"
+                                name="subject"
+                                type="text"
+                                placeholder={language === "de" ? "Betreff" : "Subject"}
+                                required value={subject}
                                 onChange={(e) => setSubject(e.target.value)} />
                         </div>
                         <div>
                             <label htmlFor="message" className="block mb-2 text-lg font-medium text-gray-300">{language === "de" ? "Deine Nachricht (optional)" : "Your Message (optional)"}</label>
-                            <textarea 
-                                id="message" 
-                                name="message" 
-                                rows={5} 
-                                placeholder={language === "de" ? "Deine Nachricht" : "Your Message"} 
-                                className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-base text-white shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] outline-none transition-colors" 
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows={5}
+                                placeholder={language === "de" ? "Deine Nachricht" : "Your Message"}
+                                className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-base text-white shadow-xs focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] outline-none transition-colors"
                                 value={msg} onChange={(e) => setMsg(e.target.value)} />
                         </div>
                         {showCookieAlert && (
@@ -185,7 +187,7 @@ export default function Contact() {
                         )}
                         {showCaptcha && (
                             <>
-                                <Script 
+                                <Script
                                     src="https://cap.sanjis.thanhxt.com/assets/widget.js"
                                     strategy="afterInteractive"
                                 ></Script>
@@ -195,9 +197,9 @@ export default function Contact() {
                                 ></cap-widget>
                             </>
                         )}
-                        <Button 
-                            type="submit" 
-                            className="mt-4 w-full md:w-auto px-8 py-2 text-lg font-semibold" 
+                        <Button
+                            type="submit"
+                            className="mt-4 w-full md:w-auto px-8 py-2 text-lg font-semibold"
                             onClick={(e) => {
                                 e.preventDefault();
                                 sendEmail();
@@ -236,7 +238,7 @@ export default function Contact() {
                     </div>
                     <div>
                         <h2 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Social Media" : "Social Media"}</h2>
-                            <div className="flex gap-4 mt-2">
+                        <div className="flex gap-4 mt-2">
                             <Link href="https://www.instagram.com/sanjis.kitchen/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition">
                                 <Instagram className="w-8 h-8" />
                             </Link>
