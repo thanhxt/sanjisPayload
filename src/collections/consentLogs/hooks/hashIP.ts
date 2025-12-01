@@ -1,19 +1,15 @@
 import type { CollectionBeforeChangeHook } from 'payload'
-import crypto from 'crypto'
+import { hashIPAddress } from '@/lib/ip-utils'
 
 export const hashIP: CollectionBeforeChangeHook = async ({ data, req }) => {
+    // If ipHash is already present (e.g. from API route), return data
+    if (data.ipHash) return data
+
     // Only run on create
     if (req.method !== 'POST') return data
 
     const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown'
-
-    // Use a salt from env or a fallback (should be in env for production security)
-    const salt = process.env.IP_SALT || 'sanjis-kitchen-secret-salt'
-
-    const hash = crypto
-        .createHash('sha256')
-        .update(ip + salt)
-        .digest('hex')
+    const hash = hashIPAddress(ip)
 
     return {
         ...data,
