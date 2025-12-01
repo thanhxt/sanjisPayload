@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { NextRequest, NextResponse } from 'next/server'
+import { hashIPAddress } from '@/lib/ip-utils'
 
 export async function POST(req: NextRequest) {
     try {
@@ -13,6 +14,9 @@ export async function POST(req: NextRequest) {
 
         const payload = await getPayload({ config })
 
+        const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown'
+        const ipHash = hashIPAddress(ip)
+
         await payload.create({
             collection: 'consent-logs',
             data: {
@@ -20,6 +24,7 @@ export async function POST(req: NextRequest) {
                 preferences,
                 userAgent,
                 policyVersion,
+                ipHash,
                 timestamp: new Date().toISOString(),
             },
         })
