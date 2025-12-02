@@ -9,6 +9,7 @@ import { LanguageProvider } from "@/components/contexts/language-context";
 import { MenuContextProvider } from "@/components/contexts/menu-context";
 import ChristmasPopup from "@/components/christmas/christmasPopup";
 import "@/lib/init-cleanup";
+import Script from "next/script";
 
 
 
@@ -53,6 +54,8 @@ export const metadata = {
 };
 
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,6 +66,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${cormorant.className}`}
       >
+        <Script 
+          src="https://umami.sanjiskitchen.de/script.js" 
+          data-website-id="d6fc4869-fc14-4e60-8d83-054916944289"
+          strategy="afterInteractive"
+        />
         <LanguageProvider>
           <MenuContextProvider>
             <Navbar />
