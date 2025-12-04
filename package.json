@@ -31,7 +31,7 @@
     "flag-icons": "^7.5.0",
     "graphql": "^16.11.0",
     "lucide-react": "^0.510.0",
-    "next": "^15.3.2",
+    "next": "^15.3.6",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.3",
     "payload": "^3.41.0",
