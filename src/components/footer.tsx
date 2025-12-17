@@ -59,11 +59,11 @@ export default function Footer() {
                   {t.menu[language]}
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/weihnachten" className="hover:text-yellow-400 hover:underline">
                   {t.christmas[language]}
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/reservierung" className="hover:text-yellow-400 hover:underline">
                   {t.reservation[language]}
