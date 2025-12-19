@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
 export const metadata = {
-  title: "Christmas Menu | Sanji's Kitchen",
-  description: 'Erleben Sie unser exklusives 6-Gänge Weihnachtsmenü.',
+  title: "Silvester Menü & Jahresabschluss | Sanji's – Steak, Grill & Bar München",
+  description: 'Feiern Sie Silvester bei Sanji\'s Kitchen in München! Genießen Sie unser exklusives Jahresabschluss-Dinner und begrüßen Sie das neue Jahr mit Genuss und Feuerwerk.',
 };
 
 export default function NewyearPage() {

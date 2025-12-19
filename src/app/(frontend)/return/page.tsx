@@ -5,6 +5,15 @@ import { Button } from '@/components/ui/button'
 
 import { stripe } from '@/lib/stripe'
 
+export const metadata = {
+  title: "Bestellstatus | Sanji's – Steak, Grill & Bar München",
+  description: "Status Ihrer Bestellung und Zahlung bei Sanji's Kitchen.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 export default async function Return({ searchParams }: { searchParams: Promise<{ session_id: string }> }) {
   const { session_id } = await searchParams
 
