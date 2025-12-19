@@ -5,17 +5,20 @@ export const metadata = {
   description: 'Erleben Sie unser exklusives 6-Gänge Weihnachtsmenü.',
 };
 
-export default function ChristmasPage() {
+export default function NewyearPage() {
   return (
     <main className="min-h-screen bg-[#050505] text-[#C5A059] flex flex-col items-center pb-20">
 
       {/* === INTRO TEXT === */}
       <div className="text-center mt-32 mb-12 px-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <h1 className="text-3xl md:text-5xl font-serif text-white mb-4">
-          Black Angus vs <span className="text-[#C5A059] italic">Wagyu</span>
+          <span className="text-[#C5A059] italic">Jahresabschluss-Dinner</span> im Sanjis
         </h1>
         <p className="text-gray-400 max-w-md mx-auto text-sm leading-relaxed">
-          Ein kulinarisches Fest für die Sinne. Genießen Sie am 26.12.2025 unser exklusiv kreiertes 6-Gänge Black Angus vs Wagyu Menü.
+          Gemeinsam das Jahr ausklingen lassen - mit Genuss, Wärme und besonderen Momenten.
+        </p>
+        <p className="text-gray-400 max-w-md mx-auto text-sm leading-relaxed mt-2">
+          Zum Mitternachtsschlag erwartet euch ein exklusives Feuerwerk – feiern wir gemeinsam den Beginn des neuen Jahres.
         </p>
       </div>
 
@@ -28,8 +31,8 @@ export default function ChristmasPage() {
         {/* Container für das Bild */}
         <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-black/80 border border-[#C5A059]/20">
           <Image
-            src="/christmas-menu.jpeg" 
-            alt="Sanji's Christmas Menu Gänge"
+            src="/newyear-menu.jpeg" 
+            alt="Sanji's New Year Menu Gänge"
             width={800}
             height={1200}
             className="w-full h-auto object-cover"
@@ -44,7 +47,7 @@ export default function ChristmasPage() {
       {/* === CALL TO ACTION BUTTON === */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-[#050505]/80 backdrop-blur-md border-t border-[#C5A059]/20 flex justify-center z-50 animate-in slide-in-from-bottom-full duration-1000 delay-300">
         <a
-          href="https://www.opentable.com/booking/experiences-availability?rid=347604&restref=347604&experienceId=593388&utm_source=external&utm_medium=referral&utm_campaign=shared"
+          href="https://www.opentable.com/booking/experiences-availability?rid=347604&restref=347604&experienceId=593444&utm_source=external&utm_medium=referral&utm_campaign=shared"
           target="_blank"
           rel="noopener noreferrer"
           className="
@@ -57,7 +60,7 @@ export default function ChristmasPage() {
             transition-all duration-300
           "
         >
-          <span className="relative z-10">Tisch für Weihnachten sichern</span>
+          <span className="relative z-10">Tisch für Neujahr sichern</span>
           {/* Shine Effekt beim Hover */}
           <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-white/30 skew-x-12 transition-transform duration-700 ease-in-out"></div>
         </a>
