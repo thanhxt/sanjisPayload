@@ -7,6 +7,7 @@ import { Cormorant_Garamond } from 'next/font/google'
 import CookieConsentComponent from "@/components/cookie-consent";
 import { LanguageProvider } from "@/components/contexts/language-context";
 import { MenuContextProvider } from "@/components/contexts/menu-context";
+import HolidayOpeningHours from "@/components/openingTimes/openingTimes";
 import NewYearPopup from "@/components/newYear/newYearPopup";
 import "@/lib/init-cleanup";
 import Script from "next/script";
@@ -75,6 +76,7 @@ export default function RootLayout({
           <MenuContextProvider>
             <Navbar />
             <NewYearPopup />
+            <HolidayOpeningHours />
             {children}
             <Footer />
           </MenuContextProvider>
