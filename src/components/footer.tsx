@@ -13,17 +13,17 @@ export default function Footer() {
   }, []);
 
   const t = {
-    links:       { de: 'Links',            en: 'Links' },
-    menu:        { de: 'Speisekarte',      en: 'Menu' },
-    about:       { de: 'Über uns',         en: 'About' },
+    links:       { de: 'Links',             en: 'Links' },
+    menu:        { de: 'Speisekarte',       en: 'Menu' },
+    about:       { de: 'Über uns',          en: 'About' },
     reservation: { de: 'Reservierung',      en: 'Reservation' },
-    contact:     { de: 'Kontakt',          en: 'Contact' },
-    voucher:     { de: 'Gutschein',        en: 'Voucher' },
-    christmas:   { de: 'Weihnachten',      en: 'Christmas' },
+    contact:     { de: 'Kontakt',           en: 'Contact' },
+    voucher:     { de: 'Gutschein',         en: 'Voucher' },
+    newyear:     { de: 'Neujahr',           en: 'New Year' },
     opening:     { de: 'Öffnungszeiten',    en: 'Opening Hours' },
     weekdays:    { de: 'Montag - Freitag',  en: 'Monday - Friday' },
     Sunday:      { de: 'Sonntag',           en: 'Sunday' },
-    saturday:    { de: 'Samstag',           en: 'Samstag' },
+    saturday:    { de: 'Samstag',           en: 'Saturday' },
     socials:     { de: 'Socials',           en: 'Socials' },
     rights:      { de: 'Alle Rechte vorbehalten', en: 'All rights reserved' },
     privacy:     { de: 'Datenschutz',       en: 'Privacy Policy' },
@@ -59,11 +59,11 @@ export default function Footer() {
                   {t.menu[language]}
                 </Link>
               </li>
-              {/* <li>
-                <Link href="/weihnachten" className="hover:text-yellow-400 hover:underline">
-                  {t.christmas[language]}
+              <li>
+                <Link href="/newyear" className="hover:text-yellow-400 hover:underline">
+                  {t.newyear[language]}
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link href="/reservierung" className="hover:text-yellow-400 hover:underline">
                   {t.reservation[language]}
