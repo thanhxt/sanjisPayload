@@ -121,9 +121,23 @@ export default function Datenschutz() {
                     </p>
                 </section>
 
-                {/* 6. Drittanbieter-Tools & Plugins */}
+                {/* 6. Webanalyse (Umami) */}
                 <section className="mb-8">
-                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "6. Drittanbieter-Tools & Plugins" : "6. Third-Party Tools & Plugins"}</h2>
+                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "6. Webanalyse (Umami)" : "6. Web Analytics (Umami)"}</h2>
+                    <p>
+                        {language === "de" ? "Diese Website verwendet Umami, einen Open-Source-Webanalysedienst. Umami verwendet keine Cookies und speichert keine personenbezogenen Daten. Die IP-Adressen der Besucher werden anonymisiert verarbeitet." : "This website uses Umami, an open-source web analytics service. Umami does not use cookies and does not store personal data. Visitors' IP addresses are processed anonymously."}
+                    </p>
+                    <p className="mt-3">
+                        {language === "de" ? "Die Nutzung von Umami erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der anonymisierten Analyse des Nutzerverhaltens, um sowohl sein Webangebot als auch seine Werbung zu optimieren." : "The use of Umami is based on Art. 6 Para. 1 lit. f GDPR. The website operator has a legitimate interest in the anonymous analysis of user behavior in order to optimize both its website and its advertising."}
+                    </p>
+                    <p className="mt-3">
+                        {language === "de" ? "Da Umami auf unseren eigenen Servern gehostet wird, werden keine Daten an Dritte (z. B. Google Analytics) weitergegeben." : "Since Umami is hosted on our own servers, no data is passed on to third parties (e.g. Google Analytics)."}
+                    </p>
+                </section>
+
+                {/* 7. Drittanbieter-Tools & Plugins */}
+                <section className="mb-8">
+                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "7. Drittanbieter-Tools & Plugins" : "7. Third-Party Tools & Plugins"}</h2>
                     <p>
                         {language === "de" ? "Unsere Website nutzt Inhalte von Drittanbietern:" : "Our website uses content from third parties:"}
                     </p>
@@ -134,9 +148,9 @@ export default function Datenschutz() {
                     </ul>
                 </section>
 
-                {/* 7. Links zu externen Diensten */}
+                {/* 8. Links zu externen Diensten */}
                 <section className="mb-8">
-                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "7. Links zu externen Diensten" : "7. Links to External Services"}</h2>
+                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "8. Links zu externen Diensten" : "8. Links to External Services"}</h2>
                     <p>
                         {language === "de" ? "Unsere Website enthält Verweise (Links) zu externen Anbietern, z. B." : "Our website contains links (links) to external providers, e.g."}
                     </p>
@@ -152,9 +166,9 @@ export default function Datenschutz() {
                     </p>
                 </section>
 
-                {/* 8. Ihre Rechte */}
+                {/* 9. Ihre Rechte */}
                 <section className="mb-8">
-                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "8. Ihre Rechte" : "8. Your Rights"}</h2>
+                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "9. Ihre Rechte" : "9. Your Rights"}</h2>
                     <p>
                         {language === "de" ? "Sie haben jederzeit das Recht auf:" : "You have the right at any time to:"}
                     </p>
@@ -169,17 +183,13 @@ export default function Datenschutz() {
                     </ul>
                 </section>
 
-                {/* 9. SSL- bzw. TLS-Verschlüsselung */}
+                {/* 10. SSL- bzw. TLS-Verschlüsselung */}
                 <section className="mb-8">
-                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "9. SSL- bzw. TLS-Verschlüsselung" : "9. SSL- or TLS-Encryption"}</h2>
+                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "10. SSL- bzw. TLS-Verschlüsselung" : "10. SSL- or TLS-Encryption"}</h2>
                     <p>
                         {language === "de" ? "Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von \"http://\" auf \"https://\" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile." : "This site uses SSL or TLS encryption for security reasons and to protect the transmission of confidential content. A secure connection is recognized by the change of the browser address from \"http://\" to \"https://\" and the lock symbol in your browser address bar."}
                     </p>
                 </section>
-
-                <div className="text-gray-400 text-sm text-center">
-                    {language === "de" ? "Stand: November 2025" : "Last updated: November 2025"}
-                </div>
             </div>
         </div>
     );

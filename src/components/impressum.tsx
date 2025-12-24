@@ -35,36 +35,15 @@ export default function Impressum() {
                     <div>
                         {language === "de" ? (
                             <>
-                                Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" className="text-yellow-400">https://ec.europa.eu/consumers/odr/</a>.<br />
-                                Unsere E-Mail-Adresse finden Sie oben im Impressum.
+                                Wir sind nicht bereit oder verpflichtet, an Streitbeteilugungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
                             </>
                         ) : (
                             <>
-                                The European Commission provides a platform for online dispute resolution (ODR): <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" className="text-yellow-400">https://ec.europa.eu/consumers/odr/</a>.<br />
-                                Our email address can be found above in the legal notice.
+                                We are not prepared or obliged to participate in dispute resolution proceedings before a consumer mediation center.
                             </>
                         )}
                     </div>
                 </section>
-
-                <section className="mb-8">
-                    <h2 className="text-xl font-bold mb-3">{language === "de" ? "Verbraucherstreitbeilegung/Universalschlichtungsstelle" : "Consumer dispute resolution/Universal mediation"}</h2>
-                    <div>
-                        {language === "de" ? (
-                            <>
-                                Wir nehmen an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil. Zuständig ist die Universalschlichtungsstelle des Zentrums für Schlichtung e.V., Straßburger Straße 8, 77694 Kehl am Rhein (<a href="https://www.verbraucher-schlichter.de" target="_blank" rel="noopener noreferrer" className="text-yellow-400">https://www.verbraucher-schlichter.de</a>).
-                            </>
-                        ) : (
-                            <>
-                                We participate in a dispute resolution procedure before a consumer mediation center. The responsible body is the Universal Mediation Center of the Center for Mediation e.V., Straßburger Straße 8, 77694 Kehl am Rhein (<a href="https://www.verbraucher-schlichter.de" target="_blank" rel="noopener noreferrer" className="text-yellow-400">https://www.verbraucher-schlichter.de</a>).
-                            </>
-                        )}
-                    </div>
-                </section>
-
-                <div className="text-gray-400 text-sm text-center">
-                    {language === "de" ? "Stand: Mai 2025" : "Last updated: May 2025"}
-                </div>
             </div>
         </div>
     );
