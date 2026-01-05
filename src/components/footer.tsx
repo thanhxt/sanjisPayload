@@ -19,7 +19,6 @@ export default function Footer() {
     reservation: { de: 'Reservierung',      en: 'Reservation' },
     contact:     { de: 'Kontakt',           en: 'Contact' },
     voucher:     { de: 'Gutschein',         en: 'Voucher' },
-    newyear:     { de: 'Neujahr',           en: 'New Year' },
     opening:     { de: 'Öffnungszeiten',    en: 'Opening Hours' },
     weekdays:    { de: 'Montag - Freitag',  en: 'Monday - Friday' },
     Sunday:      { de: 'Sonntag',           en: 'Sunday' },
@@ -28,6 +27,7 @@ export default function Footer() {
     rights:      { de: 'Alle Rechte vorbehalten', en: 'All rights reserved' },
     privacy:     { de: 'Datenschutz',       en: 'Privacy Policy' },
     legal:       { de: 'Impressum',         en: 'Legal Notice' },
+    cancellation:{ de: 'Widerrufsbelehrung',en: 'Cancellation Policy' },
   };
 
   return (
@@ -57,11 +57,6 @@ export default function Footer() {
               <li>
                 <Link href="/speisekarte" className="hover:text-yellow-400 hover:underline">
                   {t.menu[language]}
-                </Link>
-              </li>
-              <li>
-                <Link href="/newyear" className="hover:text-yellow-400 hover:underline">
-                  {t.newyear[language]}
                 </Link>
               </li>
               <li>
@@ -125,12 +120,15 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="bg-black text-gray-300 text-xs md:text-base border-t border-gray-800 flex flex-col md:flex-row justify-between items-center px-6 py-4">
         <span>© {year} Sanji&apos;s München | {t.rights[language]}</span>
-        <div className="flex space-x-4 mt-2 md:mt-0">
+        <div className="flex flex-wrap justify-center space-x-4 mt-2 md:mt-0">
           <Link href="/datenschutz" className="hover:text-yellow-400 hover:underline">
             {t.privacy[language]}
           </Link>
           <Link href="/impressum" className="hover:text-yellow-400 hover:underline">
             {t.legal[language]}
+          </Link>
+          <Link href="/widerrufsbelehrung" className="hover:text-yellow-400 hover:underline">
+            {t.cancellation[language]}
           </Link>
         </div>
       </div>
