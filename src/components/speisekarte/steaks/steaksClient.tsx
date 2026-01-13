@@ -126,9 +126,9 @@ export default function SteaksClient({ steaksItems, steakChoiceItems, steakShari
                         </>}
                         <br />
                         {language === "de" ? <>
-                        Alle Preise in € inklusive 19% Mehrwertsteuer
+                        Alle Preise in € inklusive 7% Mehrwertsteuer
                         </> : <>
-                        All prices in € including 19% VAT
+                        All prices in € including 7% VAT
                         </>}
                     </div>    
                 </div>
