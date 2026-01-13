@@ -15,10 +15,10 @@ export default function Sides() {
                         <div className="mb-6">
                             {language === "de" ? 
                             <>
-                                Bratkartoffeln mit Schalotten 8,9
+                                Bratkartoffeln mit Schalotten 9,9
                             </> : 
                             <>
-                                fried potatoes with shallots 8,9
+                                fried potatoes with shallots 9,9
                             </>
                             }
                         </div>
