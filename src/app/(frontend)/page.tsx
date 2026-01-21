@@ -3,6 +3,7 @@ import LandingPage from "@/components/landing-page"
 import Reservations from "@/components/reservations"
 import Maps from "@/components/maps"
 import Gallery from "@/components/gallery/gallery"
+import ValentinePopup from "@/components/valentine/valentinePopup"
 
 
 export const metadata = {
@@ -21,6 +22,7 @@ export default function Home() {
       <Reservations />
       <Maps />
       <Gallery />
+      <ValentinePopup />
     </main>
   )
 }

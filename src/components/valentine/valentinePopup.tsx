@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link'; // WICHTIG: Link importiert
 
-export default function ChristmasPopup() {
+export default function ValentinePopup() {
   const [showPopup, setShowPopup] = useState(false);
   const [showTrigger, setShowTrigger] = useState(false);
 
   useEffect(() => {
     // Session Storage Check
-    const hasSeen = typeof window !== 'undefined' && sessionStorage.getItem('sanjis_newyear_seen');
+    const hasSeen = typeof window !== 'undefined' && sessionStorage.getItem('sanjis_valentine_seen');
 
     if (hasSeen) {
       setShowTrigger(true);
@@ -26,7 +26,7 @@ export default function ChristmasPopup() {
     setShowPopup(false);
     setTimeout(() => setShowTrigger(true), 300);
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem('sanjis_newyear_seen', 'true');
+      sessionStorage.setItem('sanjis_valentine_seen', 'true');
     }
   };
 
@@ -47,7 +47,7 @@ export default function ChristmasPopup() {
         <button
           onClick={handleOpenTrigger}
           className="fixed bottom-6 right-6 z-[9990] w-14 h-14 rounded-full bg-[#0a0a0a]/90 border border-[#C5A059]/60 backdrop-blur-md flex items-center justify-center text-[#C5A059] hover:bg-[#C5A059] hover:text-black transition-all duration-500 shadow-xl shadow-black/60 group cursor-pointer"
-          aria-label="Neujahrs-Special öffnen"
+          aria-label="Valentinstags-Special öffnen"
         >
            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-6 h-6 group-hover:scale-110 transition-transform">
              <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H4.5a1.5 1.5 0 0 1-1.5-1.5v-8.25M21 11.25c0 1.105-.895 2-2 2H5c-1.105 0-2-.895-2-2m18 0V9.75a1.5 1.5 0 0 0-1.5-1.5h-3.75a1.5 1.5 0 0 0-1.5 1.5v1.5m-9 0V9.75a1.5 1.5 0 0 0-1.5-1.5H4.5a1.5 1.5 0 0 0-1.5 1.5v1.5m9 0h-9" />
@@ -83,8 +83,8 @@ export default function ChristmasPopup() {
             {/* BILD BEREICH */}
             <div className="relative w-full h-auto bg-white">
               <Image 
-                src="/newyear.jpeg" 
-                alt="Sanji's New Year Special"
+                src="/valentine-start.jpeg" 
+                alt="Sanji's Valentine Special"
                 width={800}
                 height={1000}
                 className="w-full h-auto block"
@@ -101,7 +101,7 @@ export default function ChristmasPopup() {
                 
                 {/* BUTTON 1: ZUM MENÜ (Interne Seite) */}
                 <Link 
-                  href="/newyear" 
+                  href="/valentine" 
                   onClick={handleClosePopup}
                   className={buttonBaseClass}
                 >
@@ -113,7 +113,7 @@ export default function ChristmasPopup() {
 
                 {/* BUTTON 2: RESERVIEREN (Extern) */}
                 <a 
-                  href="https://www.opentable.com/booking/experiences-availability?rid=347604&restref=347604&experienceId=593444&utm_source=external&utm_medium=referral&utm_campaign=shared" 
+                  href="https://www.opentable.com/booking/experiences-availability?rid=347604&restref=347604&experienceId=636244&utm_source=external&utm_medium=referral&utm_campaign=shared"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={handleClosePopup}
