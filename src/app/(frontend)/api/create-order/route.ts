@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingOrder.docs.length > 0) {
+      console.log(`Duplicate order attempt for session ${sessionId}. Returning existing order: ${existingOrder.docs[0].id}`)
       return NextResponse.json({ 
         success: true, 
         orderId: existingOrder.docs[0].id,
@@ -62,6 +63,8 @@ export async function POST(request: NextRequest) {
         notes: notes || undefined,
       },
     })
+    
+    console.log(`Order created successfully. ID: ${order.id} | Amount: ${amount} ${currency || 'EUR'} | Email: ${customerEmail} | Items: ${orderItems?.length || 0}`)
 
     return NextResponse.json({ 
       success: true, 

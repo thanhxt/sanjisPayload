@@ -9,9 +9,27 @@ export const Order: CollectionConfig = {
   slug: 'orders',
   access: {
     read: () => true,
-    create: ({ req: { user } }) => checkRole(['admin'], user),
-    update: ({ req: { user } }) => checkRole(['admin'], user),
-    delete: ({ req: { user } }) => checkRole(['admin'], user),
+    create: ({ req: { user } }) => {
+      const allowed = checkRole(['admin'], user)
+      if (!allowed) {
+        console.warn(`[ACCESS DENIED] User: ${user?.email || 'Anonymous'} (ID: ${user?.id || 'N/A'}) attempted to CREATE an Order.`)
+      }
+      return allowed
+    },
+    update: ({ req: { user } }) => {
+      const allowed = checkRole(['admin'], user)
+      if (!allowed) {
+        console.warn(`[ACCESS DENIED] User: ${user?.email || 'Anonymous'} (ID: ${user?.id || 'N/A'}) attempted to UPDATE an Order.`)
+      }
+      return allowed
+    },
+    delete: ({ req: { user } }) => {
+      const allowed = checkRole(['admin'], user)
+      if (!allowed) {
+        console.warn(`[ACCESS DENIED] User: ${user?.email || 'Anonymous'} (ID: ${user?.id || 'N/A'}) attempted to DELETE an Order.`)
+      }
+      return allowed
+    },
   },
   fields: [
     {
