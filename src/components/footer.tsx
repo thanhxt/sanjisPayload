@@ -64,11 +64,11 @@ export default function Footer() {
                   {t.reservation[language]}
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link href="/voucher" className="hover:text-yellow-400 hover:underline">
                   {t.voucher[language]}
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link href="/contact" className="hover:text-yellow-400 hover:underline">
                   {t.contact[language]}

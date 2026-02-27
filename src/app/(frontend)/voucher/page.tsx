@@ -1,5 +1,4 @@
 import Checkout from "@/components/checkout/checkout";
-import { redirect } from "next/navigation";
 
 export const metadata = {
     title: "Gutschein kaufen | Sanji's – Steak, Grill & Bar München",
@@ -21,7 +20,6 @@ export const metadata = {
 };
 
 export default function VoucherPage() {
-    redirect("/");
     return (
         <>
             <div id="checkout">

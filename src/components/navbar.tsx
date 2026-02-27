@@ -64,7 +64,7 @@ export default function Navbar() {
                         <li><Link href="/about" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Über uns" : "About"}</Link></li>
                         <li><Link href="/speisekarte" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
                         <li><Link href="/reservierung" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
-                        {/* <li><Link href="/voucher" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Gutschein" : "Voucher"}</Link></li> */}
+                        <li><Link href="/voucher" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
                         <li><Link href="/kontakt" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                         <li className="pl-2"> 
                             <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language" className="border-white/20">
@@ -116,7 +116,7 @@ export default function Navbar() {
                             <li><Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Über uns" : "About Us"}</Link></li>
                             <li><Link href="/speisekarte" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
                             <li><Link href="/reservierung" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
-                            {/* <li><Link href="/voucher" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Gutschein" : "Voucher"}</Link></li> */}
+                            <li><Link href="/voucher" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
                             <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                             <li className="mt-4">
                                 <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" onValueChange={handleLanguageChange} aria-label="Select language" className="scale-125 border-white/20">
