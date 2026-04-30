@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Cookie } from 'lucide-react';
 import * as CookieConsent from 'vanilla-cookieconsent';
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
@@ -10,16 +10,16 @@ import { useLanguage } from '../contexts/language-context';
 export default function CookieConsentComponent() {
     const { language } = useLanguage();
 
-    const getConsentId = () => {
+    const getConsentId = useCallback(() => {
         let consentId = localStorage.getItem('consent_id');
         if (!consentId) {
             consentId = crypto.randomUUID();
             localStorage.setItem('consent_id', consentId);
         }
         return consentId;
-    };
+    }, []);
 
-    const logConsent = async () => {
+    const logConsent = useCallback(async () => {
         try {
             const consentId = getConsentId();
 
@@ -41,7 +41,7 @@ export default function CookieConsentComponent() {
         } catch (error) {
             console.error('Failed to log consent:', error);
         }
-    };
+    }, [getConsentId]);
 
     useEffect(() => {
         const consentId = getConsentId();
@@ -66,7 +66,7 @@ export default function CookieConsentComponent() {
                 logConsent();
             },
         });
-    }, []);
+    }, [getConsentId, logConsent]);
 
     useEffect(() => {
         CookieConsent.setLanguage(language);

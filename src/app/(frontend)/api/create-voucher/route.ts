@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingVoucher.docs.length > 0) {
+      console.log(`[VOUCHER:CREATE] 🔄 Already exists | Order: ${orderId} | Code: ${existingVoucher.docs[0].code}`)
       return NextResponse.json({ 
         success: true, 
         voucherId: existingVoucher.docs[0].id,
@@ -50,6 +51,8 @@ export async function POST(request: NextRequest) {
         isDuplicate: true
       })
     }
+
+    console.log(`[VOUCHER:CREATE] 🎟️ Generating voucher | Order: ${orderId} | Value: ${value} ${currency}`)
 
     // Generate a unique voucher code
     let voucherCode: string
@@ -120,10 +123,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
-} ng voucher:', error)
-    return NextResponse.json(
-      { error: 'Failed to create voucher' },
-      { status: 500 }
-    )
-  }
-} 
+}
