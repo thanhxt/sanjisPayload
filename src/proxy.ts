@@ -7,7 +7,7 @@ const ipCache = new Map<string, { count: number; lastRequest: number }>()
 const MAX_REQUESTS = 20 // Maximum requests per window
 const WINDOW_MS = 60 * 1000 // 1 minute window
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Only apply rate limiting to API routes
   if (request.nextUrl.pathname.startsWith('/api/') || request.nextUrl.pathname.startsWith('/(payload)/api/')) {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 
@@ -28,7 +28,7 @@ export function middleware(request: NextRequest) {
       } else {
         // Within window, check count
         if (rateData.count >= MAX_REQUESTS) {
-          console.warn(`[RATE LIMIT] Blocked IP: ${ip} for path: ${request.nextUrl.pathname}`)
+          console.warn(`[RATE LIMIT] 🚫 Blocked | IP: ${ip} | Path: ${request.nextUrl.pathname} | Requests: ${rateData.count}`)
           return new NextResponse(
             JSON.stringify({ error: 'Too many requests. Please try again later.' }),
             { 
