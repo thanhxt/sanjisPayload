@@ -30,7 +30,7 @@ export const protectRoles: FieldHook<{id: string} & User> = async ({req, data}) 
 
         // If no admin users exist, allow creating the first admin
         if (adminUsers.docs.length === 0) {
-            console.log('No admin users found, allowing first admin creation')
+            console.log('[AUTH:ROLES] 🔑 No admin users found, allowing first admin creation')
             const userRoles = new Set(data?.roles || [])
             if (!userRoles.has('user')) {
                 userRoles.add('user')
@@ -38,7 +38,7 @@ export const protectRoles: FieldHook<{id: string} & User> = async ({req, data}) 
             return [...userRoles.values()]
         }
     } catch (error) {
-        console.log('Error checking for admin users:', error)
+        console.error('[AUTH:ROLES] ❌ Error checking for admin users:', error)
     }
 
     // If not admin and admin users exist, only allow 'user' role

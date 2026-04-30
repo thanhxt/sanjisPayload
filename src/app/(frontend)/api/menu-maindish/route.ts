@@ -16,7 +16,7 @@ export async function GET() {
 
         return NextResponse.json(mainDish);
     } catch (error) {
-        console.error('Error fetching main dishes:', error);
+        console.error('[MENU:MAINDISH] ❌ Error:', error);
         return NextResponse.json({ error: 'Failed to fetch main dishes' }, { status: 500 });
     }
 } 

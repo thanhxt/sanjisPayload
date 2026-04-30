@@ -2,10 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     const { token } = await request.json();
-    console.log(token);
-    console.log(process.env.CAPTCHA_SECRET_PRODUCTION);
 
     try {
+        console.log('[CAPTCHA:VERIFY] 🛡️ Verifying token...')
         const response = await fetch(
             process.env.CAPTCHA_VERIFY_URL || '',
             {
@@ -20,9 +19,14 @@ export async function POST(request: NextRequest) {
             }
         );
         const data = await response.json();
-        console.log(data);
+        
+        if (data.success) {
+            console.log('[CAPTCHA:VERIFY] ✅ Success')
+        } else {
+            console.warn('[CAPTCHA:VERIFY] ⚠️ Failed:', data['error-codes'] || 'Unknown error')
+        }
     } catch (error) {
-        console.error(error);
+        console.error('[CAPTCHA:VERIFY] ❌ Error:', error);
         return NextResponse.json({ message: "Error verifying token", success: false }, { status: 500 });
     }
 

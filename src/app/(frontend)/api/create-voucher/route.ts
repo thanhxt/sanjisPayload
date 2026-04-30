@@ -103,6 +103,8 @@ export async function POST(request: NextRequest) {
       },
     })
 
+    console.log(`[VOUCHER:CREATE] ✅ Success | ID: ${voucher.id} | Code: ${voucher.code}`)
+
     return NextResponse.json({ 
       success: true, 
       voucherId: voucher.id,
@@ -112,7 +114,13 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Error creating voucher:', error)
+    console.error(`[VOUCHER:CREATE] ❌ Error:`, error)
+    return NextResponse.json(
+      { error: 'Failed to create voucher' },
+      { status: 500 }
+    )
+  }
+} ng voucher:', error)
     return NextResponse.json(
       { error: 'Failed to create voucher' },
       { status: 500 }

@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
 
@@ -34,15 +32,14 @@ export async function POST(request: Request) {
         }
     });
 
-    console.log(JSON.stringify(message));
-
     try {
-
+        console.log(`[EMAIL:NODE] 📧 Sending email | From: ${email} | Subject: ${subject}`)
         await transporter.sendMail(message);
+        console.log(`[EMAIL:NODE] ✅ Success`)
         return NextResponse.json({message: 'Email Sent Successfully'}, {status: 200});
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-        console.log(error);
+        console.error('[EMAIL:NODE] ❌ Error:', error);
         return NextResponse.json({error: error.message}, {status: 500});
     }
 }

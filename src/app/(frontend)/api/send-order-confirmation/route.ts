@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingOrder.emailSent) {
+      console.log(`[EMAIL:CONFIRM] 🔄 Already sent | Order: ${orderId} | To: ${customerEmail}`)
       return NextResponse.json({ 
         success: true, 
         message: 'Email already sent for this order',
@@ -52,17 +53,15 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Debug: Check if environment variables are set
-    console.log('EMAIL_FROM:', process.env.EMAIL_FROM ? 'SET' : 'NOT SET')
-    console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? 'SET' : 'NOT SET')
-    
     if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASSWORD) {
-      console.error('Missing email environment variables')
+      console.error('[EMAIL:CONFIRM] ❌ Missing email environment variables')
       return NextResponse.json(
         { error: 'Email configuration missing' },
         { status: 500 }
       )
     }
+
+    console.log(`[EMAIL:CONFIRM] 📧 Preparing email | To: ${customerEmail} | Order: ${orderId}`)
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -469,14 +468,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    console.log('Sending order confirmation email to:', customerEmail)
-
     // Test the connection first
     try {
       await transporter.verify()
-      console.log('Email server connection verified')
+      console.log('[EMAIL:CONFIRM] ✅ Server connection verified')
     } catch (verifyError: unknown) {
-      console.error('Email server connection failed:', verifyError)
+      console.error('[EMAIL:CONFIRM] ❌ Server connection failed:', verifyError)
       return NextResponse.json(
         { error: 'Email server connection failed', details: verifyError instanceof Error ? verifyError.message : 'Unknown error' },
         { status: 500 }
@@ -485,7 +482,7 @@ export async function POST(request: NextRequest) {
 
     // Send the email
     const info = await transporter.sendMail(message)
-    console.log('Email sent successfully:', info.messageId)
+    console.log(`[EMAIL:CONFIRM] ✅ Success | ID: ${info.messageId} | Order: ${orderId}`)
     
     // Mark the order as having received an email
     await payload.update({
@@ -505,7 +502,7 @@ export async function POST(request: NextRequest) {
 
   } catch (error: unknown) {
     const emailError = error as EmailError
-    console.error('Error sending order confirmation email:', emailError)
+    console.error('[EMAIL:CONFIRM] ❌ Error:', emailError)
     return NextResponse.json(
       { error: 'Failed to send order confirmation email', details: emailError.message },
       { status: 500 }

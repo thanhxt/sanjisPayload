@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({ message: 'Consent logged successfully' }, { status: 200 })
     } catch (error) {
-        console.error('Error logging consent:', error)
+        console.error('[CONSENT:LOG] ❌ Error:', error)
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
 }

@@ -30,7 +30,7 @@ Message: ${msg || 'No message content'}
       replyTo: email || undefined,
     });
     
-    console.log("Message sent:", info.messageId);
+    console.log(`[EMAIL:CONTACT] ✅ Success | ID: ${info.messageId} | From: ${email}`)
     
     return NextResponse.json({ 
       message: 'Email sent successfully', 
@@ -38,7 +38,7 @@ Message: ${msg || 'No message content'}
     });
     
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("[EMAIL:CONTACT] ❌ Error:", error);
     return NextResponse.json(
       { error: 'Failed to send email' }, 
       { status: 500 }
