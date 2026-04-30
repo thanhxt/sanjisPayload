@@ -1,6 +1,7 @@
 import { CollectionAfterChangeHook } from "payload";
+import { revalidatePaths } from "@/lib/revalidate-paths";
 
-export const afterChangeHook: CollectionAfterChangeHook = async ({ doc }) => {
+export const afterChangeHook: CollectionAfterChangeHook = async ({ doc, req }) => {
     if (!doc.Feld1) return doc;
 
     const pathToRevalidate = [
@@ -8,14 +9,6 @@ export const afterChangeHook: CollectionAfterChangeHook = async ({ doc }) => {
         `/kontakt`,
     ]
 
-    await Promise.all(
-        pathToRevalidate.map(path =>
-            fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate?secret=${process.env.REVALIDATE_SECRET}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ path }),
-            })
-        )
-    )
+    await revalidatePaths({ paths: pathToRevalidate, req })
     return doc;
 }
