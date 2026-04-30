@@ -1,4 +1,4 @@
-name: Build and Test
+name: Test
 
 on:
   pull_request:
@@ -19,9 +19,6 @@ jobs:
     
     - name: install dependencies
       run: npm install
-
-    - name: Run build
-      run: npm run build
 
     - name: Run Lint
       run: npm run lint
