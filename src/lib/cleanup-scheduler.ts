@@ -2,7 +2,7 @@ import cron from 'node-cron'
 
 // Run cleanup every month at 3 AM on the 1st day
 export function initConsentLogCleanup() {
-    // TEMPORARY: Run every minute for testing. Original: '0 3 1 * *'
+    // Schedule: At 03:00 on day 1 of every month
     cron.schedule('0 3 1 * *', async () => {
         console.log('[CLEANUP] 🕒 Running scheduled consent log cleanup...')
 
@@ -30,5 +30,5 @@ export function initConsentLogCleanup() {
         }
     })
 
-    console.log('[CLEANUP] ⚙️ Scheduler initialized (running every minute for testing)')
+    console.log('[CLEANUP] ⚙️ Scheduler initialized (runs monthly at 3 AM)')
 }
