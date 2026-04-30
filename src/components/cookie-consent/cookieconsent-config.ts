@@ -54,6 +54,10 @@ export const cookieConsentConfig: CookieConsentConfig = {
               description: 'Diese Cookies ermöglichen es der Website, erweiterte Funktionen und Personalisierung bereitzustellen (z.B. Karten, Reservierungen).',
               linkedCategory: 'functionality',
             },
+            {
+              title: 'Ihre Consent-ID',
+              description: 'Für Anfragen bezüglich Ihrer Einwilligung geben Sie bitte Ihre Consent-ID an:<br><strong style="user-select: all;">{{consent_id}}</strong>',
+            },
           ],
         },
       },
@@ -83,6 +87,10 @@ export const cookieConsentConfig: CookieConsentConfig = {
               title: 'Functional Cookies',
               description: 'These cookies allow the website to provide enhanced functionality and personalization (e.g. Maps, Reservations).',
               linkedCategory: 'functionality',
+            },
+            {
+              title: 'Your Consent ID',
+              description: 'For inquiries regarding your consent, please provide your Consent ID:<br><strong style="user-select: all;">{{consent_id}}</strong>',
             },
           ],
         },
