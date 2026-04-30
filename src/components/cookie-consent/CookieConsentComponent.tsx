@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Cookie } from 'lucide-react';
 import * as CookieConsent from 'vanilla-cookieconsent';
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
@@ -10,14 +10,18 @@ import { useLanguage } from '../contexts/language-context';
 export default function CookieConsentComponent() {
     const { language } = useLanguage();
 
-    const logConsent = async () => {
+    const getConsentId = useCallback(() => {
+        let consentId = localStorage.getItem('consent_id');
+        if (!consentId) {
+            consentId = crypto.randomUUID();
+            localStorage.setItem('consent_id', consentId);
+        }
+        return consentId;
+    }, []);
+
+    const logConsent = useCallback(async () => {
         try {
-            // Get or create consent ID
-            let consentId = localStorage.getItem('consent_id');
-            if (!consentId) {
-                consentId = crypto.randomUUID();
-                localStorage.setItem('consent_id', consentId);
-            }
+            const consentId = getConsentId();
 
             // Get user preferences as a proper object
             const preferences = CookieConsent.getUserPreferences();
@@ -37,11 +41,19 @@ export default function CookieConsentComponent() {
         } catch (error) {
             console.error('Failed to log consent:', error);
         }
-    };
+    }, [getConsentId]);
 
     useEffect(() => {
+        const consentId = getConsentId();
+        
+        // Deep clone the config and replace the placeholder with the actual ID
+        // This is safer than using a non-existent loadTranslations method
+        const configWithId = JSON.parse(
+            JSON.stringify(cookieConsentConfig).replace(/{{consent_id}}/g, consentId)
+        );
+
         CookieConsent.run({
-            ...cookieConsentConfig,
+            ...configWithId,
             onFirstConsent: () => {
                 window.dispatchEvent(new Event('cookie_consent_updated'));
                 logConsent();
@@ -54,7 +66,7 @@ export default function CookieConsentComponent() {
                 logConsent();
             },
         });
-    }, []);
+    }, [getConsentId, logConsent]);
 
     useEffect(() => {
         CookieConsent.setLanguage(language);

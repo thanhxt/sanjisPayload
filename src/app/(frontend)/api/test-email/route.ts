@@ -1,16 +1,15 @@
 import { NextResponse } from 'next/server'
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const nodemailer = require('nodemailer')
+import nodemailer from 'nodemailer'
 
 export async function POST() {
   try {
-    console.log('Testing email configuration...')
+    console.log('[EMAIL:TEST] 🛠️ Starting email test...')
     
     // Check environment variables
-    console.log('EMAIL_FROM:', process.env.EMAIL_FROM ? 'SET' : 'NOT SET')
-    console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? 'SET' : 'NOT SET')
+    console.log(`[EMAIL:TEST] 🔍 Config: FROM=${process.env.EMAIL_FROM ? 'SET' : 'NOT SET'} | PASS=${process.env.EMAIL_PASSWORD ? 'SET' : 'NOT SET'}`)
     
     if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASSWORD) {
+      console.error('[EMAIL:TEST] ❌ Missing environment variables')
       return NextResponse.json(
         { error: 'Missing email environment variables' },
         { status: 500 }
@@ -29,9 +28,9 @@ export async function POST() {
     })
 
     // Test connection
-    console.log('Testing email server connection...')
+    console.log('[EMAIL:TEST] 🔌 Testing server connection...')
     await transporter.verify()
-    console.log('Email server connection verified!')
+    console.log('[EMAIL:TEST] ✅ Connection verified')
 
     // Send test email
     const testMessage = {
@@ -45,9 +44,9 @@ export async function POST() {
       `,
     }
 
-    console.log('Sending test email...')
+    console.log('[EMAIL:TEST] 📧 Sending test email...')
     const info = await transporter.sendMail(testMessage)
-    console.log('Test email sent successfully:', info.messageId)
+    console.log(`[EMAIL:TEST] ✅ Success | ID: ${info.messageId}`)
 
     return NextResponse.json({ 
       success: true, 
@@ -56,7 +55,7 @@ export async function POST() {
     })
 
   } catch (error: unknown) {
-    console.error('Email test failed:', error)
+    console.error('[EMAIL:TEST] ❌ Failed:', error)
     return NextResponse.json(
       { 
         error: 'Email test failed', 

@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     const clientSecret = await fetchClientSecret()
     return NextResponse.json({ clientSecret })
   } catch (error) {
-    console.error('Error creating checkout session:', error)
+    console.error('[STRIPE:SESSION] ❌ Error:', error)
     return NextResponse.json(
       { error: 'Failed to create checkout session' },
       { status: 500 }

@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingVoucher.docs.length > 0) {
+      console.log(`[VOUCHER:CREATE] 🔄 Already exists | Order: ${orderId} | Code: ${existingVoucher.docs[0].code}`)
       return NextResponse.json({ 
         success: true, 
         voucherId: existingVoucher.docs[0].id,
@@ -50,6 +51,8 @@ export async function POST(request: NextRequest) {
         isDuplicate: true
       })
     }
+
+    console.log(`[VOUCHER:CREATE] 🎟️ Generating voucher | Order: ${orderId} | Value: ${value} ${currency}`)
 
     // Generate a unique voucher code
     let voucherCode: string
@@ -103,6 +106,8 @@ export async function POST(request: NextRequest) {
       },
     })
 
+    console.log(`[VOUCHER:CREATE] ✅ Success | ID: ${voucher.id} | Code: ${voucher.code}`)
+
     return NextResponse.json({ 
       success: true, 
       voucherId: voucher.id,
@@ -112,10 +117,10 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Error creating voucher:', error)
+    console.error(`[VOUCHER:CREATE] ❌ Error:`, error)
     return NextResponse.json(
       { error: 'Failed to create voucher' },
       { status: 500 }
     )
   }
-} 
+}

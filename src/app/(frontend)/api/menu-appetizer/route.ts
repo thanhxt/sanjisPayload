@@ -16,7 +16,7 @@ export async function GET() {
         
         return NextResponse.json(appetizerDish);
     } catch (error) {
-        console.error('Error fetching appetizer dishes:', error);
+        console.error('[MENU:APPETIZER] ❌ Error:', error);
         return NextResponse.json({ error: 'Failed to fetch appetizer dishes' }, { status: 500 });
     }
 } 

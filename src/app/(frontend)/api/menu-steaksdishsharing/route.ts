@@ -15,7 +15,7 @@ export async function GET() {
 
         return NextResponse.json(steaksDishSharing);
     } catch (error) {
-        console.error('Error fetching steaksDishSharing:', error);
+        console.error('[MENU:STEAKS:SHARING] ❌ Error:', error);
         return NextResponse.json({ error: 'Failed to fetch steaksDishSharing' }, { status: 500 });
     }
 } 

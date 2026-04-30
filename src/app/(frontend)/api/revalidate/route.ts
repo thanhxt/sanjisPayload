@@ -19,9 +19,10 @@ export async function POST(request: NextRequest) {
   try {
     // This tells Next.js to re-generate the given route
     revalidatePath(path)
+    console.log(`[CACHE:REVALIDATE] 🔄 Success | Path: ${path}`)
     return NextResponse.json({ revalidated: true, path })
   } catch (err) {
-    console.error('Failed to revalidate:', err)
+    console.error(`[CACHE:REVALIDATE] ❌ Error | Path: ${path}:`, err)
     return NextResponse.json({ message: 'Error revalidating' }, { status: 500 })
   }
 }

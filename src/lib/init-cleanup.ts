@@ -12,3 +12,6 @@ export function initCleanupScheduler() {
         cleanupSchedulerInitialized = true;
     }
 }
+
+// Initialize on load
+initCleanupScheduler();

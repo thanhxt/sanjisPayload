@@ -23,6 +23,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    console.log(`[ORDER:CREATE] 🛒 Incoming request | Customer: ${customerEmail} | Amount: ${amount}`)
+
     const payload = await getPayload({ config })
 
     // Check if order already exists for this session
@@ -37,7 +39,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingOrder.docs.length > 0) {
-      console.log(`Duplicate order attempt for session ${sessionId}. Returning existing order: ${existingOrder.docs[0].id}`)
+      console.log(`[ORDER:CREATE] 🔄 Duplicate detected | Session: ${sessionId} | Existing Order: ${existingOrder.docs[0].id}`)
       return NextResponse.json({ 
         success: true, 
         orderId: existingOrder.docs[0].id,
@@ -64,7 +66,14 @@ export async function POST(request: NextRequest) {
       },
     })
     
-    console.log(`Order created successfully. ID: ${order.id} | Amount: ${amount} ${currency || 'EUR'} | Email: ${customerEmail} | Items: ${orderItems?.length || 0}`)
+    console.log(`
+[ORDER:CREATE] ✅ Success
+  Order ID: ${order.id}
+  Customer: ${customerEmail}
+  Amount:   ${amount} ${currency || 'EUR'}
+  Items:    ${orderItems?.length || 0}
+  Session:  ${sessionId}
+    `.trim())
 
     return NextResponse.json({ 
       success: true, 
@@ -74,7 +83,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Error creating order:', error)
+    console.error(`[ORDER:CREATE] ❌ Error:`, error)
     return NextResponse.json(
       { error: 'Failed to create order' },
       { status: 500 }
