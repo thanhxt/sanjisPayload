@@ -178,12 +178,12 @@ REVALIDATE_SECRET=your_revalidate_secret
 This project uses the latest technologies:
 
 ### Core Framework
-- **[Next.js 15.3.2](https://nextjs.org)** - React framework with App Router
+- **[Next.js 15.4.11](https://nextjs.org)** - React framework with App Router
 - **[React 19](https://react.dev)** - Latest React with concurrent features  
 - **[TypeScript 5](https://www.typescriptlang.org)** - Type-safe development
 
 ### Backend & CMS
-- **[PayloadCMS 3.41.0](https://payloadcms.com)** - Headless CMS with MongoDB
+- **[PayloadCMS 3.84.1](https://payloadcms.com)** - Headless CMS with MongoDB
 - **[MongoDB](https://www.mongodb.com)** - Database via PayloadCMS adapter
 
 ### UI & Styling
