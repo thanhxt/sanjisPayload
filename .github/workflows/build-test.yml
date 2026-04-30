@@ -1,0 +1,30 @@
+name: Build and Test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v6
+      with:
+        node-version: '22'
+    
+    - name: install dependencies
+      run: npm install
+
+    - name: Run build
+      run: npm run build
+
+    - name: Run Lint
+      run: npm run lint
+
+    - name: Run tests
+      run: npm test
