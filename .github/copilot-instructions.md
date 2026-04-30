@@ -15,7 +15,7 @@ npm run lint
 Lint a single file:
 
 ```bash
-npm run lint -- --file src/app/(frontend)/voucher/page.tsx
+npm run lint -- src/app/(frontend)/voucher/page.tsx
 ```
 
 Automated test scripts are not configured in `package.json` yet (no `test` script / no test runner config in repo), so there is currently no single-test command.

@@ -4,11 +4,11 @@ Welcome to the Sanji's Kitchen project. This document serves as the primary inst
 
 ## Project Overview
 
-Sanji's Kitchen is a modern, responsive restaurant website built with **Next.js 15** and **PayloadCMS 3**. It features a dynamic menu, table reservation integration, and a complete e-commerce solution for purchasing gift vouchers via **Stripe**.
+Sanji's Kitchen is a modern, responsive restaurant website built with **Next.js 16** and **PayloadCMS 3**. It features a dynamic menu, table reservation integration, and a complete e-commerce solution for purchasing gift vouchers via **Stripe**.
 
 ### Key Technologies
 
-- **Framework:** Next.js 15 (App Router)
+- **Framework:** Next.js 16 (App Router)
 - **CMS:** PayloadCMS 3.84.1
 - **Database:** MongoDB (via Mongoose adapter)
 - **Styling:** Tailwind CSS v4, shadcn/ui

@@ -178,7 +178,7 @@ REVALIDATE_SECRET=your_revalidate_secret
 This project uses the latest technologies:
 
 ### Core Framework
-- **[Next.js 15.4.11](https://nextjs.org)** - React framework with App Router
+- **[Next.js 16.2.4](https://nextjs.org)** - React framework with App Router
 - **[React 19](https://react.dev)** - Latest React with concurrent features  
 - **[TypeScript 5](https://www.typescriptlang.org)** - Type-safe development
 
