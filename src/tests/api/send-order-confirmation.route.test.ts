@@ -43,6 +43,7 @@ describe('POST /api/send-order-confirmation', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
+    process.env.INTERNAL_API_SECRET = 'test-secret'
     process.env.EMAIL_FROM = 'test@gmail.com'
     process.env.EMAIL_PASSWORD = 'password123'
     
@@ -51,10 +52,22 @@ describe('POST /api/send-order-confirmation', () => {
     mockVerify.mockResolvedValue(true)
   })
 
+  it('returns 401 if missing or invalid authorization header', async () => {
+    const req = new Request('http://localhost/api', {
+      method: 'POST',
+      body: JSON.stringify({}),
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer wrong-secret' },
+    })
+
+    const res = await POST(req as never)
+    expect(res.status).toBe(401)
+  })
+
   it('returns 400 for missing fields', async () => {
     const req = new Request('http://localhost/api/send-order-confirmation', {
       method: 'POST',
       body: JSON.stringify({ orderId: '123' }),
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer test-secret' }
     })
 
     const res = await POST(req as never)
@@ -70,6 +83,7 @@ describe('POST /api/send-order-confirmation', () => {
     const req = new Request('http://localhost/api/send-order-confirmation', {
       method: 'POST',
       body: JSON.stringify(validBody),
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer test-secret' }
     })
 
     const res = await POST(req as never)
@@ -89,6 +103,7 @@ describe('POST /api/send-order-confirmation', () => {
     const req = new Request('http://localhost/api/send-order-confirmation', {
       method: 'POST',
       body: JSON.stringify(validBody),
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer test-secret' }
     })
 
     const res = await POST(req as never)
@@ -119,6 +134,7 @@ describe('POST /api/send-order-confirmation', () => {
     const req = new Request('http://localhost/api/send-order-confirmation', {
       method: 'POST',
       body: JSON.stringify(validBody),
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer test-secret' }
     })
 
     const res = await POST(req as never)
