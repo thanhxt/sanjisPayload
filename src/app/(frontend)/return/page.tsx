@@ -75,6 +75,7 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
         const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/create-order`, {
           method: 'POST',
           headers: {
+            'Authorization': `Bearer ${process.env.INTERNAL_API_SECRET}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(orderData),
@@ -103,6 +104,7 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
             const voucherResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/create-voucher`, {
               method: 'POST',
               headers: {
+            'Authorization': `Bearer ${process.env.INTERNAL_API_SECRET}`,
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(voucherData),
@@ -135,6 +137,7 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
                 const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-order-confirmation`, {
                   method: 'POST',
                   headers: {
+            'Authorization': `Bearer ${process.env.INTERNAL_API_SECRET}`,
                     'Content-Type': 'application/json',
                   },
                   body: JSON.stringify(emailData),

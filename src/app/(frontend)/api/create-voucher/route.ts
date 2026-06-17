@@ -12,6 +12,11 @@ function generateVoucherCode(): string {
 
 export async function POST(request: NextRequest) {
   try {
+    const authHeader = request.headers.get('authorization')
+    if (authHeader !== `Bearer ${process.env.INTERNAL_API_SECRET}`) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const body = await request.json()
     const { 
       orderId, 

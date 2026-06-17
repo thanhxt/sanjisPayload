@@ -14,13 +14,26 @@ import { POST } from '@/app/(frontend)/api/create-order/route'
 describe('POST /api/create-order', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    process.env.INTERNAL_API_SECRET = 'test-secret'
   })
+
+  it('returns 401 if missing or invalid authorization header', async () => {
+    const req = new Request('http://localhost/api', {
+      method: 'POST',
+      body: JSON.stringify({}),
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer wrong-secret' },
+    })
+
+    const res = await POST(req as never)
+    expect(res.status).toBe(401)
+  })
+
 
   it('returns 400 for missing required fields', async () => {
     const req = new Request('http://localhost/api/create-order', {
       method: 'POST',
       body: JSON.stringify({ amount: 10 }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer test-secret' },
     })
 
     const res = await POST(req as never)
@@ -44,7 +57,7 @@ describe('POST /api/create-order', () => {
         amount: 50,
         customerEmail: 'a@example.com',
       }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer test-secret' },
     })
 
     const res = await POST(req as never)
@@ -75,7 +88,7 @@ describe('POST /api/create-order', () => {
         customerEmail: 'b@example.com',
         orderItems: [{ itemName: 'Voucher', quantity: 1, totalPrice: 90 }],
       }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer test-secret' },
     })
 
     const res = await POST(req as never)
