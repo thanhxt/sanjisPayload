@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
+import { generateVoucherPdf } from '@/lib/pdf-generator'
 
 // Define types for better type safety
 interface OrderItem {
@@ -103,6 +104,21 @@ export async function POST(request: NextRequest) {
       style: 'currency',
       currency: currency || 'EUR'
     }).format(voucherValue)
+
+    // Generate PDF voucher buffer
+    let pdfBuffer: Buffer | null = null
+    try {
+      pdfBuffer = await generateVoucherPdf({
+        customerName,
+        voucherCode,
+        voucherValue,
+        currency,
+        expiresAt
+      })
+      console.log('[EMAIL:CONFIRM] 📄 PDF Voucher generated successfully')
+    } catch (pdfError) {
+      console.error('[EMAIL:CONFIRM] ❌ Failed to generate PDF Voucher:', pdfError)
+    }
 
     const message = {
       from: `Sanjis Kitchen <${process.env.EMAIL_FROM}>`,
@@ -408,6 +424,9 @@ export async function POST(request: NextRequest) {
                   Als Dankeschön für Ihre Bestellung erhalten Sie einen exklusiven Gutschein für Ihren nächsten Besuch!
                 </p>
                 <div class="voucher-code">${voucherCode}</div>
+                <p style="margin-top: 15px; font-size: 14px; opacity: 0.9;">
+                  Ein druckfertiger Gutschein ist im Anhang dieser E-Mail als PDF beigefügt.
+                </p>
                 <div class="voucher-details">
                   <div class="voucher-detail">
                     <strong>Gutscheinwert</strong>
@@ -465,9 +484,16 @@ export async function POST(request: NextRequest) {
               <p>Diese E-Mail wurde automatisch generiert.</p>
             </div>
           </div>
-        </body>
+          </body>
         </html>
       `,
+      attachments: pdfBuffer ? [
+        {
+          filename: 'Sanjis_Gutschein.pdf',
+          content: pdfBuffer,
+          contentType: 'application/pdf'
+        }
+      ] : undefined,
       headers: {
         "X-Entity-Ref-ID": "order-confirmation",
       }
