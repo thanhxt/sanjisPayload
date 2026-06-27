@@ -6,10 +6,23 @@ import { useLanguage } from './contexts/language-context';
 import { useCookieConsent, showConsentPreferences } from '@/hooks/useCookieConsent';
 import { Button } from './ui/button';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { openingTimes } from '@/type/openingType';
 
 export default function Reservations() {
     const { language } = useLanguage();
     const hasConsent = useCookieConsent('functionality');
+    const [times, setTimes] = React.useState<openingTimes | null>(null);
+
+    React.useEffect(() => {
+        fetch('/api/opening-times')
+            .then(res => res.json())
+            .then(data => {
+                if (data && !data.error) {
+                    setTimes(data);
+                }
+            })
+            .catch(err => console.error("Error fetching opening times:", err));
+    }, []);
 
     React.useEffect(() => {
         if (!hasConsent) return;
@@ -121,9 +134,34 @@ export default function Reservations() {
                                 <div>
                                     <h3 className="text-lg font-medium text-gray-200 mb-1">{language === "de" ? "Öffnungszeiten" : "Opening Hours"}</h3>
                                     <div className="text-gray-300 font-light text-sm space-y-1">
-                                        <p><span className="w-24 inline-block">{language === "de" ? "Mo - Fr:" : "Mon - Fri:"}</span> 17:00 – 00:00</p>
-                                        <p><span className="w-24 inline-block">{language === "de" ? "Samstag:" : "Saturday:"}</span> 12:00 – 14:30 | 17:00 - 00:00</p>
-                                        <p><span className="w-24 inline-block">{language === "de" ? "Sonntag:" : "Sunday:"}</span> 12:00 - 14:30 | 17:00 – 23:00</p>
+                                        {times ? (
+                                            <>
+                                                {times.Feld1 && (
+                                                    <p>
+                                                        <span className="w-24 inline-block">{times.Feld1}</span>
+                                                        {times.Uhrzeit1 ? ` ${times.Uhrzeit1}` : ''}
+                                                    </p>
+                                                )}
+                                                {times.Feld2 && (
+                                                    <p>
+                                                        <span className="w-24 inline-block">{times.Feld2}</span>
+                                                        {times.Uhrzeit2 ? ` ${times.Uhrzeit2}` : ''}
+                                                    </p>
+                                                )}
+                                                {times.Feld3 && (
+                                                    <p>
+                                                        <span className="w-24 inline-block">{times.Feld3}</span>
+                                                        {times.Uhrzeit3 ? ` ${times.Uhrzeit3}` : ''}
+                                                    </p>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <>
+                                                <p><span className="w-24 inline-block">{language === "de" ? "Mo - Fr:" : "Mon - Fri:"}</span> 17:00 – 00:00</p>
+                                                <p><span className="w-24 inline-block">{language === "de" ? "Samstag:" : "Saturday:"}</span> 12:00 – 14:30 | 17:00 - 00:00</p>
+                                                <p><span className="w-24 inline-block">{language === "de" ? "Sonntag:" : "Sunday:"}</span> 12:00 - 14:30 | 17:00 – 23:00</p>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </div>

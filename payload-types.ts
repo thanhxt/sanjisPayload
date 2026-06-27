@@ -77,6 +77,7 @@ export interface Config {
     menuSteaksDish: MenuSteaksDish;
     menuSteaksSharing: MenuSteaksSharing;
     menuSanjisChoice: MenuSanjisChoice;
+    menuSideDish: MenuSideDish;
     vouchers: Voucher;
     orders: Order;
     admin: Admin;
@@ -99,6 +100,7 @@ export interface Config {
     menuSteaksDish: MenuSteaksDishSelect<false> | MenuSteaksDishSelect<true>;
     menuSteaksSharing: MenuSteaksSharingSelect<false> | MenuSteaksSharingSelect<true>;
     menuSanjisChoice: MenuSanjisChoiceSelect<false> | MenuSanjisChoiceSelect<true>;
+    menuSideDish: MenuSideDishSelect<false> | MenuSideDishSelect<true>;
     vouchers: VouchersSelect<false> | VouchersSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
     admin: AdminSelect<false> | AdminSelect<true>;
@@ -361,6 +363,22 @@ export interface MenuSanjisChoice {
   stake2?: string | null;
   price2?: number | null;
   stakeWeight2?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage side dishes and sauces
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSideDish".
+ */
+export interface MenuSideDish {
+  id: string;
+  position?: number | null;
+  titleDE: string;
+  titleEN?: string | null;
+  price: string;
+  category: 'side' | 'sauce';
   updatedAt: string;
   createdAt: string;
 }
@@ -660,6 +678,10 @@ export interface PayloadLockedDocument {
         value: string | MenuSanjisChoice;
       } | null)
     | ({
+        relationTo: 'menuSideDish';
+        value: string | MenuSideDish;
+      } | null)
+    | ({
         relationTo: 'vouchers';
         value: string | Voucher;
       } | null)
@@ -908,6 +930,19 @@ export interface MenuSanjisChoiceSelect<T extends boolean = true> {
   stake2?: T;
   price2?: T;
   stakeWeight2?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuSideDish_select".
+ */
+export interface MenuSideDishSelect<T extends boolean = true> {
+  position?: T;
+  titleDE?: T;
+  titleEN?: T;
+  price?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }
