@@ -3,13 +3,24 @@ import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import Link from 'next/link';
 import { useLanguage } from './contexts/language-context';
 import { useEffect, useState } from 'react';
+import { openingTimes } from '@/type/openingType';
 
 export default function Footer() {
   const { language } = useLanguage();
   const [year, setYear] = useState<number>(2024);
+  const [times, setTimes] = useState<openingTimes | null>(null);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
+    
+    fetch('/api/opening-times')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error) {
+          setTimes(data);
+        }
+      })
+      .catch((err) => console.error('Error fetching opening times:', err));
   }, []);
 
   const t = {
@@ -81,20 +92,60 @@ export default function Footer() {
           <div className="flex flex-col items-center">
             <h2 className="font-bold tracking-widest mb-2 text-lg">{t.opening[language]}</h2>
             <div className="text-xs md:text-sm text-gray-300 space-y-2">
-              <div>
-                {t.weekdays[language]}<br />
-                17:00 – 00:00
-              </div>
-              <div>
-                {t.saturday[language]}<br />
-                12:00 – 14:30<br />
-                17:00 - 00:00
-              </div>
-              <div>
-                {t.Sunday[language]}<br />
-                12:00 - 14:30<br />
-                17:00 – 23:00
-              </div>
+              {times ? (
+                <>
+                  {times.Feld1 && (
+                    <div>
+                      {times.Feld1}
+                      {times.Uhrzeit1 && (
+                        <>
+                          <br />
+                          {times.Uhrzeit1}
+                        </>
+                      )}
+                    </div>
+                  )}
+                  {times.Feld2 && (
+                    <div>
+                      {times.Feld2}
+                      {times.Uhrzeit2 && (
+                        <>
+                          <br />
+                          {times.Uhrzeit2}
+                        </>
+                      )}
+                    </div>
+                  )}
+                  {times.Feld3 && (
+                    <div>
+                      {times.Feld3}
+                      {times.Uhrzeit3 && (
+                        <>
+                          <br />
+                          {times.Uhrzeit3}
+                        </>
+                      )}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div>
+                    {t.weekdays[language]}<br />
+                    17:00 – 00:00
+                  </div>
+                  <div>
+                    {t.saturday[language]}<br />
+                    12:00 – 14:30<br />
+                    17:00 - 00:00
+                  </div>
+                  <div>
+                    {t.Sunday[language]}<br />
+                    12:00 - 14:30<br />
+                    17:00 – 23:00
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
