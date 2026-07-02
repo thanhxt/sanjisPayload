@@ -20,6 +20,7 @@ import { Admin } from './collections/admin'
 import { Gallery } from './collections/gallery'
 import { OpeningTimes } from './collections/openingTimes'
 import { ConsentLogs } from './collections/consentLogs'
+import { Pages } from './collections/pages'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -27,6 +28,7 @@ export default buildConfig({
 
   // Define and configure your collections in this array
   collections: [
+    Pages,
     Team,
     Media,
     Hero,

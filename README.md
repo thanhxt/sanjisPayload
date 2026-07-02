@@ -219,6 +219,7 @@ This project uses the latest technologies:
 The admin panel is accessible at `/admin` and provides comprehensive management:
 
 ### Content Management
+- **Page Builder (Pages collection)**: Compose pages from layout blocks (Hero, Page Header, Media + Text, Rich Text, Call to Action, Gallery, Reservations, Maps, Team, Contact Form, Legal Content). Pages are served by the dynamic route `src/app/(frontend)/[[...slug]]/page.tsx` based on their `slug` (use `home` for the start page). Pages support drafts with autosave and a Live Preview panel that updates in real time; run `npm run seed:pages` once to create the page documents for the previously hardcoded routes
 - **Menu Management**: Add/edit appetizers, main dishes, steaks, sharing steaks, Sanji's choice, side dishes, sauces, and specials
 - **Opening Times Management**: Edit opening times dynamically across the site footer, contact page, and reservations page
 - **Team Management**: Manage team member profiles and information
