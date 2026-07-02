@@ -18,6 +18,7 @@ export default async function HeroImage(props: { slug: string }) {
                   src={heroes.find((hero) => hero.title === props.slug)?.image.url || '/notFound.jpg'}
                   alt="Exquisite Japanese cuisine"
                   fill
+                  sizes="100vw"
                   className="object-cover"
                   priority
                 />
