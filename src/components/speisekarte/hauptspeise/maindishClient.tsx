@@ -19,7 +19,7 @@ export default function MainDishClient({ menuItems }: { menuItems: MainDish[] })
 
                     <div className="flex flex-col md:ml-10 w-full md:w-auto px-4 md:px-0">
                         {menuItems.map((item: MainDish, idx: number) => (
-                            <div key={idx} className="mb-6">
+                            <div key={item.id ?? idx} className="mb-6">
                                 <div className="flex flex-row items-center">
                                     <span className="text-xl md:text-2xl font-medium">{item.titleDE}</span>
                                     <span className="text-base md:text-lg font-semibold ml-2">{item.price}</span>

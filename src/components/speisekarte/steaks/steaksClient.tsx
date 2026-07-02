@@ -32,7 +32,7 @@ export default function SteaksClient({ steaksItems, steakChoiceItems, steakShari
                     <div className="order-2 md:order-2 flex-1 w-full">
                         <div className="flex flex-wrap justify-center gap-4">
                             {steaksItems.map((item: SteaksDish, idx: number) => (
-                                <div key={idx} className="w-full md:w-[calc(33.333%-0.5rem)] text-center border-t-2 border-b-2 border-gray-600 mx-2 py-6">
+                                <div key={item.id ?? idx} className="w-full md:w-[calc(33.333%-0.5rem)] text-center border-t-2 border-b-2 border-gray-600 mx-2 py-6">
                                     <div className="font-bold">- {item.titleDE} -</div>
                                     <div>{language === "de" ? item.descriptionDE : item.descriptionEN}<br />
                                     </div>
@@ -44,7 +44,7 @@ export default function SteaksClient({ steaksItems, steakChoiceItems, steakShari
                         { /* SANJI'S CHOICE */ }
                         <div className="flex flex-wrap justify-center gap-4">
                             {steakChoiceItems.map((item: SteaksDishChoice, idx: number) => (
-                            <div key={idx} className="border-2 border-gray-600 p-8 my-10 text-center bg-zinc-800">
+                            <div key={item.id ?? idx} className="border-2 border-gray-600 p-8 my-10 text-center bg-zinc-800">
                                 <div className="font-bold text-3xl mb-3">{item.titleDE}</div>
                                 <div className="font-bold text-xl mb-2">{item.steaktitle}</div>
                                 <div className="text-base mb-2">{language === "de" ? item.descriptionDE : item.descriptionEN}</div>
