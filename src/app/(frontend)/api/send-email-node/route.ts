@@ -1,9 +1,21 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { verifyCaptcha } from '@/lib/verify-captcha';
 
 export async function POST(request: Request) {
 
-    const { email, subject, msg, name } =  await request.json();
+    const { email, subject, msg, name, captchaToken } = await request.json();
+
+    // Authoritative, server-side captcha check before sending any mail.
+    const captchaOk = await verifyCaptcha(captchaToken);
+    if (!captchaOk) {
+        return NextResponse.json({ error: 'Captcha verification failed' }, { status: 403 });
+    }
+
+    if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASSWORD) {
+        console.error('[EMAIL:NODE] ❌ Missing email environment variables');
+        return NextResponse.json({ error: 'Email configuration missing' }, { status: 500 });
+    }
 
     const message = {
         from: `Sanjis <${process.env.EMAIL_FROM}>`,
@@ -16,6 +28,7 @@ export async function POST(request: Request) {
         <p>Betreff: ${subject}</p>
         <p>Nachricht: ${msg}</p>
         `,
+        replyTo: email || undefined,
         headers: {
             "X-Entity-Ref-ID": "newmail",
         }
@@ -27,9 +40,6 @@ export async function POST(request: Request) {
             user: process.env.EMAIL_FROM,
             pass: process.env.EMAIL_PASSWORD,
         },
-        tls: {
-            rejectUnauthorized: false,
-        }
     });
 
     try {
