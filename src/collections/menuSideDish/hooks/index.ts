@@ -2,12 +2,11 @@ import { CollectionAfterChangeHook } from "payload";
 import { revalidatePaths } from "@/lib/revalidate-paths";
 
 export const afterChangeHook: CollectionAfterChangeHook = async ({ doc, req }) => {
-    if (!doc.Feld1) return doc;
+    if (!doc.titleDE) return doc;
 
     const pathToRevalidate = [
-        `/`,
-        `/kontakt`,
-        `/reservierung`,
+        `/speisekarte/steaks`,
+        `/speisekarte`,
     ]
 
     await revalidatePaths({ paths: pathToRevalidate, req })

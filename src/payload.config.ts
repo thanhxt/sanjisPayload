@@ -13,6 +13,7 @@ import { MenuAppetizerDish } from './collections/menuAppetizerDish'
 import { MenuSteaksDish } from './collections/menuSteaksDish'
 import { MenuSteaksSharing } from './collections/menuSteaksSharing'
 import { MenuSanjisChoice } from './collections/menuSanjisChoice'
+import { MenuSideDish } from './collections/menuSideDish'
 import { Voucher } from './collections/voucher'
 import { Order } from './collections/order'
 import { Admin } from './collections/admin'
@@ -36,6 +37,7 @@ export default buildConfig({
     MenuSteaksDish,
     MenuSteaksSharing,
     MenuSanjisChoice,
+    MenuSideDish,
     Voucher,
     Order,
     Admin,

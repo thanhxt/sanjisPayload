@@ -34,6 +34,8 @@ Welcome to the official website repository for Sanji's Kitchen. This is a modern
 │   │   │   │   ├── menu-steaksdish/   # Steak menu API
 │   │   │   │   ├── menu-steaksdishchoice/ # Steak choice API
 │   │   │   │   ├── menu-steaksdishsharing/ # Steak sharing API
+│   │   │   │   ├── menu-sidedish/     # Side dishes API
+│   │   │   │   ├── opening-times/     # Opening times API
 │   │   │   │   ├── send-email/        # Contact form
 │   │   │   │   ├── send-email-node/   # Node-based email sender
 │   │   │   │   ├── send-captcha/      # CAPTCHA verification
@@ -68,6 +70,8 @@ Welcome to the official website repository for Sanji's Kitchen. This is a modern
 │   │   ├── menuSanjisChoice/ # Sanji's choice items
 │   │   ├── menuSteaksDish/   # Steak items
 │   │   ├── menuSteaksSharing/ # Steak sharing items
+│   │   ├── menuSideDish/     # Side dish and sauce items
+│   │   ├── openingTimes/     # Opening hours management
 │   │   ├── order/            # Order management
 │   │   ├── team/             # Team members
 │   │   ├── user/             # User management
@@ -96,7 +100,7 @@ Welcome to the official website repository for Sanji's Kitchen. This is a modern
 - **Modern Design**: Responsive design with Tailwind CSS v4 and beautiful typography using Cormorant Garamond and Geist fonts
 - **Beautiful UI Components**: Built with shadcn/ui for consistent, accessible components
 - **Multi-language Support**: German (primary) and English support with internationalization
-- **Interactive Menu Display**: Dynamic menu with categories (appetizers, main dishes, steaks, sharing steaks, Sanji's choice, lunch, desserts)
+- **Interactive Menu Display**: Dynamic menu with categories (appetizers, main dishes, steaks, sharing steaks, Sanji's choice, side dishes, sauces, lunch, desserts)
 - **Seasonal Specials**: Dedicated pages for seasonal events (e.g., Christmas)
 - **Location & Contact**: Maps integration and contact information
 - **Reservation System**: Online table reservation functionality via Open Table
@@ -215,7 +219,8 @@ This project uses the latest technologies:
 The admin panel is accessible at `/admin` and provides comprehensive management:
 
 ### Content Management
-- **Menu Management**: Add/edit appetizers, main dishes, steaks, sharing steaks, Sanji's choice, and specials
+- **Menu Management**: Add/edit appetizers, main dishes, steaks, sharing steaks, Sanji's choice, side dishes, sauces, and specials
+- **Opening Times Management**: Edit opening times dynamically across the site footer, contact page, and reservations page
 - **Team Management**: Manage team member profiles and information
 - **Hero Content**: Update homepage hero sections and images
 - **Media Library**: Upload and organize restaurant images with automatic resizing

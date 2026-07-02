@@ -1,7 +1,11 @@
 export type openingTimes = {
+    id?: string;
     createdAt: string;
     updatedAt: string;
-    feld1: string;
-    feld2: string;
-    feld3: string;
+    Feld1: string;
+    Uhrzeit1?: string;
+    Feld2?: string;
+    Uhrzeit2?: string;
+    Feld3?: string;
+    Uhrzeit3?: string;
 }

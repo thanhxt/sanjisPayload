@@ -9,6 +9,10 @@ vi.mock('@/payload.config', () => ({
   default: {},
 }))
 
+vi.mock('@/lib/pdf-generator', () => ({
+  generateVoucherPdf: vi.fn().mockResolvedValue(Buffer.from('mock-pdf-content')),
+}))
+
 // Create mocks for nodemailer using vi.hoisted to avoid reference errors during hoisting
 const { mockSendMail, mockVerify } = vi.hoisted(() => ({
   mockSendMail: vi.fn().mockResolvedValue({ messageId: 'test-id' }),

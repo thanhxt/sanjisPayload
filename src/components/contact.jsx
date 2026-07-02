@@ -26,6 +26,18 @@ export default function Contact() {
     const [showCaptchaAlert, setShowCaptchaAlert] = useState(false);
     const [showSucessEmailAlert, setShowSucessEmailAlert] = useState(false);
     const { language } = useLanguage();
+    const [times, setTimes] = useState(null);
+
+    useEffect(() => {
+        fetch('/api/opening-times')
+            .then(res => res.json())
+            .then(data => {
+                if (data && !data.error) {
+                    setTimes(data);
+                }
+            })
+            .catch(err => console.error("Error fetching opening times:", err));
+    }, []);
 
     // Check for necessary cookies (which covers Captcha)
     const showCaptcha = useCookieConsent('necessary');
@@ -213,9 +225,19 @@ export default function Contact() {
                     <div className="mb-6">
                         <h2 className="text-xl font-semibold mb-2 text-gray-200">{language === "de" ? "Öffnungszeiten" : "Opening Hours"}</h2>
                         <div className="text-gray-300 text-base">
-                            <div>Montag - Freitag: 17:00 – 00:00</div>
-                            <div>Samstag: 12:00 – 14:30 | 17:00 - 00:00</div>
-                            <div>Sonntag: 12:00 - 14:30 | 17:00 - 23:00</div>
+                            {times ? (
+                                <>
+                                    {times.Feld1 && <div>{times.Feld1}{times.Uhrzeit1 ? `: ${times.Uhrzeit1}` : ''}</div>}
+                                    {times.Feld2 && <div>{times.Feld2}{times.Uhrzeit2 ? `: ${times.Uhrzeit2}` : ''}</div>}
+                                    {times.Feld3 && <div>{times.Feld3}{times.Uhrzeit3 ? `: ${times.Uhrzeit3}` : ''}</div>}
+                                </>
+                            ) : (
+                                <>
+                                    <div>Montag - Freitag: 17:00 – 00:00</div>
+                                    <div>Samstag: 12:00 – 14:30 | 17:00 - 00:00</div>
+                                    <div>Sonntag: 12:00 - 14:30 | 17:00 - 23:00</div>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className="mb-6">
