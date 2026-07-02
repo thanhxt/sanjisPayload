@@ -3,20 +3,22 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import { MenuAppetizerDish } from "@/type/appetizerDishType";
 
+// Menu data changes rarely; cache the response and bust via /api/revalidate.
+export const revalidate = 3600;
+
 export async function GET() {
     try {
         const payload = await getPayload({ config });
 
         const result = await payload.find({
             collection: 'menuAppetizerDish',
+            sort: 'position',
+            limit: 100,
         });
 
-        const appetizerDish = result.docs as MenuAppetizerDish[];
-        appetizerDish.sort((a, b) => (a.position || 0) - (b.position || 0));
-        
-        return NextResponse.json(appetizerDish);
+        return NextResponse.json(result.docs as MenuAppetizerDish[]);
     } catch (error) {
         console.error('[MENU:APPETIZER] ❌ Error:', error);
         return NextResponse.json({ error: 'Failed to fetch appetizer dishes' }, { status: 500 });
     }
-} 
+}

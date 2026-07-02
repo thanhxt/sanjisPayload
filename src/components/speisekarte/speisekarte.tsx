@@ -48,24 +48,20 @@ const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive
                         setIsLoading(false);
                     });
             } else if (sectionId === 'steaks' && steaksDishItems.length === 0) {
-                fetch('/api/menu-steaksdish')
-                    .then(res => res.json())
-                    .then(items => {
-                        setSteaksDishItems(items);
-                        setIsLoading(false);
-                    });
-                    fetch('/api/menu-steaksdishchoice')
-                    .then(res => res.json())
-                    .then(items => {
-                        setSteaksDishChoiceItems(items);
-                        setIsLoading(false);
-                    });
-                    fetch('/api/menu-steaksdishsharing')
-                    .then(res => res.json())
-                    .then(items => {
-                        setSteaksDishSharingItems(items);
-                        setIsLoading(false);
-                    });
+                Promise.all([
+                    fetch('/api/menu-steaksdish').then(res => res.json()),
+                    fetch('/api/menu-steaksdishchoice').then(res => res.json()),
+                    fetch('/api/menu-steaksdishsharing').then(res => res.json()),
+                ])
+                    .then(([dish, choice, sharing]) => {
+                        setSteaksDishItems(dish);
+                        setSteaksDishChoiceItems(choice);
+                        setSteaksDishSharingItems(sharing);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching steaks items:', error);
+                    })
+                    .finally(() => setIsLoading(false));
             } else {
                 setIsLoading(false);
             }
