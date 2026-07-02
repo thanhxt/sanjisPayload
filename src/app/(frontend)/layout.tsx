@@ -29,6 +29,7 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata = {
+  metadataBase: new URL("https://sanjiskitchen.de"),
   title: "Sanji's – Steak, Grill & Bar München",
   description: "Reservieren Sie online Ihren Tisch bei Sanji's Kitchen in München und genießen Sie kulinarische Highlights in stilvollem Ambiente.",
   icons: {
@@ -60,13 +61,61 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const restaurantJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    name: "Sanji's – Steak, Grill & Bar",
+    image: "https://sanjiskitchen.de/LandingPageImage2.jpg",
+    url: "https://sanjiskitchen.de",
+    telephone: "+49 89 37505678",
+    servesCuisine: ["Steakhouse", "Grill", "Asian Fusion"],
+    priceRange: "€€€",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Kellerstraße 32",
+      postalCode: "81667",
+      addressLocality: "München",
+      addressCountry: "DE",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 48.1299,
+      longitude: 11.5943,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "17:00",
+        closes: "00:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "12:00",
+        closes: "00:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Sunday",
+        opens: "12:00",
+        closes: "23:00",
+      },
+    ],
+    sameAs: ["https://www.instagram.com/sanjis.kitchen/"],
+  };
+
   return (
     <html lang="de">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${cormorant.className}`}
       >
-        <Script 
-          src="https://umami.sanjiskitchen.de/script.js" 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
+        />
+        <Script
+          src="https://umami.sanjiskitchen.de/script.js"
           data-website-id="d6fc4869-fc14-4e60-8d83-054916944289"
           strategy="afterInteractive"
         />
