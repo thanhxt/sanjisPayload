@@ -43,11 +43,11 @@ export default function Navbar() {
                 rel="stylesheet"
                 href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
             />
-            <nav className={`fixed w-full z-50 transition-all duration-300 ${menuOpen
+            <nav className={`fixed w-full z-50 transition-[background,backdrop-filter,border] duration-500 ease-out ${menuOpen
                 ? 'bg-black'
                 : isScrolled
-                    ? 'bg-[#00000099] backdrop-blur-sm'
-                    : 'bg-transparent'
+                    ? 'bg-black/70 backdrop-blur-md border-b border-white/10'
+                    : 'bg-transparent border-b border-transparent'
                 } text-white py-4`}>
                 <div className="max-w-[1440px] mx-auto flex justify-between items-center px-4 md:px-8">
                     <div className="flex-shrink-0">
@@ -60,12 +60,12 @@ export default function Navbar() {
                     </div>
                     {/* Desktop Nav */}
                     <ul className="nav-links hidden xl:flex items-center space-x-2 lg:space-x-4 xl:space-x-6 text-base xl:text-lg">
-                        <li><Link href="/" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Startseite" : "Home"}</Link></li>
-                        <li><Link href="/about" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Über uns" : "About"}</Link></li>
-                        <li><Link href="/speisekarte" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
-                        <li><Link href="/reservierung" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
-                        <li><Link href="/voucher" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
-                        <li><Link href="/kontakt" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
+                        <li><Link href="/" className="relative font-light block py-2 px-3 text-white/90 transition-colors hover:text-yellow-300 after:absolute after:bottom-1 after:left-3 after:h-px after:w-0 after:bg-yellow-300 after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]">{language === "de" ? "Startseite" : "Home"}</Link></li>
+                        <li><Link href="/about" className="relative font-light block py-2 px-3 text-white/90 transition-colors hover:text-yellow-300 after:absolute after:bottom-1 after:left-3 after:h-px after:w-0 after:bg-yellow-300 after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]">{language === "de" ? "Über uns" : "About"}</Link></li>
+                        <li><Link href="/speisekarte" className="relative font-light block py-2 px-3 text-white/90 transition-colors hover:text-yellow-300 after:absolute after:bottom-1 after:left-3 after:h-px after:w-0 after:bg-yellow-300 after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
+                        <li><Link href="/reservierung" className="relative font-light block py-2 px-3 text-white/90 transition-colors hover:text-yellow-300 after:absolute after:bottom-1 after:left-3 after:h-px after:w-0 after:bg-yellow-300 after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
+                        <li><Link href="/voucher" className="relative font-light block py-2 px-3 text-white/90 transition-colors hover:text-yellow-300 after:absolute after:bottom-1 after:left-3 after:h-px after:w-0 after:bg-yellow-300 after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
+                        <li><Link href="/kontakt" className="relative font-light block py-2 px-3 text-white/90 transition-colors hover:text-yellow-300 after:absolute after:bottom-1 after:left-3 after:h-px after:w-0 after:bg-yellow-300 after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
                         <li className="pl-2"> 
                             <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language" className="border-white/20">
                                 <ToggleGroupItem value="de" aria-label="Switch to German" className="h-8 w-10 px-0 data-[state=on]:bg-white/20">

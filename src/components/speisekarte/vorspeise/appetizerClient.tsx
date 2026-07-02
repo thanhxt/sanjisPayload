@@ -26,14 +26,13 @@ export default function AppetizerClient({ menuItems }: { menuItems: MenuAppetize
 
                 <div className="flex flex-col md:ml-10 w-full md:w-auto px-4 md:px-0">
                     {menuItems.map((item, idx) => (
-                        <div key={idx} className="mb-6">
-                            <div className="flex flex-row items-center">
-                                <span className="text-xl md:text-2xl font-medium">{item.title}</span>
-                                <span className="text-base md:text-lg font-semibold ml-2">{item.price}</span>
+                        <div key={item.id ?? idx} className="group mb-6 border-b border-white/5 pb-4">
+                            <div className="flex items-baseline gap-3">
+                                <span className="text-xl md:text-2xl font-medium transition-colors group-hover:text-yellow-300">{item.title}</span>
+                                <span className="flex-1 -translate-y-1 border-b border-dotted border-white/20" />
+                                <span className="text-base md:text-lg font-semibold tabular-nums">{item.price}</span>
                             </div>
-                            <div className="flex flex-col">
-                                <p className="text-gray-400 mt-1 text-sm md:text-base">{language === "de" ? item.descriptionDE : item.descriptionEN}</p>
-                            </div>
+                            <p className="mt-1 max-w-prose text-sm md:text-base text-gray-400">{language === "de" ? item.descriptionDE : item.descriptionEN}</p>
                         </div>
                     ))}
                     <span className="text-xl md:text-2xl font-medium mb-6">Plediade Poget No 3 Oyster 3p./18 6p. 3</span>
