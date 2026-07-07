@@ -171,6 +171,13 @@ EMAIL_PASSWORD=your_email_app_password
 STRIPE_SECRET_KEY=your_stripe_secret_key
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 
+# Media Storage
+# Directory where uploaded media files are stored (default: ./media).
+# In production, point this at a mounted persistent volume, otherwise
+# uploads are lost on every redeploy. Files committed in the repo's
+# media/ folder are copied there automatically on startup.
+MEDIA_DIR=/data/media
+
 # Application Configuration
 NEXT_PUBLIC_SITE_URL=https://sanjiskitchen.de
 NEXT_PUBLIC_APP_URL=https://sanjiskitchen.de

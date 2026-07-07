@@ -22,6 +22,12 @@ const SENSITIVE_PATHS = [
 ]
 
 export function proxy(request: NextRequest) {
+  // Media files are served through the Payload API; an image-heavy page
+  // loads many of them at once, so they are exempt from rate limiting.
+  if (request.nextUrl.pathname.startsWith('/api/media/file/')) {
+    return NextResponse.next()
+  }
+
   // Only apply rate limiting to API routes
   if (request.nextUrl.pathname.startsWith('/api/') || request.nextUrl.pathname.startsWith('/(payload)/api/')) {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ||

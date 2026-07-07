@@ -1,3 +1,4 @@
+import path from 'path'
 import type { CollectionConfig } from 'payload'
 import { checkRole } from '../user/access/checkRole'
 
@@ -14,7 +15,9 @@ export const Media: CollectionConfig = {
     delete: ({ req: { user } }) => checkRole(['admin'], user),
   },
   upload: {
-    staticDir: 'media',
+    // Point MEDIA_DIR at a persistent volume in production, otherwise
+    // uploads live inside the container and are lost on redeploy.
+    staticDir: path.resolve(process.cwd(), process.env.MEDIA_DIR || 'media'),
     imageSizes: [
       {
         name: 'thumbnail',

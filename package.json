@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/seed-media.mjs && next start",
     "lint": "eslint .",
     "generate:importmap": "payload generate:importmap",
     "generate:types": "payload generate:types",
