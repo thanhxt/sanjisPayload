@@ -9,7 +9,7 @@ import { ReservationsBlock } from './ReservationsBlock'
 import { MapsBlock } from './MapsBlock'
 import { TeamBlock } from './TeamBlock'
 import { ContactBlock } from './ContactBlock'
-import { LegalContentBlock } from './LegalContentBlock'
+import { ColumnsBlock } from './ColumnsBlock'
 
 export const allBlocks: Block[] = [
   HeroBlock,
@@ -22,5 +22,5 @@ export const allBlocks: Block[] = [
   MapsBlock,
   TeamBlock,
   ContactBlock,
-  LegalContentBlock,
+  ColumnsBlock,
 ]

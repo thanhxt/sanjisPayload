@@ -9,6 +9,7 @@ import { LanguageProvider } from "@/components/contexts/language-context";
 import { MenuContextProvider } from "@/components/contexts/menu-context";
 import "@/lib/init-cleanup";
 import Script from "next/script";
+import { getCmsNavLinks } from "@/lib/nav-links";
 
 
 
@@ -55,11 +56,13 @@ export const metadata = {
 
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cmsLinks = await getCmsNavLinks();
+
   return (
     <html lang="de">
       <body
@@ -72,9 +75,9 @@ export default function RootLayout({
         />
         <LanguageProvider>
           <MenuContextProvider>
-            <Navbar />
+            <Navbar cmsLinks={cmsLinks} />
             {children}
-            <Footer />
+            <Footer cmsLinks={cmsLinks} />
           </MenuContextProvider>
           <CookieConsentComponent />
         </LanguageProvider>

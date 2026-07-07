@@ -175,9 +175,21 @@ export interface Page {
         | MapsBlockType
         | TeamBlockType
         | ContactBlockType
-        | LegalContentBlockType
+        | ColumnsBlockType
       )[]
     | null;
+  /**
+   * Show a link to this page in the navbar and footer.
+   */
+  showInNav?: boolean | null;
+  /**
+   * Sort order of the link in the navbar (lower = further left).
+   */
+  navOrder?: number | null;
+  navLabel?: {
+    de?: string | null;
+    en?: string | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -455,13 +467,29 @@ export interface ContactBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "LegalContentBlockType".
+ * via the `definition` "ColumnsBlockType".
  */
-export interface LegalContentBlockType {
-  document: 'impressum' | 'datenschutz' | 'widerrufsbelehrung';
+export interface ColumnsBlockType {
+  columns?:
+    | {
+        width: 'oneThird' | 'half' | 'twoThirds' | 'full';
+        content?:
+          | (
+              | RichTextBlockType
+              | CallToActionBlockType
+              | GalleryBlockType
+              | ReservationsBlockType
+              | MapsBlockType
+              | TeamBlockType
+              | ContactBlockType
+            )[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'legalContent';
+  blockType: 'columns';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1040,7 +1068,15 @@ export interface PagesSelect<T extends boolean = true> {
         maps?: T | MapsBlockTypeSelect<T>;
         team?: T | TeamBlockTypeSelect<T>;
         contact?: T | ContactBlockTypeSelect<T>;
-        legalContent?: T | LegalContentBlockTypeSelect<T>;
+        columns?: T | ColumnsBlockTypeSelect<T>;
+      };
+  showInNav?: T;
+  navOrder?: T;
+  navLabel?:
+    | T
+    | {
+        de?: T;
+        en?: T;
       };
   meta?:
     | T
@@ -1216,10 +1252,26 @@ export interface ContactBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "LegalContentBlockType_select".
+ * via the `definition` "ColumnsBlockType_select".
  */
-export interface LegalContentBlockTypeSelect<T extends boolean = true> {
-  document?: T;
+export interface ColumnsBlockTypeSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        width?: T;
+        content?:
+          | T
+          | {
+              richText?: T | RichTextBlockTypeSelect<T>;
+              cta?: T | CallToActionBlockTypeSelect<T>;
+              gallery?: T | GalleryBlockTypeSelect<T>;
+              reservations?: T | ReservationsBlockTypeSelect<T>;
+              maps?: T | MapsBlockTypeSelect<T>;
+              team?: T | TeamBlockTypeSelect<T>;
+              contact?: T | ContactBlockTypeSelect<T>;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

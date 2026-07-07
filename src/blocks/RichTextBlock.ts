@@ -7,6 +7,7 @@ export const RichTextBlock: Block = {
   slug: 'richText',
   interfaceName: 'RichTextBlockType',
   labels: { singular: 'Rich Text', plural: 'Rich Texts' },
+  imageURL: '/block-previews/rich-text.svg',
   fields: [
     {
       name: 'content',

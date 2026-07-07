@@ -8,6 +8,7 @@ export const CallToActionBlock: Block = {
   slug: 'cta',
   interfaceName: 'CallToActionBlockType',
   labels: { singular: 'Call to Action', plural: 'Calls to Action' },
+  imageURL: '/block-previews/cta.svg',
   fields: [
     bilingualText('heading', { label: 'Heading', required: true }),
     bilingualText('text', { label: 'Text', textarea: true }),

@@ -8,5 +8,6 @@ export const GalleryBlock: Block = {
   slug: 'gallery',
   interfaceName: 'GalleryBlockType',
   labels: { singular: 'Gallery', plural: 'Galleries' },
+  imageURL: '/block-previews/gallery.svg',
   fields: [anchorIdField],
 }

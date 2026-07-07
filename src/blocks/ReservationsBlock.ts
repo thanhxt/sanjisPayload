@@ -9,5 +9,6 @@ export const ReservationsBlock: Block = {
   slug: 'reservations',
   interfaceName: 'ReservationsBlockType',
   labels: { singular: 'Reservations', plural: 'Reservations' },
+  imageURL: '/block-previews/reservations.svg',
   fields: [anchorIdField],
 }

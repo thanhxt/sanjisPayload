@@ -66,6 +66,34 @@ export const Pages: CollectionConfig = {
       },
     },
     {
+      name: 'showInNav',
+      type: 'checkbox',
+      defaultValue: true,
+      admin: {
+        position: 'sidebar',
+        description: 'Show a link to this page in the navbar and footer.',
+      },
+    },
+    {
+      name: 'navOrder',
+      type: 'number',
+      defaultValue: 0,
+      admin: {
+        position: 'sidebar',
+        description: 'Sort order of the link in the navbar (lower = further left).',
+      },
+    },
+    {
+      name: 'navLabel',
+      type: 'group',
+      label: 'Nav label (optional, defaults to the page title)',
+      admin: { position: 'sidebar' },
+      fields: [
+        { name: 'de', label: 'Deutsch', type: 'text' },
+        { name: 'en', label: 'English', type: 'text' },
+      ],
+    },
+    {
       name: 'meta',
       type: 'group',
       label: 'SEO',

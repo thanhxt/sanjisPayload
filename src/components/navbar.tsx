@@ -6,12 +6,21 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useEffect, useState, useContext } from "react"
 import { MenuContext, type MenuContextType } from "./contexts/menu-context"
 import { useLanguage } from "./contexts/language-context"
+import type { NavLink } from "@/type/navLinkType"
 
-export default function Navbar() {
+export default function Navbar({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isMounted, setIsMounted] = useState(false)
     const { menuOpen, setMenuOpen } = useContext(MenuContext) as MenuContextType;
     const { language, setLanguage } = useLanguage();
+
+    // Static routes always exist; CMS pages (showInNav) follow after them.
+    const links: NavLink[] = [
+        { href: '/', label: { de: 'Startseite', en: 'Home' } },
+        { href: '/speisekarte', label: { de: 'Speisekarte', en: 'Menu' } },
+        { href: '/voucher', label: { de: 'Gutschein', en: 'Voucher' } },
+        ...cmsLinks,
+    ];
 
     useEffect(() => {
         setIsMounted(true)
@@ -60,13 +69,10 @@ export default function Navbar() {
                     </div>
                     {/* Desktop Nav */}
                     <ul className="nav-links hidden xl:flex items-center space-x-2 lg:space-x-4 xl:space-x-6 text-base xl:text-lg">
-                        <li><Link href="/" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Startseite" : "Home"}</Link></li>
-                        <li><Link href="/about" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Über uns" : "About"}</Link></li>
-                        <li><Link href="/speisekarte" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
-                        <li><Link href="/reservierung" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
-                        <li><Link href="/voucher" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
-                        <li><Link href="/kontakt" className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
-                        <li className="pl-2"> 
+                        {links.map((link) => (
+                            <li key={link.href}><Link href={link.href} className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{link.label[language]}</Link></li>
+                        ))}
+                        <li className="pl-2">
                             <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language" className="border-white/20">
                                 <ToggleGroupItem value="de" aria-label="Switch to German" className="h-8 w-10 px-0 data-[state=on]:bg-white/20">
                                     <span className="fi fi-de text-xs"></span>
@@ -112,12 +118,9 @@ export default function Navbar() {
                             </button>
                         </div>
                         <ul className="flex flex-col items-center justify-center flex-grow gap-8 text-2xl uppercase tracking-widest">
-                            <li><Link href="/" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Startseite" : "Home"}</Link></li>
-                            <li><Link href="/about" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Über uns" : "About Us"}</Link></li>
-                            <li><Link href="/speisekarte" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Speisekarte" : "Menu"}</Link></li>
-                            <li><Link href="/reservierung" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Reservierung" : "Reservations"}</Link></li>
-                            <li><Link href="/voucher" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Gutschein" : "Voucher"}</Link></li>
-                            <li><Link href="/kontakt" onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{language === "de" ? "Kontakt" : "Contact"}</Link></li>
+                            {links.map((link) => (
+                                <li key={link.href}><Link href={link.href} onClick={() => setMenuOpen(false)} className="hover:text-yellow-300 transition-colors font-light">{link.label[language]}</Link></li>
+                            ))}
                             <li className="mt-4">
                                 <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" onValueChange={handleLanguageChange} aria-label="Select language" className="scale-125 border-white/20">
                                     <ToggleGroupItem value="de" className="px-6 data-[state=on]:bg-white/20">

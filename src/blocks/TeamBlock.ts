@@ -8,5 +8,6 @@ export const TeamBlock: Block = {
   slug: 'team',
   interfaceName: 'TeamBlockType',
   labels: { singular: 'Team', plural: 'Teams' },
+  imageURL: '/block-previews/team.svg',
   fields: [anchorIdField],
 }

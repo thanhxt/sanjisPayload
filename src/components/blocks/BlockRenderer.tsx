@@ -10,15 +10,17 @@ import { ReservationsBlock } from "./ReservationsBlock";
 import { MapsBlock } from "./MapsBlock";
 import { TeamBlock } from "./TeamBlock";
 import { ContactBlock } from "./ContactBlock";
-import { LegalContentBlock } from "./LegalContentBlock";
+import { ColumnsBlock } from "./ColumnsBlock";
+import type { ColumnsBlockType } from "../../../payload-types";
 
 type LayoutBlock = NonNullable<Page['layout']>[number];
+type ColumnBlock = NonNullable<NonNullable<ColumnsBlockType['columns']>[number]['content']>[number];
 
 /**
  * Maps each Payload block (by blockType) to its React component.
  * The switch keeps full type narrowing per block.
  */
-export function BlockRenderer({ blocks }: { blocks: LayoutBlock[] }) {
+export function BlockRenderer({ blocks }: { blocks: (LayoutBlock | ColumnBlock)[] }) {
     return (
         <>
             {blocks.map((block, index) => {
@@ -45,8 +47,8 @@ export function BlockRenderer({ blocks }: { blocks: LayoutBlock[] }) {
                         return <TeamBlock key={key} {...block} />;
                     case 'contact':
                         return <ContactBlock key={key} {...block} />;
-                    case 'legalContent':
-                        return <LegalContentBlock key={key} {...block} />;
+                    case 'columns':
+                        return <ColumnsBlock key={key} {...block} />;
                     default:
                         return null;
                 }

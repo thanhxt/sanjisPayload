@@ -9,6 +9,7 @@ export const PageHeaderBlock: Block = {
   slug: 'pageHeader',
   interfaceName: 'PageHeaderBlockType',
   labels: { singular: 'Page Header', plural: 'Page Headers' },
+  imageURL: '/block-previews/page-header.svg',
   fields: [
     bilingualText('heading', { label: 'Heading', required: true }),
     {

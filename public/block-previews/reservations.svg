@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" width="400" height="225">
+  <rect width="400" height="225" rx="8" fill="#18181b"/>
+  <rect x="130" y="22" width="140" height="12" rx="4" fill="#fafafa"/>
+  <rect x="24" y="55" width="170" height="125" rx="10" fill="none" stroke="#52525b" stroke-width="2"/>
+  <rect x="40" y="72" width="138" height="10" rx="3" fill="#3f3f46"/>
+  <rect x="40" y="92" width="138" height="10" rx="3" fill="#3f3f46"/>
+  <rect x="40" y="112" width="138" height="10" rx="3" fill="#3f3f46"/>
+  <rect x="64" y="140" width="90" height="24" rx="6" fill="#facc15" opacity="0.85"/>
+  <rect x="206" y="55" width="170" height="125" rx="10" fill="none" stroke="#52525b" stroke-width="2"/>
+  <circle cx="228" cy="82" r="6" fill="#facc15"/>
+  <rect x="244" y="77" width="110" height="9" rx="3" fill="#3f3f46"/>
+  <circle cx="228" cy="112" r="6" fill="#facc15"/>
+  <rect x="244" y="107" width="100" height="9" rx="3" fill="#3f3f46"/>
+  <circle cx="228" cy="142" r="6" fill="#facc15"/>
+  <rect x="244" y="137" width="105" height="9" rx="3" fill="#3f3f46"/>
+  <text x="200" y="210" text-anchor="middle" fill="#a1a1aa" font-family="sans-serif" font-size="13">OpenTable-Widget + Kontaktinfo</text>
+</svg>

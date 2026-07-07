@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { useLanguage } from './contexts/language-context';
 import { useEffect, useState } from 'react';
 import { openingTimes } from '@/type/openingType';
+import type { NavLink } from '@/type/navLinkType';
 
-export default function Footer() {
+export default function Footer({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
   const { language } = useLanguage();
   const [year, setYear] = useState<number>(2024);
   const [times, setTimes] = useState<openingTimes | null>(null);
@@ -61,18 +62,8 @@ export default function Footer() {
             <h2 className="font-bold tracking-widest mb-2 text-lg">{t.links[language]}</h2>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="hover:text-yellow-400 hover:underline">
-                  {t.about[language]}
-                </Link>
-              </li>
-              <li>
                 <Link href="/speisekarte" className="hover:text-yellow-400 hover:underline">
                   {t.menu[language]}
-                </Link>
-              </li>
-              <li>
-                <Link href="/reservierung" className="hover:text-yellow-400 hover:underline">
-                  {t.reservation[language]}
                 </Link>
               </li>
               <li>
@@ -80,11 +71,13 @@ export default function Footer() {
                   {t.voucher[language]}
                 </Link>
               </li>
-              <li>
-                <Link href="/contact" className="hover:text-yellow-400 hover:underline">
-                  {t.contact[language]}
-                </Link>
-              </li>
+              {cmsLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-yellow-400 hover:underline">
+                    {link.label[language]}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

@@ -8,5 +8,6 @@ export const ContactBlock: Block = {
   slug: 'contact',
   interfaceName: 'ContactBlockType',
   labels: { singular: 'Contact Form', plural: 'Contact Forms' },
+  imageURL: '/block-previews/contact.svg',
   fields: [anchorIdField],
 }

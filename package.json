@@ -10,6 +10,7 @@
     "generate:importmap": "payload generate:importmap",
     "generate:types": "payload generate:types",
     "seed:pages": "payload run src/lib/seed-pages.ts",
+    "cleanup:pages": "payload run src/lib/cleanup-pages.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:api": "vitest run src/tests/api"

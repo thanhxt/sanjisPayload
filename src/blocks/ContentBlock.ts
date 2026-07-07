@@ -9,6 +9,7 @@ export const ContentBlock: Block = {
   slug: 'mediaText',
   interfaceName: 'ContentBlockType',
   labels: { singular: 'Media + Text', plural: 'Media + Text' },
+  imageURL: '/block-previews/media-text.svg',
   fields: [
     bilingualText('heading', { label: 'Heading', required: true }),
     bilingualText('body', { label: 'Body (blank line starts a new paragraph)', textarea: true }),

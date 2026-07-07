@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" width="400" height="225">
+  <rect width="400" height="225" rx="8" fill="#18181b"/>
+  <rect x="40" y="35" width="180" height="14" rx="4" fill="#fafafa"/>
+  <rect x="40" y="70" width="320" height="7" rx="3" fill="#52525b"/>
+  <rect x="40" y="86" width="300" height="7" rx="3" fill="#52525b"/>
+  <rect x="40" y="102" width="315" height="7" rx="3" fill="#52525b"/>
+  <rect x="40" y="118" width="250" height="7" rx="3" fill="#52525b"/>
+  <rect x="40" y="145" width="310" height="7" rx="3" fill="#3f3f46"/>
+  <rect x="40" y="161" width="290" height="7" rx="3" fill="#3f3f46"/>
+  <text x="200" y="205" text-anchor="middle" fill="#a1a1aa" font-family="sans-serif" font-size="13">Freier Text (DE/EN)</text>
+</svg>

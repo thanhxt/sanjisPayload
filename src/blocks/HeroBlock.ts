@@ -9,6 +9,7 @@ export const HeroBlock: Block = {
   slug: 'hero',
   interfaceName: 'HeroBlockType',
   labels: { singular: 'Hero', plural: 'Heroes' },
+  imageURL: '/block-previews/hero.svg',
   fields: [
     {
       name: 'backgroundType',

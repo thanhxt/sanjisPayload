@@ -31,6 +31,12 @@ export const afterChangeHook: CollectionAfterChangeHook = async ({ doc, previous
     paths.add(pagePath(previousDoc.slug))
   }
 
+  // Navbar/footer links are built from published pages, so refresh the
+  // static routes that would otherwise keep a stale navigation.
+  paths.add('/')
+  paths.add('/speisekarte')
+  paths.add('/voucher')
+
   await revalidatePaths({ paths: [...paths], req })
 
   return doc

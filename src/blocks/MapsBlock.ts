@@ -8,5 +8,6 @@ export const MapsBlock: Block = {
   slug: 'maps',
   interfaceName: 'MapsBlockType',
   labels: { singular: 'Maps / Parking', plural: 'Maps / Parking' },
+  imageURL: '/block-previews/maps.svg',
   fields: [anchorIdField],
 }
