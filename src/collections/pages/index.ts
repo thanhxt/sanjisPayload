@@ -32,7 +32,7 @@ export const Pages: CollectionConfig = {
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // fast autosave so live preview updates almost instantly
+        interval: 800, // keeps live preview responsive without flooding the API
       },
     },
     maxPerDoc: 25,

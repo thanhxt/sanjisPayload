@@ -21,7 +21,8 @@ async function resolveImage(props: ContentBlockType): Promise<{ url: string; alt
 
     if (props.staticSrc) return { url: props.staticSrc, alt: '' };
 
-    return { url: '/notFound.jpg', alt: '' };
+    // /notFound.jpg does not exist in /public; fall back to a real asset.
+    return { url: '/Sanjis_Julio-34.jpg', alt: '' };
 }
 
 export async function ContentBlock(props: ContentBlockType) {

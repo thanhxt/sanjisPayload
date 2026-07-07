@@ -11,7 +11,7 @@ export function HeroBlock(props: HeroBlockType) {
     const { language } = useLanguage();
 
     const media = typeof backgroundImage === 'object' ? backgroundImage : null;
-    const imageUrl = media?.url || backgroundSrc || '/notFound.jpg';
+    const imageUrl = media?.url || backgroundSrc || '/Sanjis_Julio-34.jpg';
     const headingText = (language === 'de' ? heading?.de || heading?.en : heading?.en || heading?.de) || '';
 
     return (

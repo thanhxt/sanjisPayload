@@ -15,7 +15,7 @@ export default async function HeroImage(props: { slug: string }) {
     return (
         <div className="absolute w-full h-full object-cover blur-md brightness-50 z-10">
             <Image
-                  src={heroes.find((hero) => hero.title === props.slug)?.image.url || '/notFound.jpg'}
+                  src={heroes.find((hero) => hero.title === props.slug)?.image.url || '/Sanjis_Julio-34.jpg'}
                   alt="Exquisite Japanese cuisine"
                   fill
                   className="object-cover"
