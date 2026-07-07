@@ -76,8 +76,8 @@ const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive
 
     if (isLoading) {
         return (
-            <div className="bg-black text-white py-8 text-center">
-                <div className="text-lg">Loading...</div>
+            <div className="bg-black text-white py-10 flex justify-center">
+                <div className="h-4 w-28 animate-pulse rounded bg-white/10" />
             </div>
         );
     }
@@ -123,18 +123,33 @@ export default function Speisekarte() {
             <div style={{ background: '#111', padding: 0, margin: 0 }}>
                 <style>{`
                     .menu-section {
-                        transition: color 0.3s, opacity 0.3s, font-size 0.3s;
+                        position: relative;
+                        transition: color 0.3s, opacity 0.3s, letter-spacing 0.3s, background 0.3s;
                         cursor: pointer;
                     }
+                    /* Widen tracking instead of font-size to avoid reflowing the page on hover */
                     .menu-section:hover {
                         color: #fff !important;
                         opacity: 1 !important;
-                        font-size: 5.5vw !important;
+                        letter-spacing: 0.14em !important;
                     }
                     .menu-section.active {
                         color: #fff !important;
                         opacity: 1 !important;
                         background: #222 !important;
+                    }
+                    .menu-underline {
+                        position: absolute;
+                        bottom: 40px;
+                        left: 50%;
+                        height: 1px;
+                        width: 0;
+                        transform: translateX(-50%);
+                        background: #facc15;
+                        transition: width 0.5s ease;
+                    }
+                    .menu-section:hover .menu-underline {
+                        width: 96px;
                     }
                 `}</style>
                 <div style={{
@@ -166,6 +181,7 @@ export default function Speisekarte() {
                             onClick={() => handleMenuClick(item.id)}
                         >
                             {item.label}
+                            <span className="menu-underline" />
                         </div>
                         {/* Accordion Content */}
                         <AccordionContent 

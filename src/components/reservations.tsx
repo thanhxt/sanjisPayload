@@ -56,7 +56,8 @@ export default function Reservations() {
                     alt="Background"
                     width={1920}
                     height={1080}
-                    quality={75}
+                    quality={45}
+                    sizes="100vw"
                     priority
                     className="object-cover blur-sm opacity-40 scale-105"
                 />

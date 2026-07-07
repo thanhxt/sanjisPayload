@@ -52,11 +52,11 @@ export default function Navbar({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
                 rel="stylesheet"
                 href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
             />
-            <nav className={`fixed w-full z-50 transition-all duration-300 ${menuOpen
+            <nav className={`fixed w-full z-50 transition-[background,backdrop-filter,border] duration-500 ease-out ${menuOpen
                 ? 'bg-black'
                 : isScrolled
-                    ? 'bg-[#00000099] backdrop-blur-sm'
-                    : 'bg-transparent'
+                    ? 'bg-black/70 backdrop-blur-md border-b border-white/10'
+                    : 'bg-transparent border-b border-transparent'
                 } text-white py-4`}>
                 <div className="max-w-[1440px] mx-auto flex justify-between items-center px-4 md:px-8">
                     <div className="flex-shrink-0">
@@ -70,7 +70,7 @@ export default function Navbar({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
                     {/* Desktop Nav */}
                     <ul className="nav-links hidden xl:flex items-center space-x-2 lg:space-x-4 xl:space-x-6 text-base xl:text-lg">
                         {links.map((link) => (
-                            <li key={link.href}><Link href={link.href} className="hover:text-yellow-300 transition-colors font-light block py-2 px-3">{link.label[language]}</Link></li>
+                            <li key={link.href}><Link href={link.href} className="relative font-light block py-2 px-3 text-white/90 transition-colors hover:text-yellow-300 after:absolute after:bottom-1 after:left-3 after:h-px after:w-0 after:bg-yellow-300 after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]">{link.label[language]}</Link></li>
                         ))}
                         <li className="pl-2">
                             <ToggleGroup type="single" value={isMounted ? language : 'de'} variant="outline" size="sm" onValueChange={handleLanguageChange} aria-label="Select language" className="border-white/20">
