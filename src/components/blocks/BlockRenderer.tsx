@@ -11,6 +11,7 @@ import { MapsBlock } from "./MapsBlock";
 import { TeamBlock } from "./TeamBlock";
 import { ContactBlock } from "./ContactBlock";
 import { ColumnsBlock } from "./ColumnsBlock";
+import { MediaBlock } from "./MediaBlock";
 import type { ColumnsBlockType } from "../../../payload-types";
 
 type LayoutBlock = NonNullable<Page['layout']>[number];
@@ -33,6 +34,8 @@ export function BlockRenderer({ blocks }: { blocks: (LayoutBlock | ColumnBlock)[
                         return <PageHeaderBlock key={key} {...block} />;
                     case 'mediaText':
                         return <ContentBlock key={key} {...block} />;
+                    case 'mediaOnly':
+                        return <MediaBlock key={key} {...block} />;
                     case 'richText':
                         return <RichTextBlock key={key} {...block} />;
                     case 'cta':

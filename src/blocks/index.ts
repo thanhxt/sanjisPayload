@@ -10,11 +10,13 @@ import { MapsBlock } from './MapsBlock'
 import { TeamBlock } from './TeamBlock'
 import { ContactBlock } from './ContactBlock'
 import { ColumnsBlock } from './ColumnsBlock'
+import { MediaBlock } from './MediaBlock'
 
 export const allBlocks: Block[] = [
   HeroBlock,
   PageHeaderBlock,
   ContentBlock,
+  MediaBlock,
   RichTextBlock,
   CallToActionBlock,
   GalleryBlock,

@@ -21,6 +21,7 @@ import { Gallery } from './collections/gallery'
 import { OpeningTimes } from './collections/openingTimes'
 import { ConsentLogs } from './collections/consentLogs'
 import { Pages } from './collections/pages'
+import { Announcement } from './globals/announcement'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -46,6 +47,7 @@ export default buildConfig({
     OpeningTimes,
     ConsentLogs,
   ],
+  globals: [Announcement],
   upload: {
     limits: {
       fileSize: 1024 * 1024 * 5, // 5MB

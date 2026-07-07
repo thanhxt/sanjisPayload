@@ -117,8 +117,12 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    announcement: Announcement;
+  };
+  globalsSelect: {
+    announcement: AnnouncementSelect<false> | AnnouncementSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -168,6 +172,7 @@ export interface Page {
         | HeroBlockType
         | PageHeaderBlockType
         | ContentBlockType
+        | MediaBlockType
         | RichTextBlockType
         | CallToActionBlockType
         | GalleryBlockType
@@ -330,6 +335,39 @@ export interface ContentBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlockType".
+ */
+export interface MediaBlockType {
+  /**
+   * Image from the media library.
+   */
+  media?: (string | null) | Media;
+  /**
+   * Alternatively: path to a file in /public (e.g. /gallery1.mp4). Videos (.mp4/.mov/.webm) play automatically without sound.
+   */
+  staticSrc?: string | null;
+  size?: ('contained' | 'full') | null;
+  caption?: {
+    de?: string | null;
+    en?: string | null;
+  };
+  link?: {
+    url?: string | null;
+    /**
+     * Open the link in a new tab.
+     */
+    newTab?: boolean | null;
+  };
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaOnly';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "RichTextBlockType".
  */
 export interface RichTextBlockType {
@@ -477,6 +515,7 @@ export interface ColumnsBlockType {
           | (
               | RichTextBlockType
               | CallToActionBlockType
+              | MediaBlockType
               | GalleryBlockType
               | ReservationsBlockType
               | MapsBlockType
@@ -1061,6 +1100,7 @@ export interface PagesSelect<T extends boolean = true> {
         hero?: T | HeroBlockTypeSelect<T>;
         pageHeader?: T | PageHeaderBlockTypeSelect<T>;
         mediaText?: T | ContentBlockTypeSelect<T>;
+        mediaOnly?: T | MediaBlockTypeSelect<T>;
         richText?: T | RichTextBlockTypeSelect<T>;
         cta?: T | CallToActionBlockTypeSelect<T>;
         gallery?: T | GalleryBlockTypeSelect<T>;
@@ -1155,6 +1195,30 @@ export interface ContentBlockTypeSelect<T extends boolean = true> {
             };
         url?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlockType_select".
+ */
+export interface MediaBlockTypeSelect<T extends boolean = true> {
+  media?: T;
+  staticSrc?: T;
+  size?: T;
+  caption?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  link?:
+    | T
+    | {
+        url?: T;
+        newTab?: T;
+      };
+  anchorId?: T;
   id?: T;
   blockName?: T;
 }
@@ -1264,6 +1328,7 @@ export interface ColumnsBlockTypeSelect<T extends boolean = true> {
           | {
               richText?: T | RichTextBlockTypeSelect<T>;
               cta?: T | CallToActionBlockTypeSelect<T>;
+              mediaOnly?: T | MediaBlockTypeSelect<T>;
               gallery?: T | GalleryBlockTypeSelect<T>;
               reservations?: T | ReservationsBlockTypeSelect<T>;
               maps?: T | MapsBlockTypeSelect<T>;
@@ -1617,6 +1682,64 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Shown as a speech bubble at the bottom right on every page while enabled. Visitors can dismiss it for their session.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcement".
+ */
+export interface Announcement {
+  id: string;
+  /**
+   * Show the speech bubble on the website.
+   */
+  enabled?: boolean | null;
+  message?: {
+    de?: string | null;
+    en?: string | null;
+  };
+  link?: {
+    label?: {
+      de?: string | null;
+      en?: string | null;
+    };
+    url?: string | null;
+    /**
+     * Open the link in a new tab.
+     */
+    newTab?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcement_select".
+ */
+export interface AnnouncementSelect<T extends boolean = true> {
+  enabled?: T;
+  message?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  link?:
+    | T
+    | {
+        label?:
+          | T
+          | {
+              de?: T;
+              en?: T;
+            };
+        url?: T;
+        newTab?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

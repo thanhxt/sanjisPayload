@@ -88,8 +88,14 @@ export default async function Page({ params }: Args) {
         notFound();
     }
 
+    // Hero and page header are designed to sit behind the transparent
+    // fixed navbar; every other first block needs to clear it.
+    const fullBleedBlocks = ['hero', 'pageHeader'];
+    const firstBlockType = page.layout?.[0]?.blockType;
+    const needsNavOffset = !firstBlockType || !fullBleedBlocks.includes(firstBlockType);
+
     return (
-        <main>
+        <main className={needsNavOffset ? 'bg-black pt-20 md:pt-24' : ''}>
             {draft && <LivePreviewListener />}
             <BlockRenderer blocks={page.layout ?? []} />
         </main>
