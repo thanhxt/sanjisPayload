@@ -12,6 +12,7 @@ import { TeamBlock } from "./TeamBlock";
 import { ContactBlock } from "./ContactBlock";
 import { ColumnsBlock } from "./ColumnsBlock";
 import { MediaBlock } from "./MediaBlock";
+import { FaqBlock } from "./FaqBlock";
 import type { ColumnsBlockType } from "../../../payload-types";
 
 type LayoutBlock = NonNullable<Page['layout']>[number];
@@ -52,6 +53,8 @@ export function BlockRenderer({ blocks }: { blocks: (LayoutBlock | ColumnBlock)[
                         return <ContactBlock key={key} {...block} />;
                     case 'columns':
                         return <ColumnsBlock key={key} {...block} />;
+                    case 'faq':
+                        return <FaqBlock key={key} {...block} />;
                     default:
                         return null;
                 }

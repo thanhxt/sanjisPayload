@@ -7,6 +7,7 @@ import { MapsBlock } from './MapsBlock'
 import { TeamBlock } from './TeamBlock'
 import { ContactBlock } from './ContactBlock'
 import { MediaBlock } from './MediaBlock'
+import { FaqBlock } from './FaqBlock'
 
 /**
  * Places blocks side by side instead of stacking them vertically,
@@ -45,6 +46,7 @@ export const ColumnsBlock: Block = {
             RichTextBlock,
             CallToActionBlock,
             MediaBlock,
+            FaqBlock,
             GalleryBlock,
             ReservationsBlock,
             MapsBlock,

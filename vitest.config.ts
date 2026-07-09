@@ -11,9 +11,11 @@ export default defineConfig({
     },
   },
   test: {
+    // API/unit tests run in node; component tests opt into jsdom via
+    // the `// @vitest-environment jsdom` pragma at the top of the file.
     environment: 'node',
     clearMocks: true,
-    include: ['src/tests/**/*.test.ts'],
+    include: ['src/tests/**/*.test.ts', 'src/tests/**/*.test.tsx'],
     css: false,
   },
   resolve: {

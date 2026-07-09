@@ -11,6 +11,7 @@ import { TeamBlock } from './TeamBlock'
 import { ContactBlock } from './ContactBlock'
 import { ColumnsBlock } from './ColumnsBlock'
 import { MediaBlock } from './MediaBlock'
+import { FaqBlock } from './FaqBlock'
 
 export const allBlocks: Block[] = [
   HeroBlock,
@@ -25,4 +26,5 @@ export const allBlocks: Block[] = [
   TeamBlock,
   ContactBlock,
   ColumnsBlock,
+  FaqBlock,
 ]
