@@ -7,6 +7,7 @@ import { useCookieConsent, showConsentPreferences } from '@/hooks/useCookieConse
 import { Button } from './ui/button';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { openingTimes } from '@/type/openingType';
+import { OPENING_HOURS_FALLBACK } from '@/lib/site-info';
 
 export default function Reservations() {
     const { language } = useLanguage();
@@ -158,9 +159,11 @@ export default function Reservations() {
                                             </>
                                         ) : (
                                             <>
-                                                <p><span className="w-24 inline-block">{language === "de" ? "Mo - Fr:" : "Mon - Fri:"}</span> 17:00 – 00:00</p>
-                                                <p><span className="w-24 inline-block">{language === "de" ? "Samstag:" : "Saturday:"}</span> 12:00 – 14:30 | 17:00 - 00:00</p>
-                                                <p><span className="w-24 inline-block">{language === "de" ? "Sonntag:" : "Sunday:"}</span> 12:00 - 14:30 | 17:00 – 23:00</p>
+                                                {OPENING_HOURS_FALLBACK.map((entry) => (
+                                                    <p key={entry.opens + entry.closes}>
+                                                        <span className="w-24 inline-block">{entry.label[language]}:</span> {entry.display}
+                                                    </p>
+                                                ))}
                                             </>
                                         )}
                                     </div>

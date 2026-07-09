@@ -12,6 +12,7 @@ import Script from "next/script";
 import { getCmsNavLinks } from "@/lib/nav-links";
 import { getAnnouncement } from "@/lib/announcement";
 import AnnouncementBubble from "@/components/announcement-bubble";
+import { SITE_INFO, openingHoursJsonLd } from "@/lib/site-info";
 
 
 
@@ -70,44 +71,25 @@ export default async function RootLayout({
   const restaurantJsonLd = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
-    name: "Sanji's – Steak, Grill & Bar",
-    image: "https://sanjiskitchen.de/LandingPageImage2.jpg",
-    url: "https://sanjiskitchen.de",
-    telephone: "+49 89 37505678",
+    name: SITE_INFO.name,
+    image: `${SITE_INFO.url}/LandingPageImage2.jpg`,
+    url: SITE_INFO.url,
+    telephone: SITE_INFO.telephone,
     servesCuisine: ["Steakhouse", "Grill", "Asian Fusion"],
     priceRange: "€€€",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Kellerstraße 32",
-      postalCode: "81667",
-      addressLocality: "München",
-      addressCountry: "DE",
+      streetAddress: SITE_INFO.address.street,
+      postalCode: SITE_INFO.address.postalCode,
+      addressLocality: SITE_INFO.address.city,
+      addressCountry: SITE_INFO.address.country,
     },
     geo: {
       "@type": "GeoCoordinates",
       latitude: 48.1299,
       longitude: 11.5943,
     },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "17:00",
-        closes: "00:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "12:00",
-        closes: "00:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Sunday",
-        opens: "12:00",
-        closes: "23:00",
-      },
-    ],
+    openingHoursSpecification: openingHoursJsonLd(),
     sameAs: ["https://www.instagram.com/sanjis.kitchen/"],
   };
 

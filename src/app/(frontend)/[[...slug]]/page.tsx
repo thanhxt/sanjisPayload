@@ -65,12 +65,18 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
     const url = slug === 'home' ? `${SITE_URL}/` : `${SITE_URL}/${slug}`;
     const title = page.meta?.title || page.title;
     const description = page.meta?.description || undefined;
+    const metaImage = typeof page.meta?.image === 'object' ? page.meta.image : null;
 
     return {
         title,
         description,
         alternates: { canonical: url },
-        openGraph: { title, description, url },
+        openGraph: {
+            title,
+            description,
+            url,
+            ...(metaImage?.url ? { images: [{ url: metaImage.url, alt: metaImage.alt || title }] } : {}),
+        },
     };
 }
 
@@ -94,9 +100,22 @@ export default async function Page({ params }: Args) {
     const firstBlockType = page.layout?.[0]?.blockType;
     const needsNavOffset = !firstBlockType || !fullBleedBlocks.includes(firstBlockType);
 
+    const path = slug === 'home' ? '/' : `/${slug}`;
+
     return (
         <main className={needsNavOffset ? 'bg-black pt-20 md:pt-24' : ''}>
             {draft && <LivePreviewListener />}
+            {draft && (
+                <div className="fixed bottom-0 inset-x-0 z-[220] bg-yellow-400 text-black text-sm font-medium flex items-center justify-center gap-4 py-2 px-4">
+                    <span>Entwurfsvorschau — Änderungen sind noch nicht veröffentlicht.</span>
+                    <a
+                        href={`/next/exit-preview?path=${encodeURIComponent(path)}`}
+                        className="underline underline-offset-2 hover:no-underline"
+                    >
+                        Vorschau beenden
+                    </a>
+                </div>
+            )}
             <BlockRenderer blocks={page.layout ?? []} />
         </main>
     );

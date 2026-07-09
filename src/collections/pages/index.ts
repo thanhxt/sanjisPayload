@@ -101,6 +101,14 @@ export const Pages: CollectionConfig = {
       fields: [
         { name: 'title', type: 'text' },
         { name: 'description', type: 'textarea' },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          admin: {
+            description: 'Shown when the page is shared on social media (Open Graph).',
+          },
+        },
       ],
     },
   ],

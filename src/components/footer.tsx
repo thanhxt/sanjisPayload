@@ -5,6 +5,7 @@ import { useLanguage } from './contexts/language-context';
 import { useEffect, useState } from 'react';
 import { openingTimes } from '@/type/openingType';
 import type { NavLink } from '@/type/navLinkType';
+import { OPENING_HOURS_FALLBACK } from '@/lib/site-info';
 
 export default function Footer({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
   const { language } = useLanguage();
@@ -27,14 +28,8 @@ export default function Footer({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
   const t = {
     links:       { de: 'Links',             en: 'Links' },
     menu:        { de: 'Speisekarte',       en: 'Menu' },
-    about:       { de: 'Über uns',          en: 'About' },
-    reservation: { de: 'Reservierung',      en: 'Reservation' },
-    contact:     { de: 'Kontakt',           en: 'Contact' },
     voucher:     { de: 'Gutschein',         en: 'Voucher' },
     opening:     { de: 'Öffnungszeiten',    en: 'Opening Hours' },
-    weekdays:    { de: 'Montag - Freitag',  en: 'Monday - Friday' },
-    Sunday:      { de: 'Sonntag',           en: 'Sunday' },
-    saturday:    { de: 'Samstag',           en: 'Saturday' },
     socials:     { de: 'Socials',           en: 'Socials' },
     rights:      { de: 'Alle Rechte vorbehalten', en: 'All rights reserved' },
     privacy:     { de: 'Datenschutz',       en: 'Privacy Policy' },
@@ -123,20 +118,14 @@ export default function Footer({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
                 </>
               ) : (
                 <>
-                  <div>
-                    {t.weekdays[language]}<br />
-                    17:00 – 00:00
-                  </div>
-                  <div>
-                    {t.saturday[language]}<br />
-                    12:00 – 14:30<br />
-                    17:00 - 00:00
-                  </div>
-                  <div>
-                    {t.Sunday[language]}<br />
-                    12:00 - 14:30<br />
-                    17:00 – 23:00
-                  </div>
+                  {OPENING_HOURS_FALLBACK.map((entry) => (
+                    <div key={entry.opens + entry.closes}>
+                      {entry.label[language]}<br />
+                      {entry.display.split(' | ').map((part) => (
+                        <span key={part}>{part}<br /></span>
+                      ))}
+                    </div>
+                  ))}
                 </>
               )}
             </div>

@@ -198,6 +198,10 @@ export interface Page {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Shown when the page is shared on social media (Open Graph).
+     */
+    image?: (string | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -613,90 +617,165 @@ export interface Gallery {
   createdAt: string;
 }
 /**
- * Manage main dishes
+ * The dishes in the MAIN COURSE section of the menu page (/speisekarte).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuMainDish".
  */
 export interface MenuMainDish {
   id: string;
-  position?: number | null;
+  /**
+   * Appears exactly as typed in the MAIN COURSE section.
+   */
   titleDE: string;
+  /**
+   * Just the number, e.g. 28.9 → shown to the right of the dish.
+   */
   price: number;
+  /**
+   * Small grey line below the dish, e.g. the ingredients.
+   */
   descriptionDE?: string | null;
+  /**
+   * Shown when guests use the website in English.
+   */
   descriptionEN?: string | null;
+  /**
+   * Lower number = higher up in the list (1, 2, 3, …).
+   */
+  position?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Manage appetizer dishes
+ * The dishes in the STARTERS section of the menu page (/speisekarte).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuAppetizerDish".
  */
 export interface MenuAppetizerDish {
   id: string;
-  position?: number | null;
+  /**
+   * Appears on the menu exactly as typed, e.g. "spicy salmon tatare".
+   */
   title: string;
+  /**
+   * Just the number, e.g. 16.9 → shown to the right of the dish.
+   */
   price: number;
+  /**
+   * Small grey line below the dish, e.g. the ingredients.
+   */
   descriptionDE?: string | null;
+  /**
+   * Shown when guests use the website in English.
+   */
   descriptionEN?: string | null;
+  /**
+   * Lower number = higher up in the list (1, 2, 3, …).
+   */
+  position?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Manage steaks dishes
+ * The steak cards in the 3-column grid of the STEAKS section (/speisekarte). Each cut shows two portion sizes: weight | price.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuSteaksDish".
  */
 export interface MenuSteaksDish {
   id: string;
+  /**
+   * Card heading, e.g. "RUMP CAP / TAFELSPITZ".
+   */
   titleDE: string;
+  /**
+   * Line below the name, e.g. the type of beef.
+   */
   descriptionDE?: string | null;
+  /**
+   * Shown when guests use the website in English.
+   */
   descriptionEN?: string | null;
+  /**
+   * Small line with the origin, e.g. "Australia".
+   */
   regionDE?: string | null;
   regionEN?: string | null;
+  /**
+   * Small portion, e.g. 200.
+   */
   weightSmall?: number | null;
   priceSmall?: number | null;
+  /**
+   * Large portion, e.g. 300.
+   */
   weightLarge?: number | null;
   priceLarge?: number | null;
+  /**
+   * Lower number = earlier in the grid (1, 2, 3, …).
+   */
   position?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Manage steaks sharing
+ * The three large steaks to share under "SHARING STEAKS" in the STEAKS section (/speisekarte) – flambéed & carved at the table.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuSteaksSharing".
  */
 export interface MenuSteaksSharing {
   id: string;
+  /**
+   * e.g. "TOMAHAWK", "CHATEAUBRIAND" or "PORTERHOUSE".
+   */
   titleDE: string;
+  /**
+   * Line below the name, e.g. the type of beef.
+   */
   descriptionDE?: string | null;
+  /**
+   * Shown when guests use the website in English.
+   */
   descriptionEN?: string | null;
   regionDE?: string | null;
   regionEN?: string | null;
   weightSmall?: number | null;
   priceSmall?: number | null;
+  /**
+   * Leave empty if there is only one size (e.g. Tomahawk).
+   */
   weightLarge?: number | null;
   priceLarge?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Manage sanjis choice
+ * The highlighted recommendation box in the STEAKS section (/speisekarte) with two steak options. Displayed as: "name price€ | p. weightg".
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuSanjisChoice".
  */
 export interface MenuSanjisChoice {
   id: string;
+  /**
+   * Large heading of the highlighted box, e.g. "SANJI'S CHOICE".
+   */
   titleDE: string;
+  /**
+   * Second line below the heading, e.g. the steak name.
+   */
   steaktitle?: string | null;
   descriptionDE?: string | null;
+  /**
+   * Shown when guests use the website in English.
+   */
   descriptionEN?: string | null;
+  /**
+   * e.g. "Bistro Filet".
+   */
   stake1?: string | null;
   price1?: number | null;
   stakeWeight1?: number | null;
@@ -707,18 +786,33 @@ export interface MenuSanjisChoice {
   createdAt: string;
 }
 /**
- * Manage side dishes and sauces
+ * Side dishes and sauces in the STEAKS section of the menu page (/speisekarte).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menuSideDish".
  */
 export interface MenuSideDish {
   id: string;
-  position?: number | null;
+  /**
+   * e.g. "Trüffel Pommes" or "Pfefferrahm-Sauce".
+   */
   titleDE: string;
+  /**
+   * Optional – shown when guests use the website in English.
+   */
   titleEN?: string | null;
+  /**
+   * Free text, e.g. "5.9" – appears exactly as typed after the name.
+   */
   price: string;
+  /**
+   * Determines whether the entry appears in the SIDES or SAUCES list.
+   */
   category: 'side' | 'sauce';
+  /**
+   * Lower number = higher up in the list (1, 2, 3, …).
+   */
+  position?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1123,6 +1217,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1456,11 +1551,11 @@ export interface GallerySelect<T extends boolean = true> {
  * via the `definition` "menuMainDish_select".
  */
 export interface MenuMainDishSelect<T extends boolean = true> {
-  position?: T;
   titleDE?: T;
   price?: T;
   descriptionDE?: T;
   descriptionEN?: T;
+  position?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1469,11 +1564,11 @@ export interface MenuMainDishSelect<T extends boolean = true> {
  * via the `definition` "menuAppetizerDish_select".
  */
 export interface MenuAppetizerDishSelect<T extends boolean = true> {
-  position?: T;
   title?: T;
   price?: T;
   descriptionDE?: T;
   descriptionEN?: T;
+  position?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1535,11 +1630,11 @@ export interface MenuSanjisChoiceSelect<T extends boolean = true> {
  * via the `definition` "menuSideDish_select".
  */
 export interface MenuSideDishSelect<T extends boolean = true> {
-  position?: T;
   titleDE?: T;
   titleEN?: T;
   price?: T;
   category?: T;
+  position?: T;
   updatedAt?: T;
   createdAt?: T;
 }
