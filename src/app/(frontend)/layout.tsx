@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// Flag icons for the language switch (bundled instead of loaded from a CDN)
+import "flag-icons/css/flag-icons.min.css";
 import "@/lib/localStorage-polyfill";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";

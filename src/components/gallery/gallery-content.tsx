@@ -1,6 +1,62 @@
 'use client'
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import { Gallery } from '@/type/galleryType';
+
+/**
+ * The gallery videos are ~45 MB each; loading them only when the
+ * gallery scrolls into view keeps them off the critical path.
+ */
+export function LazyVideo({ src, className }: { src: string; className?: string }) {
+    const ref = useRef<HTMLVideoElement>(null);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const element = ref.current;
+        if (!element || typeof IntersectionObserver === 'undefined') {
+            setVisible(true);
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '200px' },
+        );
+        observer.observe(element);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (visible) {
+            ref.current?.play().catch(() => {
+                // Autoplay can be blocked; the muted loop is decorative anyway.
+            });
+        }
+    }, [visible]);
+
+    return (
+        <video
+            ref={ref}
+            src={visible ? src : undefined}
+            autoPlay
+            muted
+            loop
+            playsInline
+            disablePictureInPicture
+            controls={false}
+            preload="none"
+            className={className}
+            // Positioning is inline because styled-jsx in the parent does not
+            // scope into child components.
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
+        />
+    );
+}
 
 export default function GalleryContent({ gallery }: { gallery: Gallery[] }) {
 
@@ -8,16 +64,7 @@ export default function GalleryContent({ gallery }: { gallery: Gallery[] }) {
         <div className="gallery-outer">
             <div className="gallery-inner">
                 <div className="side left">
-                    <video 
-                        src="/gallery1.mp4" 
-                        autoPlay 
-                        muted 
-                        loop 
-                        playsInline
-                        disablePictureInPicture
-                        controls={false}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
-                    />
+                    <LazyVideo src="/gallery1.mp4" />
                 </div>
                 <div className="center-grid">
                     {gallery.map((item) => (
@@ -35,16 +82,7 @@ export default function GalleryContent({ gallery }: { gallery: Gallery[] }) {
                     ))}
                 </div>
                 <div className="side right">
-                    <video 
-                        src="/gallery2.mp4" 
-                        autoPlay 
-                        muted 
-                        loop 
-                        playsInline
-                        disablePictureInPicture
-                        controls={false}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
-                    />
+                    <LazyVideo src="/gallery2.mp4" />
                 </div>
             </div>
             <style jsx>{`

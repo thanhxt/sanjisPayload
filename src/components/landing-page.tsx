@@ -13,6 +13,8 @@ export default function LandingPage() {
                 loop
                 muted
                 playsInline
+                preload="metadata"
+                poster="/LandingPageImage2.jpg"
                 className="absolute inset-0 w-full h-full object-cover"
             >
                 <source src="/LandingPageVideo2.MOV" type="video/mp4" />
