@@ -178,6 +178,16 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 # media/ folder are copied there automatically on startup.
 MEDIA_DIR=/data/media
 
+# Alternatively: S3-compatible media storage (Cloudflare R2, MinIO, AWS S3).
+# When these are set, uploads go to the bucket instead of MEDIA_DIR and
+# survive redeploys without a mounted volume. S3_ENDPOINT is required for
+# R2/MinIO; leave it unset for AWS S3.
+# S3_BUCKET=sanjis-media
+# S3_ACCESS_KEY_ID=...
+# S3_SECRET_ACCESS_KEY=...
+# S3_ENDPOINT=https://<account-id>.r2.cloudflarestorage.com
+# S3_REGION=auto
+
 # Application Configuration
 NEXT_PUBLIC_SITE_URL=https://sanjiskitchen.de
 NEXT_PUBLIC_APP_URL=https://sanjiskitchen.de

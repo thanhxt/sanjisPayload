@@ -22,6 +22,8 @@ import { OpeningTimes } from './collections/openingTimes'
 import { ConsentLogs } from './collections/consentLogs'
 import { Pages } from './collections/pages'
 import { Announcement } from './globals/announcement'
+import { s3Storage } from '@payloadcms/storage-s3'
+import { shouldUseS3, buildS3Config } from './lib/s3-storage'
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -48,6 +50,19 @@ export default buildConfig({
     ConsentLogs,
   ],
   globals: [Announcement],
+  plugins: [
+    // Media uploads move to S3-compatible storage (R2/MinIO/AWS) when the
+    // S3_* env vars are set; otherwise they stay on the MEDIA_DIR volume.
+    ...(shouldUseS3(process.env)
+      ? [
+          s3Storage({
+            collections: { media: true },
+            bucket: process.env.S3_BUCKET || '',
+            config: buildS3Config(process.env),
+          }),
+        ]
+      : []),
+  ],
   upload: {
     limits: {
       fileSize: 1024 * 1024 * 5, // 5MB
