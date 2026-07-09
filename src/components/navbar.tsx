@@ -44,14 +44,6 @@ export default function Navbar({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
 
     return (
         <div>
-            {/* Flag Icons 
-            https://www.npmjs.com/package/flag-icons
-            https://flagicons.lipis.dev/
-            */}
-            <link
-                rel="stylesheet"
-                href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
-            />
             <nav className={`fixed w-full z-50 transition-[background,backdrop-filter,border] duration-500 ease-out ${menuOpen
                 ? 'bg-black'
                 : isScrolled

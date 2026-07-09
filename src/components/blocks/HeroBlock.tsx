@@ -22,6 +22,8 @@ export function HeroBlock(props: HeroBlockType) {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
+                    poster={media?.url || '/LandingPageImage2.jpg'}
                     className="absolute inset-0 w-full h-full object-cover"
                 >
                     <source src={backgroundSrc || ''} type="video/mp4" />
