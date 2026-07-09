@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" width="400" height="225">
+  <rect width="400" height="225" rx="8" fill="#18181b"/>
+  <rect x="140" y="20" width="120" height="12" rx="4" fill="#fafafa"/>
+  <rect x="40" y="48" width="320" height="30" rx="6" fill="#27272a"/>
+  <rect x="56" y="59" width="100" height="8" rx="3" fill="#facc15"/>
+  <path d="M340 58 L346 66 L352 58" fill="none" stroke="#a1a1aa" stroke-width="2"/>
+  <rect x="40" y="86" width="320" height="30" rx="6" fill="#27272a"/>
+  <rect x="56" y="97" width="120" height="8" rx="3" fill="#e4e4e7"/>
+  <path d="M340 96 L346 104 L352 96" fill="none" stroke="#a1a1aa" stroke-width="2"/>
+  <rect x="40" y="124" width="320" height="30" rx="6" fill="#27272a"/>
+  <rect x="56" y="135" width="90" height="8" rx="3" fill="#e4e4e7"/>
+  <path d="M340 134 L346 142 L352 134" fill="none" stroke="#a1a1aa" stroke-width="2"/>
+  <rect x="40" y="162" width="320" height="30" rx="6" fill="#27272a"/>
+  <rect x="56" y="173" width="110" height="8" rx="3" fill="#e4e4e7"/>
+  <path d="M340 172 L346 180 L352 172" fill="none" stroke="#a1a1aa" stroke-width="2"/>
+  <text x="200" y="215" text-anchor="middle" fill="#a1a1aa" font-family="sans-serif" font-size="13">Speisekarte (Akkordeon)</text>
+</svg>

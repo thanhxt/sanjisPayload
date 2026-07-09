@@ -12,6 +12,8 @@ import { TeamBlock } from "./TeamBlock";
 import { ContactBlock } from "./ContactBlock";
 import { ColumnsBlock } from "./ColumnsBlock";
 import { MediaBlock } from "./MediaBlock";
+import { MenuBlock } from "./MenuBlock";
+import { VoucherBlock } from "./VoucherBlock";
 import type { ColumnsBlockType } from "../../../payload-types";
 
 type LayoutBlock = NonNullable<Page['layout']>[number];
@@ -52,6 +54,10 @@ export function BlockRenderer({ blocks }: { blocks: (LayoutBlock | ColumnBlock)[
                         return <ContactBlock key={key} {...block} />;
                     case 'columns':
                         return <ColumnsBlock key={key} {...block} />;
+                    case 'menu':
+                        return <MenuBlock key={key} {...block} />;
+                    case 'voucher':
+                        return <VoucherBlock key={key} {...block} />;
                     default:
                         return null;
                 }

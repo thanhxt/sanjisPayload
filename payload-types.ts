@@ -181,6 +181,8 @@ export interface Page {
         | TeamBlockType
         | ContactBlockType
         | ColumnsBlockType
+        | MenuBlockType
+        | VoucherBlockType
       )[]
     | null;
   /**
@@ -529,6 +531,32 @@ export interface ColumnsBlockType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'columns';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MenuBlockType".
+ */
+export interface MenuBlockType {
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'menu';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VoucherBlockType".
+ */
+export interface VoucherBlockType {
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'voucher';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1109,6 +1137,8 @@ export interface PagesSelect<T extends boolean = true> {
         team?: T | TeamBlockTypeSelect<T>;
         contact?: T | ContactBlockTypeSelect<T>;
         columns?: T | ColumnsBlockTypeSelect<T>;
+        menu?: T | MenuBlockTypeSelect<T>;
+        voucher?: T | VoucherBlockTypeSelect<T>;
       };
   showInNav?: T;
   navOrder?: T;
@@ -1337,6 +1367,24 @@ export interface ColumnsBlockTypeSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MenuBlockType_select".
+ */
+export interface MenuBlockTypeSelect<T extends boolean = true> {
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VoucherBlockType_select".
+ */
+export interface VoucherBlockTypeSelect<T extends boolean = true> {
+  anchorId?: T;
   id?: T;
   blockName?: T;
 }
