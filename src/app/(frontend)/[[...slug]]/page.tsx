@@ -2,7 +2,8 @@ import { cache } from "react";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { draftMode } from "next/headers";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { findRedirectTarget } from "@/lib/redirects";
 import type { Metadata } from "next";
 import type { Page as PageType } from "../../../../payload-types";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer";
@@ -85,6 +86,11 @@ export default async function Page({ params }: Args) {
         // Keeps the start page alive until the 'home' page document
         // has been created (see npm run seed:pages).
         if (slug === 'home') return <HomeFallback />;
+
+        // Renamed pages leave a redirect behind (see Redirects collection).
+        const target = await findRedirectTarget(await getPayload({ config }), slug);
+        if (target) redirect(target);
+
         notFound();
     }
 
