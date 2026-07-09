@@ -5,6 +5,15 @@ export async function POST(request: Request) {
 
     const { email, subject, msg, name } =  await request.json();
 
+    if (typeof email !== 'string' || email.trim() === '' || typeof msg !== 'string' || msg.trim() === '') {
+        return NextResponse.json({ error: 'Missing email or message' }, { status: 400 });
+    }
+
+    if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASSWORD) {
+        console.error('[EMAIL:NODE] ❌ Missing email environment variables');
+        return NextResponse.json({ error: 'Email is not configured' }, { status: 500 });
+    }
+
     const message = {
         from: `Sanjis <${process.env.EMAIL_FROM}>`,
         to: process.env.EMAIL_FROM,

@@ -46,9 +46,7 @@ export default function Contact() {
         if (!showCaptcha) return;
 
         const handleCaptchaSolve = (e) => {
-            const token = e.detail.token;
-            setCaptchaToken(token);
-            sendCaptcha(token);
+            sendCaptcha(e.detail.token);
         };
 
         // Wait for the widget to be available
@@ -71,12 +69,27 @@ export default function Contact() {
     }, [showCaptcha]);
 
     const sendCaptcha = async (token) => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-captcha`, {
-            method: "POST",
-            body: JSON.stringify({ token }),
-        });
-        const data = await res.json();
-        console.log(data.message || data.error);
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-captcha`, {
+                method: "POST",
+                body: JSON.stringify({ token }),
+            });
+            const data = await res.json();
+            console.log(data.message || data.error);
+
+            // Only accept the token once the server confirmed it.
+            if (res.ok && data.success) {
+                setCaptchaToken(token);
+                setShowCaptchaAlert(false);
+            } else {
+                setCaptchaToken('');
+                setShowCaptchaAlert(true);
+            }
+        } catch (error) {
+            console.error('Captcha verification failed:', error);
+            setCaptchaToken('');
+            setShowCaptchaAlert(true);
+        }
     };
 
     const sendEmail = async () => {
