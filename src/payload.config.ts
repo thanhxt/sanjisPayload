@@ -21,6 +21,7 @@ import { Gallery } from './collections/gallery'
 import { OpeningTimes } from './collections/openingTimes'
 import { ConsentLogs } from './collections/consentLogs'
 import { Pages } from './collections/pages'
+import { Redirects } from './collections/redirects'
 import { Announcement } from './globals/announcement'
 
 export default buildConfig({
@@ -30,6 +31,7 @@ export default buildConfig({
   // Define and configure your collections in this array
   collections: [
     Pages,
+    Redirects,
     Team,
     Media,
     Hero,

@@ -41,3 +41,53 @@ export const afterChangeHook: CollectionAfterChangeHook = async ({ doc, previous
 
   return doc
 }
+
+/**
+ * When a published page's slug changes, keep the old path working by
+ * creating (or retargeting) a redirect from the old slug to the new one.
+ */
+export const createRedirectOnSlugChange: CollectionAfterChangeHook = async ({ doc, previousDoc, req }) => {
+  if (doc._status !== 'published') return doc
+
+  const oldSlug = previousDoc?.slug
+  if (!oldSlug || oldSlug === doc.slug || oldSlug === 'home') return doc
+
+  try {
+    const existing = await req.payload.find({
+      collection: 'redirects',
+      where: { from: { equals: oldSlug } },
+      limit: 1,
+    })
+
+    if (existing.docs.length > 0) {
+      await req.payload.update({
+        collection: 'redirects',
+        id: existing.docs[0].id,
+        data: { to: doc.slug },
+      })
+    } else {
+      await req.payload.create({
+        collection: 'redirects',
+        data: { from: oldSlug, to: doc.slug },
+      })
+    }
+
+    // Redirects pointing at the old slug would now chain; retarget them.
+    const chained = await req.payload.find({
+      collection: 'redirects',
+      where: { to: { equals: oldSlug } },
+      limit: 100,
+    })
+    for (const redirectDoc of chained.docs) {
+      await req.payload.update({
+        collection: 'redirects',
+        id: redirectDoc.id,
+        data: { to: doc.slug },
+      })
+    }
+  } catch (error) {
+    console.warn(`[REDIRECTS] Could not create redirect ${oldSlug} -> ${doc.slug}`, error)
+  }
+
+  return doc
+}

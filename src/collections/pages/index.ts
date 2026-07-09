@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { checkRole } from '../user/access/checkRole'
 import { allBlocks } from '@/blocks'
 import { generatePreviewPath } from '@/lib/preview'
-import { afterChangeHook, formatSlug } from './hooks'
+import { afterChangeHook, createRedirectOnSlugChange, formatSlug } from './hooks'
 
 /**
  * Pages are built from an editable array of layout blocks and rendered
@@ -105,6 +105,6 @@ export const Pages: CollectionConfig = {
     },
   ],
   hooks: {
-    afterChange: [afterChangeHook],
+    afterChange: [afterChangeHook, createRedirectOnSlugChange],
   },
 }
