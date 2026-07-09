@@ -12,7 +12,7 @@ import { TeamBlock } from "./TeamBlock";
 import { ContactBlock } from "./ContactBlock";
 import { ColumnsBlock } from "./ColumnsBlock";
 import { MediaBlock } from "./MediaBlock";
-import { MenuBlock } from "./MenuBlock";
+import { MenuSectionBlock } from "./MenuSectionBlock";
 import { VoucherBlock } from "./VoucherBlock";
 import type { ColumnsBlockType } from "../../../payload-types";
 
@@ -54,8 +54,8 @@ export function BlockRenderer({ blocks }: { blocks: (LayoutBlock | ColumnBlock)[
                         return <ContactBlock key={key} {...block} />;
                     case 'columns':
                         return <ColumnsBlock key={key} {...block} />;
-                    case 'menu':
-                        return <MenuBlock key={key} {...block} />;
+                    case 'menuSection':
+                        return <MenuSectionBlock key={key} {...block} />;
                     case 'voucher':
                         return <VoucherBlock key={key} {...block} />;
                     default:

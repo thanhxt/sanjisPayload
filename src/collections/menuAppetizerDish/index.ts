@@ -35,6 +35,7 @@ export const MenuAppetizerDish: CollectionConfig = {
     },
   ],
   admin: {
+    hidden: true, // superseded by the menuSection blocks in the Pages tab (kept for migrate:menu)
     useAsTitle: 'title',
     group: 'Menu',
     description: 'Manage appetizer dishes',

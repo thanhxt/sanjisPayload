@@ -54,6 +54,7 @@ export const MenuSanjisChoice: CollectionConfig = {
     },
   ],
   admin: {
+    hidden: true, // superseded by the menuSection blocks in the Pages tab (kept for migrate:menu)
     useAsTitle: 'titleDE',
     group: 'Menu',
     description: 'Manage sanjis choice',

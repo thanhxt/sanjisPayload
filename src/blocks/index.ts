@@ -11,7 +11,7 @@ import { TeamBlock } from './TeamBlock'
 import { ContactBlock } from './ContactBlock'
 import { ColumnsBlock } from './ColumnsBlock'
 import { MediaBlock } from './MediaBlock'
-import { MenuBlock } from './MenuBlock'
+import { MenuSectionBlock } from './MenuSectionBlock'
 import { VoucherBlock } from './VoucherBlock'
 
 export const allBlocks: Block[] = [
@@ -27,6 +27,6 @@ export const allBlocks: Block[] = [
   TeamBlock,
   ContactBlock,
   ColumnsBlock,
-  MenuBlock,
+  MenuSectionBlock,
   VoucherBlock,
 ]

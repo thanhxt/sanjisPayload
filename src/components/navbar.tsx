@@ -15,9 +15,9 @@ export default function Navbar({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
     const { language, setLanguage } = useLanguage();
 
     // Static routes always exist; CMS pages (showInNav) follow after them.
+    // The Speisekarte is a CMS page since the menuSection blocks migration.
     const links: NavLink[] = [
         { href: '/', label: { de: 'Startseite', en: 'Home' } },
-        { href: '/speisekarte', label: { de: 'Speisekarte', en: 'Menu' } },
         { href: '/voucher', label: { de: 'Gutschein', en: 'Voucher' } },
         ...cmsLinks,
     ];

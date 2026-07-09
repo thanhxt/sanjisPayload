@@ -181,7 +181,7 @@ export interface Page {
         | TeamBlockType
         | ContactBlockType
         | ColumnsBlockType
-        | MenuBlockType
+        | MenuSectionBlockType
         | VoucherBlockType
       )[]
     | null;
@@ -534,16 +534,76 @@ export interface ColumnsBlockType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MenuBlockType".
+ * via the `definition` "MenuSectionBlockType".
  */
-export interface MenuBlockType {
+export interface MenuSectionBlockType {
+  heading: {
+    de: string;
+    en: string;
+  };
+  /**
+   * Groups inside this section, e.g. 'Steak Cuts', 'Sharing Steaks', 'Beilagen'. A simple section has one group without a title.
+   */
+  groups?:
+    | {
+        title?: {
+          de?: string | null;
+          en?: string | null;
+        };
+        intro?: {
+          de?: string | null;
+          en?: string | null;
+        };
+        layout: 'list' | 'cards';
+        items?:
+          | {
+              name: string;
+              subtitle?: {
+                de?: string | null;
+                en?: string | null;
+              };
+              description?: {
+                de?: string | null;
+                en?: string | null;
+              };
+              region?: {
+                de?: string | null;
+                en?: string | null;
+              };
+              prices?:
+                | {
+                    /**
+                     * Optional, e.g. '300g' or 'Bistro Filet'.
+                     */
+                    label?: string | null;
+                    /**
+                     * Free text, e.g. '24,90' or '39 pro 100g'.
+                     */
+                    price: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              /**
+               * Render as a highlighted box (like Sanji's Choice).
+               */
+              highlight?: boolean | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  note?: {
+    de?: string | null;
+    en?: string | null;
+  };
   /**
    * Optional HTML id for this section (used for anchor links).
    */
   anchorId?: string | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'menu';
+  blockType: 'menuSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1137,7 +1197,7 @@ export interface PagesSelect<T extends boolean = true> {
         team?: T | TeamBlockTypeSelect<T>;
         contact?: T | ContactBlockTypeSelect<T>;
         columns?: T | ColumnsBlockTypeSelect<T>;
-        menu?: T | MenuBlockTypeSelect<T>;
+        menuSection?: T | MenuSectionBlockTypeSelect<T>;
         voucher?: T | VoucherBlockTypeSelect<T>;
       };
   showInNav?: T;
@@ -1372,9 +1432,71 @@ export interface ColumnsBlockTypeSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MenuBlockType_select".
+ * via the `definition` "MenuSectionBlockType_select".
  */
-export interface MenuBlockTypeSelect<T extends boolean = true> {
+export interface MenuSectionBlockTypeSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  groups?:
+    | T
+    | {
+        title?:
+          | T
+          | {
+              de?: T;
+              en?: T;
+            };
+        intro?:
+          | T
+          | {
+              de?: T;
+              en?: T;
+            };
+        layout?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              subtitle?:
+                | T
+                | {
+                    de?: T;
+                    en?: T;
+                  };
+              description?:
+                | T
+                | {
+                    de?: T;
+                    en?: T;
+                  };
+              region?:
+                | T
+                | {
+                    de?: T;
+                    en?: T;
+                  };
+              prices?:
+                | T
+                | {
+                    label?: T;
+                    price?: T;
+                    id?: T;
+                  };
+              highlight?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  note?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
   anchorId?: T;
   id?: T;
   blockName?: T;

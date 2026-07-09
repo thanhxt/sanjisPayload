@@ -62,11 +62,6 @@ export default function Footer({ cmsLinks = [] }: { cmsLinks?: NavLink[] }) {
             <h2 className="font-bold tracking-widest mb-2 text-lg">{t.links[language]}</h2>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/speisekarte" className="hover:text-yellow-400 hover:underline">
-                  {t.menu[language]}
-                </Link>
-              </li>
-              <li>
                 <Link href="/voucher" className="hover:text-yellow-400 hover:underline">
                   {t.voucher[language]}
                 </Link>
