@@ -13,9 +13,7 @@ async function fetchClientSecret() {
       ui_mode: 'embedded',
       line_items: [
         {
-          // Provide the exact Price ID (for example, price_1234) of
-          // the product you want to sell
-          price: process.env.STRIPE_PRICE_ID, // Replace with your actual Price ID
+          price: process.env.STRIPE_PRICE_ID,
           quantity: 1
         }
       ],
@@ -28,6 +26,14 @@ async function fetchClientSecret() {
 
 // HTTP handler for the API route
 export async function POST(request: NextRequest) {
+  if (!process.env.STRIPE_PRICE_ID || !process.env.STRIPE_SECRET_KEY) {
+    console.error('[STRIPE:SESSION] ❌ STRIPE_PRICE_ID and/or STRIPE_SECRET_KEY are not configured')
+    return NextResponse.json(
+      { error: 'Payment is not configured' },
+      { status: 500 }
+    )
+  }
+
   try {
     const clientSecret = await fetchClientSecret()
     return NextResponse.json({ clientSecret })

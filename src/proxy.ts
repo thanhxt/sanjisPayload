@@ -7,6 +7,19 @@ const ipCache = new Map<string, { count: number; lastRequest: number }>()
 const MAX_REQUESTS = 20 // Maximum requests per window (anonymous traffic)
 const ADMIN_MAX_REQUESTS = 600 // Admin panel traffic (autosave + live preview are chatty)
 const WINDOW_MS = 60 * 1000 // 1 minute window
+const MAX_CACHE_ENTRIES = 5000 // Prune expired entries beyond this to bound memory
+
+/** Test-only helper to start from a clean slate. */
+export const resetRateLimit = () => ipCache.clear()
+
+const pruneExpiredEntries = (now: number) => {
+  if (ipCache.size <= MAX_CACHE_ENTRIES) return
+  for (const [key, value] of ipCache) {
+    if (now - value.lastRequest > WINDOW_MS) {
+      ipCache.delete(key)
+    }
+  }
+}
 
 // These routes trigger emails/payments and always use the strict limit,
 // even when a (potentially forged) admin session cookie is present.
@@ -43,6 +56,7 @@ export function proxy(request: NextRequest) {
     const cacheKey = `${ip}|${maxRequests}`
 
     const now = Date.now()
+    pruneExpiredEntries(now)
     const rateData = ipCache.get(cacheKey)
 
     if (!rateData) {

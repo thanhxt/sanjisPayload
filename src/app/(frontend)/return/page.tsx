@@ -51,123 +51,116 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
       const customerEmail = customer_details?.email || 'Ihre E-Mail-Adresse'
       const customerName = customer_details?.name || undefined
       const customerPhone = customer_details?.phone || undefined
-      
-      // Create order in database
+
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+      const internalHeaders = {
+        'Authorization': `Bearer ${process.env.INTERNAL_API_SECRET}`,
+        'Content-Type': 'application/json',
+      }
+
+      const orderItems = line_items?.data?.map(item => ({
+        itemName: item.description || 'Unknown Item',
+        quantity: item.quantity || 1,
+        unitPrice: (item.amount_total || 0) / (item.quantity || 1) / 100, // Calculate unit price from total
+        totalPrice: (item.amount_total || 0) / 100, // Convert from cents
+      })) || []
+
+      // The payment already succeeded at this point; the steps below are
+      // fulfillment. Each step is tracked so the page can tell the customer
+      // when something needs manual follow-up instead of pretending success.
+      let orderOk = false
+      let voucherOk = false
+      let emailOk = false
+
+      let orderId: string | undefined
       try {
-        const orderItems = line_items?.data?.map(item => ({
-          itemName: item.description || 'Unknown Item',
-          quantity: item.quantity || 1,
-          unitPrice: (item.amount_total || 0) / (item.quantity || 1) / 100, // Calculate unit price from total
-          totalPrice: (item.amount_total || 0) / 100, // Convert from cents
-        })) || []
-
-        const orderData = {
-          sessionId: session_id,
-          amount: (amount_total || 0) / 100, // Convert from cents
-          currency: currency?.toUpperCase() || 'EUR',
-          customerEmail: customerEmail,
-          customerName: customerName,
-          customerPhone: customerPhone,
-          orderItems: orderItems,
-          notes: `Stripe Session: ${session_id}`
-        }
-
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/create-order`, {
+        const response = await fetch(`${baseUrl}/api/create-order`, {
           method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${process.env.INTERNAL_API_SECRET}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(orderData),
+          headers: internalHeaders,
+          body: JSON.stringify({
+            sessionId: session_id,
+            amount: (amount_total || 0) / 100, // Convert from cents
+            currency: currency?.toUpperCase() || 'EUR',
+            customerEmail: customerEmail,
+            customerName: customerName,
+            customerPhone: customerPhone,
+            orderItems: orderItems,
+            notes: `Stripe Session: ${session_id}`,
+          }),
         })
 
-        if (!response.ok) {
-          console.error('Failed to create order in database')
-        } else {
+        if (response.ok) {
           const result = await response.json()
-          if (result.isDuplicate) {
-            console.log('Order already exists in database:', result.orderId)
-          } else {
-            console.log('Order created successfully:', result.orderId)
-          }
-
-          // Create voucher for the order
-          try {
-            const voucherData = {
-              orderId: result.orderId,
-              value: (amount_total || 0) / 100, // Same value as order amount
-              currency: currency?.toUpperCase() || 'EUR',
-              customerEmail: customerEmail,
-              description: `Voucher for successful payment - Session: ${session_id}`
-            }
-
-            const voucherResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/create-voucher`, {
-              method: 'POST',
-              headers: {
-            'Authorization': `Bearer ${process.env.INTERNAL_API_SECRET}`,
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(voucherData),
-            })
-
-            if (!voucherResponse.ok) {
-              console.error('Failed to create voucher in database')
-            } else {
-              const voucherResult = await voucherResponse.json()
-              if (voucherResult.isDuplicate) {
-                console.log('Voucher already exists in database:', voucherResult.voucherCode)
-              } else {
-                console.log('Voucher created successfully:', voucherResult.voucherCode)
-              }
-
-              // Send order confirmation email with voucher details
-              try {
-                const emailData = {
-                  customerEmail: customerEmail,
-                  customerName: customerName,
-                  orderId: result.orderId,
-                  orderAmount: (amount_total || 0) / 100,
-                  currency: currency?.toUpperCase() || 'EUR',
-                  voucherCode: voucherResult.voucherCode,
-                  voucherValue: (amount_total || 0) / 100,
-                  expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
-                  orderItems: orderItems
-                }
-
-                const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/send-order-confirmation`, {
-                  method: 'POST',
-                  headers: {
-            'Authorization': `Bearer ${process.env.INTERNAL_API_SECRET}`,
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(emailData),
-                })
-
-                if (!emailResponse.ok) {
-                  console.error('Failed to send order confirmation email')
-                } else {
-                  const emailResult = await emailResponse.json()
-                  if (emailResult.isDuplicate) {
-                    console.log('Order confirmation email already sent for this order')
-                  } else {
-                    console.log('Order confirmation email sent successfully')
-                  }
-                }
-              } catch (emailError) {
-                console.error('Error sending order confirmation email:', emailError)
-                // Continue with the success page even if email sending fails
-              }
-            }
-          } catch (voucherError) {
-            console.error('Error creating voucher in database:', voucherError)
-            // Continue with the success page even if voucher creation fails
-          }
+          orderId = result.orderId
+          orderOk = true
+          console.log(result.isDuplicate ? `Order already exists in database: ${result.orderId}` : `Order created successfully: ${result.orderId}`)
+        } else {
+          console.error('Failed to create order in database')
         }
       } catch (dbError) {
         console.error('Error creating order in database:', dbError)
-        // Continue with the success page even if database creation fails
       }
-      
+
+      let voucherCode: string | undefined
+      if (orderOk) {
+        try {
+          const voucherResponse = await fetch(`${baseUrl}/api/create-voucher`, {
+            method: 'POST',
+            headers: internalHeaders,
+            body: JSON.stringify({
+              orderId: orderId,
+              value: (amount_total || 0) / 100, // Same value as order amount
+              currency: currency?.toUpperCase() || 'EUR',
+              customerEmail: customerEmail,
+              description: `Voucher for successful payment - Session: ${session_id}`,
+            }),
+          })
+
+          if (voucherResponse.ok) {
+            const voucherResult = await voucherResponse.json()
+            voucherCode = voucherResult.voucherCode
+            voucherOk = true
+            console.log(voucherResult.isDuplicate ? `Voucher already exists in database: ${voucherResult.voucherCode}` : `Voucher created successfully: ${voucherResult.voucherCode}`)
+          } else {
+            console.error('Failed to create voucher in database')
+          }
+        } catch (voucherError) {
+          console.error('Error creating voucher in database:', voucherError)
+        }
+      }
+
+      if (voucherOk) {
+        try {
+          const emailResponse = await fetch(`${baseUrl}/api/send-order-confirmation`, {
+            method: 'POST',
+            headers: internalHeaders,
+            body: JSON.stringify({
+              customerEmail: customerEmail,
+              customerName: customerName,
+              orderId: orderId,
+              orderAmount: (amount_total || 0) / 100,
+              currency: currency?.toUpperCase() || 'EUR',
+              voucherCode: voucherCode,
+              voucherValue: (amount_total || 0) / 100,
+              expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
+              orderItems: orderItems,
+            }),
+          })
+
+          if (emailResponse.ok) {
+            const emailResult = await emailResponse.json()
+            emailOk = true
+            console.log(emailResult.isDuplicate ? 'Order confirmation email already sent for this order' : 'Order confirmation email sent successfully')
+          } else {
+            console.error('Failed to send order confirmation email')
+          }
+        } catch (emailError) {
+          console.error('Error sending order confirmation email:', emailError)
+        }
+      }
+
+      const fulfillmentOk = orderOk && voucherOk && emailOk
+
       return (
         <div className="min-h-screen bg-black text-white py-20">
           {/* Background with subtle pattern */}
@@ -221,30 +214,49 @@ export default async function Return({ searchParams }: { searchParams: Promise<{
                   </div>
                 </div>
 
-                {/* Next Steps */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-medium mb-4 text-center">Was passiert als nächstes?</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <Mail className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
-                      <div>
-                        <p className="font-medium">Bestätigungs-E-Mail</p>
-                        <p className="text-sm text-gray-400">
-                          Eine detaillierte Bestellbestätigung wird an {customerEmail} gesendet.
-                        </p>
+                {/* Next Steps / Fulfillment warning */}
+                {fulfillmentOk ? (
+                  <div className="mb-8">
+                    <h3 className="text-lg font-medium mb-4 text-center">Was passiert als nächstes?</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-start space-x-3">
+                        <Mail className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium">Bestätigungs-E-Mail</p>
+                          <p className="text-sm text-gray-400">
+                            Eine detaillierte Bestellbestätigung wird an {customerEmail} gesendet.
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <Clock className="w-5 h-5 text-yellow-400 mt-1 flex-shrink-0" />
-                      <div>
-                        <p className="font-medium">Verarbeitung</p>
-                        <p className="text-sm text-gray-400">
-                          Ihre Bestellung wird schnellstmöglich bearbeitet und vorbereitet.
-                        </p>
+                      <div className="flex items-start space-x-3">
+                        <Clock className="w-5 h-5 text-yellow-400 mt-1 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium">Verarbeitung</p>
+                          <p className="text-sm text-gray-400">
+                            Ihre Bestellung wird schnellstmöglich bearbeitet und vorbereitet.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="mb-8 border border-yellow-500/40 bg-yellow-500/10 rounded-xl p-6">
+                    <h3 className="text-lg font-medium mb-2 text-yellow-300">Wichtiger Hinweis zu Ihrer Bestellung</h3>
+                    <p className="text-sm text-gray-300 mb-2">
+                      Ihre Zahlung war erfolgreich, aber bei der automatischen Verarbeitung Ihrer
+                      Bestellung ist leider ein Fehler aufgetreten
+                      {!emailOk && voucherOk ? ' (die Bestätigungs-E-Mail konnte nicht gesendet werden)' : ''}.
+                      Bitte kontaktieren Sie uns unter{' '}
+                      <a href="mailto:info@sanjiskitchen.de" className="text-yellow-300 underline">info@sanjiskitchen.de</a>{' '}
+                      und geben Sie Ihre Bestellnummer <span className="font-mono">{session_id.slice(-8)}</span> an —
+                      wir kümmern uns umgehend darum.
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      Your payment was successful, but we could not finish processing your order automatically.
+                      Please contact us at info@sanjiskitchen.de and include your order number {session_id.slice(-8)}.
+                    </p>
+                  </div>
+                )}
 
                 {/* Contact Information */}
                 <div className="bg-gray-800/30 rounded-xl p-6 mb-8">
