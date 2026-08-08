@@ -110,7 +110,8 @@ export default function Contact() {
                     email,
                     subject,
                     msg,
-                    name
+                    name,
+                    captchaToken
                 }),
             });
             if (!res.ok) {

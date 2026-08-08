@@ -75,9 +75,6 @@ export async function POST(request: NextRequest) {
         user: process.env.EMAIL_FROM,
         pass: process.env.EMAIL_PASSWORD,
       },
-      tls: {
-        rejectUnauthorized: false,
-      },
       // Additional Gmail-specific settings
       pool: true,
       maxConnections: 1,
