@@ -8,9 +8,9 @@ import { checkRole } from '../user/access/checkRole'
 export const Voucher: CollectionConfig = {
   slug: 'vouchers',
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => checkRole(['admin', 'editor'], user),
     create: ({ req: { user } }) => checkRole(['admin','editor'], user),
-    update: () => true,
+    update: ({ req: { user } }) => checkRole(['admin','editor'], user),
     delete: ({ req: { user } }) => checkRole(['admin','editor'], user),
   },
   timestamps: true,

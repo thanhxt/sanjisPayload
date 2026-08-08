@@ -8,11 +8,11 @@ import { checkRole } from '../user/access/checkRole'
 export const Order: CollectionConfig = {
   slug: 'orders',
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => checkRole(['admin', 'editor'], user),
     create: ({ req: { user } }) => checkRole(['admin'], user),
     update: ({ req: { user } }) => checkRole(['admin'], user),
     delete: ({ req: { user } }) => checkRole(['admin'], user),
-    
+
   },
   fields: [
     {
