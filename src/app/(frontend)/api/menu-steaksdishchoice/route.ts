@@ -3,6 +3,9 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import { SteaksDishChoice } from "@/type/steaksDishChoiceType";
 
+// Menu data changes rarely; cache the response and bust via /api/revalidate.
+export const revalidate = 3600;
+
 export async function GET() {
     try {
         const payload = await getPayload({ config });
