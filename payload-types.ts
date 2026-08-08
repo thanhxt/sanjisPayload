@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    pages: Page;
     team: Team;
     media: Media;
     hero: Hero;
@@ -90,6 +91,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    pages: PagesSelect<false> | PagesSelect<true>;
     team: TeamSelect<false> | TeamSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -115,8 +117,12 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    announcement: Announcement;
+  };
+  globalsSelect: {
+    announcement: AnnouncementSelect<false> | AnnouncementSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -146,16 +152,83 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Build pages from layout blocks. Changes appear live in the preview panel.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "team".
+ * via the `definition` "pages".
  */
-export interface Team {
+export interface Page {
   id: string;
-  Mitarbeiter: string;
-  Bild: string | Media;
-  beschreibung?: string | null;
+  title: string;
+  /**
+   * URL path of the page (e.g. 'about'). Use 'home' for the start page.
+   */
+  slug: string;
+  /**
+   * The sections of this page, rendered top to bottom.
+   */
+  layout?:
+    | (
+        | HeroBlockType
+        | PageHeaderBlockType
+        | ContentBlockType
+        | MediaBlockType
+        | RichTextBlockType
+        | CallToActionBlockType
+        | GalleryBlockType
+        | ReservationsBlockType
+        | MapsBlockType
+        | TeamBlockType
+        | ContactBlockType
+        | ColumnsBlockType
+      )[]
+    | null;
+  /**
+   * Show a link to this page in the navbar and footer.
+   */
+  showInNav?: boolean | null;
+  /**
+   * Sort order of the link in the navbar (lower = further left).
+   */
+  navOrder?: number | null;
+  navLabel?: {
+    de?: string | null;
+    en?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlockType".
+ */
+export interface HeroBlockType {
+  backgroundType: 'video' | 'image';
+  /**
+   * Background image from the media library.
+   */
+  backgroundImage?: (string | null) | Media;
+  /**
+   * Path to a file in /public (e.g. /LandingPageVideo2.MOV). Used for videos or when no media is selected.
+   */
+  backgroundSrc?: string | null;
+  /**
+   * Show the Sanji's logo in the center.
+   */
+  showLogo?: boolean | null;
+  heading?: {
+    de?: string | null;
+    en?: string | null;
+  };
+  showScrollIndicator?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -201,6 +274,273 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PageHeaderBlockType".
+ */
+export interface PageHeaderBlockType {
+  heading: {
+    de: string;
+    en: string;
+  };
+  /**
+   * Background image from the media library.
+   */
+  image?: (string | null) | Media;
+  /**
+   * Alternatively: title of an entry in the Hero collection (e.g. 'kontaktHero'). Used when no image is selected.
+   */
+  heroSlug?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pageHeader';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockType".
+ */
+export interface ContentBlockType {
+  heading: {
+    de: string;
+    en: string;
+  };
+  body?: {
+    de?: string | null;
+    en?: string | null;
+  };
+  /**
+   * Image from the media library.
+   */
+  image?: (string | null) | Media;
+  /**
+   * Alternatively: title of an entry in the Hero collection (e.g. 'aboutHero'). Used when no image is selected.
+   */
+  heroSlug?: string | null;
+  /**
+   * Alternatively: path to an image in /public (e.g. /LandingPageImage1.jpg).
+   */
+  staticSrc?: string | null;
+  imagePosition?: ('right' | 'left') | null;
+  cta?: {
+    label?: {
+      de?: string | null;
+      en?: string | null;
+    };
+    url?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlockType".
+ */
+export interface MediaBlockType {
+  /**
+   * Image from the media library.
+   */
+  media?: (string | null) | Media;
+  /**
+   * Alternatively: path to a file in /public (e.g. /gallery1.mp4). Videos (.mp4/.mov/.webm) play automatically without sound.
+   */
+  staticSrc?: string | null;
+  size?: ('contained' | 'full') | null;
+  caption?: {
+    de?: string | null;
+    en?: string | null;
+  };
+  link?: {
+    url?: string | null;
+    /**
+     * Open the link in a new tab.
+     */
+    newTab?: boolean | null;
+  };
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaOnly';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlockType".
+ */
+export interface RichTextBlockType {
+  content?: {
+    de?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    en?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlockType".
+ */
+export interface CallToActionBlockType {
+  heading: {
+    de: string;
+    en: string;
+  };
+  text?: {
+    de?: string | null;
+    en?: string | null;
+  };
+  buttons?:
+    | {
+        label: {
+          de: string;
+          en: string;
+        };
+        url: string;
+        /**
+         * Open the link in a new tab.
+         */
+        newTab?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlockType".
+ */
+export interface GalleryBlockType {
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ReservationsBlockType".
+ */
+export interface ReservationsBlockType {
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'reservations';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MapsBlockType".
+ */
+export interface MapsBlockType {
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'maps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlockType".
+ */
+export interface TeamBlockType {
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'team';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlockType".
+ */
+export interface ContactBlockType {
+  /**
+   * Optional HTML id for this section (used for anchor links).
+   */
+  anchorId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ColumnsBlockType".
+ */
+export interface ColumnsBlockType {
+  columns?:
+    | {
+        width: 'oneThird' | 'half' | 'twoThirds' | 'full';
+        content?:
+          | (
+              | RichTextBlockType
+              | CallToActionBlockType
+              | MediaBlockType
+              | GalleryBlockType
+              | ReservationsBlockType
+              | MapsBlockType
+              | TeamBlockType
+              | ContactBlockType
+            )[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'columns';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team".
+ */
+export interface Team {
+  id: string;
+  Mitarbeiter: string;
+  Bild: string | Media;
+  beschreibung?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -638,6 +978,10 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
+        relationTo: 'pages';
+        value: string | Page;
+      } | null)
+    | ({
         relationTo: 'team';
         value: string | Team;
       } | null)
@@ -742,6 +1086,259 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  layout?:
+    | T
+    | {
+        hero?: T | HeroBlockTypeSelect<T>;
+        pageHeader?: T | PageHeaderBlockTypeSelect<T>;
+        mediaText?: T | ContentBlockTypeSelect<T>;
+        mediaOnly?: T | MediaBlockTypeSelect<T>;
+        richText?: T | RichTextBlockTypeSelect<T>;
+        cta?: T | CallToActionBlockTypeSelect<T>;
+        gallery?: T | GalleryBlockTypeSelect<T>;
+        reservations?: T | ReservationsBlockTypeSelect<T>;
+        maps?: T | MapsBlockTypeSelect<T>;
+        team?: T | TeamBlockTypeSelect<T>;
+        contact?: T | ContactBlockTypeSelect<T>;
+        columns?: T | ColumnsBlockTypeSelect<T>;
+      };
+  showInNav?: T;
+  navOrder?: T;
+  navLabel?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlockType_select".
+ */
+export interface HeroBlockTypeSelect<T extends boolean = true> {
+  backgroundType?: T;
+  backgroundImage?: T;
+  backgroundSrc?: T;
+  showLogo?: T;
+  heading?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  showScrollIndicator?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PageHeaderBlockType_select".
+ */
+export interface PageHeaderBlockTypeSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  image?: T;
+  heroSlug?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlockType_select".
+ */
+export interface ContentBlockTypeSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  body?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  image?: T;
+  heroSlug?: T;
+  staticSrc?: T;
+  imagePosition?: T;
+  cta?:
+    | T
+    | {
+        label?:
+          | T
+          | {
+              de?: T;
+              en?: T;
+            };
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlockType_select".
+ */
+export interface MediaBlockTypeSelect<T extends boolean = true> {
+  media?: T;
+  staticSrc?: T;
+  size?: T;
+  caption?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  link?:
+    | T
+    | {
+        url?: T;
+        newTab?: T;
+      };
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlockType_select".
+ */
+export interface RichTextBlockTypeSelect<T extends boolean = true> {
+  content?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlockType_select".
+ */
+export interface CallToActionBlockTypeSelect<T extends boolean = true> {
+  heading?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  text?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  buttons?:
+    | T
+    | {
+        label?:
+          | T
+          | {
+              de?: T;
+              en?: T;
+            };
+        url?: T;
+        newTab?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlockType_select".
+ */
+export interface GalleryBlockTypeSelect<T extends boolean = true> {
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ReservationsBlockType_select".
+ */
+export interface ReservationsBlockTypeSelect<T extends boolean = true> {
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MapsBlockType_select".
+ */
+export interface MapsBlockTypeSelect<T extends boolean = true> {
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlockType_select".
+ */
+export interface TeamBlockTypeSelect<T extends boolean = true> {
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlockType_select".
+ */
+export interface ContactBlockTypeSelect<T extends boolean = true> {
+  anchorId?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ColumnsBlockType_select".
+ */
+export interface ColumnsBlockTypeSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        width?: T;
+        content?:
+          | T
+          | {
+              richText?: T | RichTextBlockTypeSelect<T>;
+              cta?: T | CallToActionBlockTypeSelect<T>;
+              mediaOnly?: T | MediaBlockTypeSelect<T>;
+              gallery?: T | GalleryBlockTypeSelect<T>;
+              reservations?: T | ReservationsBlockTypeSelect<T>;
+              maps?: T | MapsBlockTypeSelect<T>;
+              team?: T | TeamBlockTypeSelect<T>;
+              contact?: T | ContactBlockTypeSelect<T>;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1085,6 +1682,64 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Shown as a speech bubble at the bottom right on every page while enabled. Visitors can dismiss it for their session.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcement".
+ */
+export interface Announcement {
+  id: string;
+  /**
+   * Show the speech bubble on the website.
+   */
+  enabled?: boolean | null;
+  message?: {
+    de?: string | null;
+    en?: string | null;
+  };
+  link?: {
+    label?: {
+      de?: string | null;
+      en?: string | null;
+    };
+    url?: string | null;
+    /**
+     * Open the link in a new tab.
+     */
+    newTab?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcement_select".
+ */
+export interface AnnouncementSelect<T extends boolean = true> {
+  enabled?: T;
+  message?:
+    | T
+    | {
+        de?: T;
+        en?: T;
+      };
+  link?:
+    | T
+    | {
+        label?:
+          | T
+          | {
+              de?: T;
+              en?: T;
+            };
+        url?: T;
+        newTab?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

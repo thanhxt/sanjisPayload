@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" width="400" height="225">
+  <rect width="400" height="225" rx="8" fill="#18181b"/>
+  <rect width="400" height="225" rx="8" fill="url(#g)" opacity="0.5"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#27272a"/>
+      <stop offset="1" stop-color="#09090b"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="95" r="34" fill="none" stroke="#facc15" stroke-width="3"/>
+  <text x="200" y="102" text-anchor="middle" fill="#facc15" font-family="sans-serif" font-size="18" font-weight="300">S</text>
+  <path d="M188 160 L200 172 L212 160" fill="none" stroke="#e4e4e7" stroke-width="3" stroke-linecap="round"/>
+  <text x="200" y="205" text-anchor="middle" fill="#a1a1aa" font-family="sans-serif" font-size="13">Fullscreen Video / Bild</text>
+</svg>

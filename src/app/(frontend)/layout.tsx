@@ -9,6 +9,9 @@ import { LanguageProvider } from "@/components/contexts/language-context";
 import { MenuContextProvider } from "@/components/contexts/menu-context";
 import "@/lib/init-cleanup";
 import Script from "next/script";
+import { getCmsNavLinks } from "@/lib/nav-links";
+import { getAnnouncement } from "@/lib/announcement";
+import AnnouncementBubble from "@/components/announcement-bubble";
 
 
 
@@ -56,11 +59,14 @@ export const metadata = {
 
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cmsLinks = await getCmsNavLinks();
+  const announcement = await getAnnouncement();
+
   const restaurantJsonLd = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
@@ -121,9 +127,10 @@ export default function RootLayout({
         />
         <LanguageProvider>
           <MenuContextProvider>
-            <Navbar />
+            <Navbar cmsLinks={cmsLinks} />
             {children}
-            <Footer />
+            <AnnouncementBubble announcement={announcement} />
+            <Footer cmsLinks={cmsLinks} />
           </MenuContextProvider>
           <CookieConsentComponent />
         </LanguageProvider>

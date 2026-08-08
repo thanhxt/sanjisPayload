@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" width="400" height="225">
+  <rect width="400" height="225" rx="8" fill="#18181b"/>
+  <rect x="140" y="22" width="120" height="12" rx="4" fill="#fafafa"/>
+  <rect x="24" y="55" width="108" height="125" rx="10" fill="#27272a"/>
+  <circle cx="78" cy="100" r="24" fill="#52525b"/>
+  <rect x="44" y="140" width="68" height="8" rx="3" fill="#3f3f46"/>
+  <rect x="54" y="156" width="48" height="7" rx="3" fill="#facc15" opacity="0.7"/>
+  <rect x="146" y="55" width="108" height="125" rx="10" fill="#27272a"/>
+  <circle cx="200" cy="100" r="24" fill="#52525b"/>
+  <rect x="166" y="140" width="68" height="8" rx="3" fill="#3f3f46"/>
+  <rect x="176" y="156" width="48" height="7" rx="3" fill="#facc15" opacity="0.7"/>
+  <rect x="268" y="55" width="108" height="125" rx="10" fill="#27272a"/>
+  <circle cx="322" cy="100" r="24" fill="#52525b"/>
+  <rect x="288" y="140" width="68" height="8" rx="3" fill="#3f3f46"/>
+  <rect x="298" y="156" width="48" height="7" rx="3" fill="#facc15" opacity="0.7"/>
+  <text x="200" y="210" text-anchor="middle" fill="#a1a1aa" font-family="sans-serif" font-size="13">Team (aus der Team-Sammlung)</text>
+</svg>

@@ -171,6 +171,13 @@ EMAIL_PASSWORD=your_email_app_password
 STRIPE_SECRET_KEY=your_stripe_secret_key
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 
+# Media Storage
+# Directory where uploaded media files are stored (default: ./media).
+# In production, point this at a mounted persistent volume, otherwise
+# uploads are lost on every redeploy. Files committed in the repo's
+# media/ folder are copied there automatically on startup.
+MEDIA_DIR=/data/media
+
 # Application Configuration
 NEXT_PUBLIC_SITE_URL=https://sanjiskitchen.de
 NEXT_PUBLIC_APP_URL=https://sanjiskitchen.de
@@ -219,6 +226,8 @@ This project uses the latest technologies:
 The admin panel is accessible at `/admin` and provides comprehensive management:
 
 ### Content Management
+- **Page Builder (Pages collection)**: Compose pages from layout blocks (Hero, Page Header, Media + Text, Media for standalone images/videos, Rich Text, Call to Action, Gallery, Reservations, Maps, Team, Contact Form, and Columns for side-by-side layouts). Pages are served by the dynamic route `src/app/(frontend)/[[...slug]]/page.tsx` based on their `slug` (use `home` for the start page). Pages support drafts with autosave and a Live Preview panel that updates in real time. Published pages with "Show in nav" enabled appear automatically in the navbar and footer (label/order configurable in the sidebar). Run `npm run seed:pages` once to create the editable `home` page; `npm run cleanup:pages` deletes every page document except `home`. Legal pages (Impressum, Datenschutz, Widerrufsbelehrung) remain static routes
+- **Announcement (Speech Bubble)**: Global toggle in the admin panel that shows a dismissible speech bubble at the bottom right of every page — e.g. holiday hours or a link to a special-occasion page (DE/EN message + optional link)
 - **Menu Management**: Add/edit appetizers, main dishes, steaks, sharing steaks, Sanji's choice, side dishes, sauces, and specials
 - **Opening Times Management**: Edit opening times dynamically across the site footer, contact page, and reservations page
 - **Team Management**: Manage team member profiles and information
