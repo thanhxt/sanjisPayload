@@ -5,8 +5,6 @@ import getSteaksDish from "../getData/get-steaksdish";
 import getSteaksDishChoice from "../getData/get-steaksdishchoice";
 import getSteaksDishSharing from "../getData/get-steaksdishsharing";
 
-export const revalidate = 60;
-
 export default async function Steaks() {
     const steaks = await getSteaksDish();
     const steakChoice = await getSteaksDishChoice();

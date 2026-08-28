@@ -12,6 +12,21 @@ import { SteaksDish } from '@/type/steaksDishType';
 import { SteaksDishChoice } from '@/type/steaksDishChoiceType';
 import { SteaksDishSharing } from '@/type/steaksDishSharingType';
 
+// The menu endpoints answer errors with a JSON body ({ error }), not an array.
+// Without the ok/array check that object lands in state and the child's .map() throws,
+// which blanks the whole section instead of just leaving it empty.
+const fetchMenu = async <T,>(url: string): Promise<T[]> => {
+    const res = await fetch(url);
+    if (!res.ok) {
+        throw new Error(`${url} responded ${res.status}`);
+    }
+    const data = await res.json();
+    if (!Array.isArray(data)) {
+        throw new Error(`${url} did not return an array`);
+    }
+    return data as T[];
+};
+
 // Create a wrapper component for async data fetching
 const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive: boolean }) => {
     const [appetizerItems, setAppetizerItems] = useState<MenuAppetizerDish[]>([]);
@@ -24,48 +39,35 @@ const AccordionContent = ({ sectionId, isActive }: { sectionId: string, isActive
     React.useEffect(() => {
         if (isActive && (sectionId === 'vorspeise' || sectionId === 'hauptspeise' || sectionId === 'steaks')) {
             setIsLoading(true);
-            
+
             if (sectionId === 'vorspeise' && appetizerItems.length === 0) {
-                fetch('/api/menu-appetizer')
-                    .then(res => res.json())
-                    .then(items => {
-                        setAppetizerItems(items);
-                        setIsLoading(false);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching appetizer items:', error);
-                        setIsLoading(false);
-                    });
+                fetchMenu<MenuAppetizerDish>('/api/menu-appetizer')
+                    .then(items => setAppetizerItems(items))
+                    .catch(error => console.error('Error fetching appetizer items:', error))
+                    .finally(() => setIsLoading(false));
             } else if (sectionId === 'hauptspeise' && mainDishItems.length === 0) {
-                fetch('/api/menu-maindish')
-                    .then(res => res.json())
-                    .then(items => {
-                        setMainDishItems(items);
-                        setIsLoading(false);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching main dish items:', error);
-                        setIsLoading(false);
-                    });
+                fetchMenu<MainDish>('/api/menu-maindish')
+                    .then(items => setMainDishItems(items))
+                    .catch(error => console.error('Error fetching main dish items:', error))
+                    .finally(() => setIsLoading(false));
             } else if (sectionId === 'steaks' && steaksDishItems.length === 0) {
-                fetch('/api/menu-steaksdish')
-                    .then(res => res.json())
-                    .then(items => {
-                        setSteaksDishItems(items);
-                        setIsLoading(false);
-                    });
-                    fetch('/api/menu-steaksdishchoice')
-                    .then(res => res.json())
-                    .then(items => {
-                        setSteaksDishChoiceItems(items);
-                        setIsLoading(false);
-                    });
-                    fetch('/api/menu-steaksdishsharing')
-                    .then(res => res.json())
-                    .then(items => {
-                        setSteaksDishSharingItems(items);
-                        setIsLoading(false);
-                    });
+                // All three drive one section, so only clear the spinner once they settle.
+                Promise.allSettled([
+                    fetchMenu<SteaksDish>('/api/menu-steaksdish')
+                        .then(items => setSteaksDishItems(items)),
+                    fetchMenu<SteaksDishChoice>('/api/menu-steaksdishchoice')
+                        .then(items => setSteaksDishChoiceItems(items)),
+                    fetchMenu<SteaksDishSharing>('/api/menu-steaksdishsharing')
+                        .then(items => setSteaksDishSharingItems(items)),
+                ])
+                    .then(results => {
+                        for (const result of results) {
+                            if (result.status === 'rejected') {
+                                console.error('Error fetching steaks items:', result.reason);
+                            }
+                        }
+                    })
+                    .finally(() => setIsLoading(false));
             } else {
                 setIsLoading(false);
             }

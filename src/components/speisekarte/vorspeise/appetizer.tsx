@@ -3,8 +3,6 @@ import Image from "next/image";
 import AppetizerClient from "./appetizerClient";
 import getAppetizerDish from "../getData/get-appetizer";
 
-export const revalidate = 60;
-
 export default async function Appetizer() {
     const appetizerDish = await getAppetizerDish();
     return (
