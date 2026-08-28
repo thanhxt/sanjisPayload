@@ -16,7 +16,6 @@
     "@cap.js/server": "^1.0.11",
     "@cap.js/widget": "^0.1.9",
     "@payloadcms/db-mongodb": "3.88.0",
-    "@payloadcms/db-postgres": "3.88.0",
     "@payloadcms/next": "3.88.0",
     "@payloadcms/richtext-lexical": "3.88.0",
     "@payloadcms/translations": "3.88.0",
