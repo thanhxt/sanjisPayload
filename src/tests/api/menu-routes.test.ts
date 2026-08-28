@@ -35,7 +35,7 @@ describe('Menu API Routes', () => {
     expect(body).toHaveLength(2)
     expect(body[0].position).toBe(1)
     expect(body[1].position).toBe(2)
-    expect(payloadClient.find).toHaveBeenCalledWith({ collection: 'menuAppetizerDish' })
+    expect(payloadClient.find).toHaveBeenCalledWith({ collection: 'menuAppetizerDish', limit: 0 })
   })
 
   it('GET /api/menu-maindish returns sorted dishes', async () => {
@@ -53,7 +53,7 @@ describe('Menu API Routes', () => {
 
     expect(res.status).toBe(200)
     expect(body[0].name).toBe('Main A')
-    expect(payloadClient.find).toHaveBeenCalledWith({ collection: 'menuMainDish' })
+    expect(payloadClient.find).toHaveBeenCalledWith({ collection: 'menuMainDish', limit: 0 })
   })
 
   it('GET /api/menu-steaksdish handles errors gracefully', async () => {

@@ -3,8 +3,6 @@ import HeroText from "../../hero-text";
 import MainDishClient from "./maindishClient";
 import getMainDish from "../getData/get-maindish";
 
-export const revalidate = 60;
-
 export default async function MainDish() {
     const mainDish = await getMainDish();
 

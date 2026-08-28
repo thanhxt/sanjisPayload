@@ -2,13 +2,12 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import { SteaksDish } from "@/type/steaksDishType";
 
-export const revalidate = 60;
-
 export default async function getSteaksDish() {
     const payload = await getPayload({ config })
 
     const result = await payload.find({
         collection: 'menuSteaksDish',
+        limit: 0, // 0 = no limit; Payload defaults to 10 and would silently truncate the menu
     })
 
     const steaksDish = result.docs as SteaksDish[];

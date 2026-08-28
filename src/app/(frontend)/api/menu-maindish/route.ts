@@ -9,6 +9,7 @@ export async function GET() {
 
         const result = await payload.find({
             collection: 'menuMainDish',
+            limit: 0, // 0 = no limit; Payload defaults to 10 and would silently truncate the menu
         });
 
         const mainDish = result.docs as MainDish[];
