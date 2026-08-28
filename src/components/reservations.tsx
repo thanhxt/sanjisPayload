@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useLanguage } from './contexts/language-context';
 import { useCookieConsent, showConsentPreferences } from '@/hooks/useCookieConsent';
 import { Button } from './ui/button';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Users } from 'lucide-react';
 import { openingTimes } from '@/type/openingType';
 
 export default function Reservations() {
@@ -71,6 +71,15 @@ export default function Reservations() {
                     </h1>
                     <p className="text-base md:text-lg mb-4 text-gray-200 font-light tracking-wide drop-shadow-md max-w-xl mx-auto leading-relaxed">
                         {language === "de" ? "Reservieren Sie jetzt und genießen Sie kulinarische Exzellenz." : "Reserve now and enjoy culinary excellence."}
+                    </p>
+                </div>
+
+                <div className="max-w-3xl w-full mb-10 flex items-start gap-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-left animate-in fade-in slide-in-from-bottom-8 duration-700">
+                    <Users className="w-6 h-6 text-yellow-400 mt-1 shrink-0" />
+                    <p className="text-gray-200 font-light leading-relaxed">
+                        {language === "de"
+                            ? <>Für Reservierungen ab 9 Personen kontaktieren Sie uns bitte per E-Mail an <a href="mailto:Lana.kosic@sanjiskitchen.de" className="text-yellow-400 hover:underline">Lana.kosic@sanjiskitchen.de</a>.</>
+                            : <>For reservations of 9 or more people, please contact us by email at <a href="mailto:Lana.kosic@sanjiskitchen.de" className="text-yellow-400 hover:underline">Lana.kosic@sanjiskitchen.de</a>.</>}
                     </p>
                 </div>
 
