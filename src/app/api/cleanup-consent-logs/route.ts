@@ -4,10 +4,14 @@ import config from '@/payload.config'
 
 export async function POST(req: NextRequest) {
     try {
-        // Optional: Add authentication/secret key to prevent unauthorized access
-        const authHeader = req.headers.get('authorization')
-        const expectedSecret = process.env.CLEANUP_SECRET || 'your-secret-key'
+        // Fail closed: never fall back to a well-known default secret.
+        const expectedSecret = process.env.CLEANUP_SECRET
+        if (!expectedSecret) {
+            console.error('[CONSENT:CLEANUP] ❌ CLEANUP_SECRET is not set')
+            return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 })
+        }
 
+        const authHeader = req.headers.get('authorization')
         if (authHeader !== `Bearer ${expectedSecret}`) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
         }

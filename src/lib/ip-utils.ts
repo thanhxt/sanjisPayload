@@ -1,8 +1,11 @@
 import crypto from 'crypto'
 
 export const hashIPAddress = (ip: string): string => {
-    // Use a salt from env or a fallback (should be in env for production security)
-    const salt = process.env.IP_SALT || 'sanjis-kitchen-secret-salt'
+    // Fail closed: a hardcoded fallback salt makes the hash trivially reversible.
+    const salt = process.env.IP_SALT
+    if (!salt) {
+        throw new Error('IP_SALT environment variable is not set')
+    }
 
     return crypto
         .createHash('sha256')
