@@ -5,8 +5,36 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { stripe } from '@/lib/stripe'
 
+const LOCAL_BASE_URL = 'http://localhost:3000'
+
+const toOrigin = (value: string | null | undefined): string | null => {
+  if (!value) return null
+  try {
+    return new URL(value).origin
+  } catch {
+    return null
+  }
+}
+
+// Only origins we serve ourselves may end up in return_url; anything else
+// (missing, malformed or foreign Origin/Referer) falls back to the site URL.
+const getReturnOrigin = async (): Promise<string> => {
+  const siteOrigin = toOrigin(process.env.NEXT_PUBLIC_SITE_URL) || LOCAL_BASE_URL
+  const allowed = new Set(
+    [siteOrigin, ...(process.env.ALLOWED_ORIGINS?.split(',') ?? [])]
+      .map((entry) => toOrigin(entry.trim()))
+      .filter((entry): entry is string => Boolean(entry)),
+  )
+
+  const requestHeaders = await headers()
+  const candidate =
+    toOrigin(requestHeaders.get('origin')) || toOrigin(requestHeaders.get('referer'))
+
+  return candidate && allowed.has(candidate) ? candidate : siteOrigin
+}
+
 async function fetchClientSecret() {
-    const origin = (await headers()).get('origin')
+    const origin = await getReturnOrigin()
 
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
