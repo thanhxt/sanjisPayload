@@ -16,21 +16,27 @@ const toOrigin = (value: string | null | undefined): string | null => {
   }
 }
 
-// Only origins we serve ourselves may end up in return_url; anything else
-// (missing, malformed or foreign Origin/Referer) falls back to the site URL.
+// ALLOWED_ORIGINS lists the public origins customers check out from (first entry is the
+// default). NEXT_PUBLIC_SITE_URL may be an internal URL (e.g. http://localhost:3005), so it
+// is only used as a fallback when no allowlist is configured.
 const getReturnOrigin = async (): Promise<string> => {
+  const allowedOrigins = (process.env.ALLOWED_ORIGINS?.split(',') ?? [])
+    .map((entry) => toOrigin(entry.trim()))
+    .filter((entry): entry is string => Boolean(entry))
   const siteOrigin = toOrigin(process.env.NEXT_PUBLIC_SITE_URL) || LOCAL_BASE_URL
-  const allowed = new Set(
-    [siteOrigin, ...(process.env.ALLOWED_ORIGINS?.split(',') ?? [])]
-      .map((entry) => toOrigin(entry.trim()))
-      .filter((entry): entry is string => Boolean(entry)),
-  )
 
   const requestHeaders = await headers()
   const candidate =
     toOrigin(requestHeaders.get('origin')) || toOrigin(requestHeaders.get('referer'))
 
-  return candidate && allowed.has(candidate) ? candidate : siteOrigin
+  if (allowedOrigins.length === 0) {
+    // No allowlist configured: keep trusting the request origin as before.
+    return candidate || siteOrigin
+  }
+
+  return candidate && (allowedOrigins.includes(candidate) || candidate === siteOrigin)
+    ? candidate
+    : allowedOrigins[0]
 }
 
 async function fetchClientSecret() {

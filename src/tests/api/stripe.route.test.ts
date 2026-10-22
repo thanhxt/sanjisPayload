@@ -27,12 +27,15 @@ const callWithHeaders = async (init: Record<string, string> = {}) => {
   return { res, returnUrl: mockCreate.mock.calls.at(-1)?.[0]?.return_url as string | undefined }
 }
 
+const returnUrlFor = (origin: string) => `${origin}/return?session_id={CHECKOUT_SESSION_ID}`
+
 describe('POST /api/stripe', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     vi.unstubAllEnvs()
-    vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://sanjis.example')
-    vi.stubEnv('ALLOWED_ORIGINS', '')
+    // Mirrors production: NEXT_PUBLIC_SITE_URL is an internal URL, the public domain is allowlisted.
+    vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'http://localhost:3005')
+    vi.stubEnv('ALLOWED_ORIGINS', 'https://sanjis.example, https://www.sanjis.example')
     mockCreate.mockResolvedValue({ client_secret: 'cs_test_123' })
   })
 
@@ -43,49 +46,65 @@ describe('POST /api/stripe', () => {
     expect(await res.json()).toEqual({ clientSecret: 'cs_test_123' })
   })
 
-  it('uses the request origin when it matches the site URL', async () => {
-    const { returnUrl } = await callWithHeaders({ origin: 'https://sanjis.example' })
+  it('uses the request origin when it is allowlisted', async () => {
+    const { returnUrl } = await callWithHeaders({ origin: 'https://www.sanjis.example' })
 
-    expect(returnUrl).toBe('https://sanjis.example/return?session_id={CHECKOUT_SESSION_ID}')
+    expect(returnUrl).toBe(returnUrlFor('https://www.sanjis.example'))
   })
 
-  it('falls back to the site URL when no Origin or Referer header is sent', async () => {
+  it('falls back to the first allowlisted origin when no Origin or Referer header is sent', async () => {
     const { returnUrl } = await callWithHeaders()
 
-    expect(returnUrl).toBe('https://sanjis.example/return?session_id={CHECKOUT_SESSION_ID}')
+    expect(returnUrl).toBe(returnUrlFor('https://sanjis.example'))
   })
 
   it('ignores a foreign Origin header', async () => {
     const { returnUrl } = await callWithHeaders({ origin: 'https://evil.example' })
 
-    expect(returnUrl).toBe('https://sanjis.example/return?session_id={CHECKOUT_SESSION_ID}')
+    expect(returnUrl).toBe(returnUrlFor('https://sanjis.example'))
   })
 
   it('ignores a malformed Origin header', async () => {
     const { returnUrl } = await callWithHeaders({ origin: 'null' })
 
-    expect(returnUrl).toBe('https://sanjis.example/return?session_id={CHECKOUT_SESSION_ID}')
+    expect(returnUrl).toBe(returnUrlFor('https://sanjis.example'))
   })
 
   it('uses the Referer origin when Origin is missing', async () => {
-    vi.stubEnv('ALLOWED_ORIGINS', 'https://www.sanjis.example')
-    const { returnUrl } = await callWithHeaders({ referer: 'https://www.sanjis.example/checkout?x=1' })
+    const { returnUrl } = await callWithHeaders({ referer: 'https://www.sanjis.example/voucher?x=1' })
 
-    expect(returnUrl).toBe('https://www.sanjis.example/return?session_id={CHECKOUT_SESSION_ID}')
+    expect(returnUrl).toBe(returnUrlFor('https://www.sanjis.example'))
   })
 
-  it('accepts origins listed in ALLOWED_ORIGINS', async () => {
-    vi.stubEnv('ALLOWED_ORIGINS', 'https://www.sanjis.example, https://staging.sanjis.example')
-    const { returnUrl } = await callWithHeaders({ origin: 'https://staging.sanjis.example' })
+  it('accepts the NEXT_PUBLIC_SITE_URL origin for local development', async () => {
+    const { returnUrl } = await callWithHeaders({ origin: 'http://localhost:3005' })
 
-    expect(returnUrl).toBe('https://staging.sanjis.example/return?session_id={CHECKOUT_SESSION_ID}')
+    expect(returnUrl).toBe(returnUrlFor('http://localhost:3005'))
   })
 
-  it('falls back to localhost when NEXT_PUBLIC_SITE_URL is unset', async () => {
-    vi.stubEnv('NEXT_PUBLIC_SITE_URL', '')
-    const { returnUrl } = await callWithHeaders({ origin: 'https://evil.example' })
+  describe('without ALLOWED_ORIGINS', () => {
+    beforeEach(() => {
+      vi.stubEnv('ALLOWED_ORIGINS', '')
+    })
 
-    expect(returnUrl).toBe('http://localhost:3000/return?session_id={CHECKOUT_SESSION_ID}')
+    it('keeps using the request origin as before', async () => {
+      const { returnUrl } = await callWithHeaders({ origin: 'https://sanjis.example' })
+
+      expect(returnUrl).toBe(returnUrlFor('https://sanjis.example'))
+    })
+
+    it('falls back to NEXT_PUBLIC_SITE_URL when no Origin header is sent', async () => {
+      const { returnUrl } = await callWithHeaders()
+
+      expect(returnUrl).toBe(returnUrlFor('http://localhost:3005'))
+    })
+
+    it('falls back to localhost:3000 when NEXT_PUBLIC_SITE_URL is unset too', async () => {
+      vi.stubEnv('NEXT_PUBLIC_SITE_URL', '')
+      const { returnUrl } = await callWithHeaders()
+
+      expect(returnUrl).toBe(returnUrlFor('http://localhost:3000'))
+    })
   })
 
   it('returns 500 when Stripe fails', async () => {
